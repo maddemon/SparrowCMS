@@ -45,24 +45,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\FieldParameterBuidler.cs" />
+    <Compile Include="Builders\PageBuilder.cs" />
+    <Compile Include="Common\AssemblyHelper.cs" />
     <Compile Include="Common\Cache.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="FieldParameter.cs" />
     <Compile Include="FieldBase.cs" />
-    <Compile Include="FieldBuilder.cs" />
+    <Compile Include="Builders\FieldBuilder.cs" />
     <Compile Include="IField.cs" />
     <Compile Include="ILabel.cs" />
     <Compile Include="LabelBase.cs" />
+    <Compile Include="Builders\LabelBuilder.cs" />
     <Compile Include="LabelParameter.cs" />
     <Compile Include="Labels\Model.cs" />
     <Compile Include="Labels\Include.cs" />
     <Compile Include="Labels\List.cs" />
     <Compile Include="Labels\Page.cs" />
     <Compile Include="Labels\System.cs" />
+    <Compile Include="OutputCache.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PageBase.cs" />
     <Compile Include="IParameter.cs" />
+    <Compile Include="PageHandler.cs" />
     <Compile Include="PageTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITemplate.cs" />

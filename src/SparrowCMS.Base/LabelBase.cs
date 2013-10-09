@@ -17,13 +17,6 @@ namespace SparrowCMS.Base
 
         public List<IParameter> Parameters { get; set; }
 
-        public virtual string GetReplacedContent()
-        {
-            foreach (var field in Fields)
-            {
-                Content = Content.Replace(field.TemplateContent, field.GetReplacedContent());
-            }
-            return Content;
-        }
+        public abstract string GetReplacedContent();
     }
 }

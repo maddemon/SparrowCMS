@@ -9,7 +9,7 @@ namespace SparrowCMS.Base
     {
         public string Name { get; set; }
 
-        public List<FieldParameter> Attributes { get; set; }
+        public IEnumerable<FieldParameter> Parameters { get; set; }
 
         public string TemplateContent { get; set; }
 
@@ -17,7 +17,7 @@ namespace SparrowCMS.Base
         {
             var value = rowEntity.GetPropertyValueToString(Name);
 
-            foreach (var attr in Attributes)
+            foreach (var attr in Parameters)
             {
                 value = attr.GetFieldValue(value);
             }

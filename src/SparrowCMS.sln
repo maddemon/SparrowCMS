@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Base", "SparrowCMS.Base\SparrowCMS.Base.csproj", "{59A060DE-FA5B-4D64-8121-A93FB25B31E7}"
 EndProject
 Global

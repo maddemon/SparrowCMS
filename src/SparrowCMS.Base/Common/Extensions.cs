@@ -16,5 +16,16 @@ namespace SparrowCMS.Base
         {
             throw new NotImplementedException();
         }
+
+        public static void AddValue<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)
+        {
+            if (!dict.ContainsKey(key))
+                dict.Add(key, value);
+        }
+
+        public static TValue GetValue<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
+        {
+            return dict.ContainsKey(key) ? dict[key] : default(TValue);
+        }
     }
 }

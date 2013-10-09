@@ -5,10 +5,8 @@ using System.Text;
 
 namespace SparrowCMS.Base
 {
-    public class Page : PageBase
+    internal class PageBuilder
     {
-        public OutputCache OutputCache { get; set; }
 
-        public UrlRoute UrlRoute { get; set; }
     }
 }
