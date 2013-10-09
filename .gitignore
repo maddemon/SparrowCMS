@@ -1,7 +1,7 @@
 #################
 ## Eclipse
 #################
-
+$tf/
 *.pydevproject
 .project
 .metadata

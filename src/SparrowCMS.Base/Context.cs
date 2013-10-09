@@ -21,8 +21,6 @@ namespace SparrowCMS.Base
         public Context(HttpContext context)
         {
             HttpContext = context;
-
-
         }
     }
 }

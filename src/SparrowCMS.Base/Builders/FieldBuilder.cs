@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace SparrowCMS.Base
 {
-    internal class FieldBuilder
+    public class FieldBuilder
     {
         private static IField GetSpecialField(string labelName, string fieldName)
         {
