@@ -22,7 +22,7 @@ namespace SparrowCMS.Base
         {
             HttpContext = context;
 
-
+            //
         }
     }
 }
