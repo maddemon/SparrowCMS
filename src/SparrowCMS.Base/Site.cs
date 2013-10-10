@@ -12,6 +12,8 @@ namespace SparrowCMS.Base
             Enabled = true;
         }
 
+        public int SiteId { get; set; }
+
         public string Name { get; set; }
 
         public string[] Domains { get; set; }

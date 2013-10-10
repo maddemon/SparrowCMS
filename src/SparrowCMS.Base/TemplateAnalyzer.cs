@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Labels
+namespace SparrowCMS.Base
 {
-    public class List : LabelBase
+    public class TemplateAnalyzer
     {
-        public override string GetReplacedContent()
+        internal static IEnumerable<string> FindLabelTemplates(string Content)
         {
             throw new NotImplementedException();
         }

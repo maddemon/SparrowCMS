@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Labels
+namespace SparrowCMS.Base.Parsers
 {
-    public class List : LabelBase
+    class FieldParameterParser
     {
-        public override string GetReplacedContent()
+        internal static IEnumerable<FieldParameter> Parse(string templateContent)
         {
             throw new NotImplementedException();
         }

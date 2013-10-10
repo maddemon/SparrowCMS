@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Base.Parsers
 {
-    internal class LabelBuilder
+    class LabelParameterParser
     {
-
     }
 }

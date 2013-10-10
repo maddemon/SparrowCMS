@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace SparrowCMS.Base
 {
@@ -26,8 +27,10 @@ namespace SparrowCMS.Base
             });
         }
 
-        public RouteData GetRouteData(string absolutePath)
+        public RouteData GetRouteData(HttpContext context)
         {
+            var absolutePath = context.Request.Url.AbsolutePath;
+
             var routeData = new RouteData();
 
             var match = GetRegex().Match(absolutePath);
@@ -45,6 +48,11 @@ namespace SparrowCMS.Base
             //filter unknown querystring?cookies?forms?
 
             return routeData;
+        }
+
+        internal bool IsMatch(string absolutePath)
+        {
+            throw new NotImplementedException();
         }
     }
 }

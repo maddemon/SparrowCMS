@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparrowCMS.Base
 {
-    public class LabelBase : ILabel
+    public abstract class LabelBase : ILabel
     {
         public string LabelName { get; set; }
 

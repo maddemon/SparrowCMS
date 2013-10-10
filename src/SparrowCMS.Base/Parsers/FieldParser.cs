@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using SparrowCMS.Base.Managers;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Base.Parsers
 {
-    public class FieldBuilder
+    public class FieldParser
     {
-        private static IField GetSpecialField(string labelName, string fieldName)
-        {
-            var className = labelName + "." + fieldName;
-            return Cache<IField>.GetOrSet(className, () =>
-            {
-                var type = AssemblyHelper.GetType("Fields", className);
-                var field = Activator.CreateInstance(type);
-                return field == null ? null : (IField)field;
-            });
-        }
-
         //@(?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?(("[^"]+")|([^\s]+)))*)\))
         private static Regex _fieldPattern = new Regex(@"@(?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?((""[^""]+"")|([^\s]+)))*)\))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
@@ -31,7 +21,7 @@ namespace SparrowCMS.Base
         /// @(title maxlength=20)
         /// </param>
         /// <returns></returns>
-        public static IField Build(string labelName, string templateContent)
+        public static IField Parse(string labelName, string templateContent)
         {
             if (!templateContent.StartsWith("@")) return null;
 
@@ -39,13 +29,13 @@ namespace SparrowCMS.Base
             if (match == null) return null;
 
             var fieldName = match.Groups["name"].Value;
-            var field = GetSpecialField(labelName, fieldName);
+            var field = CustomFieldManager.FindField(labelName, fieldName);
             if (field == null)
             {
                 field = new FieldBase
                 {
                     Name = fieldName,
-                    Parameters = FieldParameterBuidler.Build(match.Groups["parameters"].Value),
+                    Parameters = FieldParameterParser.Parse(match.Groups["parameters"].Value),
                 };
             }
 
