@@ -9,8 +9,8 @@ namespace SparrowCMS.Base.Parsers
 {
     public class FieldParser
     {
-        //@(?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?(("[^"]+")|([^\s]+)))*)\))
-        private static Regex _fieldPattern = new Regex(@"@(?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?((""[^""]+"")|([^\s]+)))*)\))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        //(?<!@)@(?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?("[^"]+"|[^\s]+))*)\))
+        private static Regex _fieldPattern = new Regex(@"(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s]+))*)\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         /// <summary>
         /// 根据模板创建一个Field实例，如果是特殊Field，则反射具体类
