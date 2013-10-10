@@ -9,7 +9,7 @@ namespace SparrowCMS.Base.Parsers
 {
     public class FieldParser
     {
-        //(?<!@)@(?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?("[^"]+"|[^\s]+))*)\))
+        //(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?("[^"]+"|[^\s]+))*)\)))
         private static Regex _fieldPattern = new Regex(@"(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s]+))*)\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         /// <summary>
@@ -19,6 +19,7 @@ namespace SparrowCMS.Base.Parsers
         /// @(CreateTime format="yyyy-MM-dd")
         /// @id
         /// @(title maxlength=20)
+        /// {Category.Model id=@id}@Name{/Category.Model}
         /// </param>
         /// <returns></returns>
         public static IField Parse(string labelName, string templateContent)
