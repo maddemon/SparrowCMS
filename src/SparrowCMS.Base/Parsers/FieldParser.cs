@@ -22,7 +22,7 @@ namespace SparrowCMS.Base.Parsers
         /// {Category.Model id=@id}@Name{/Category.Model}
         /// </param>
         /// <returns></returns>
-        public static IField Parse(string labelName, string templateContent)
+        public static Field Parse(string labelName, string templateContent)
         {
             if (!templateContent.StartsWith("@")) return null;
 
@@ -33,7 +33,7 @@ namespace SparrowCMS.Base.Parsers
             var field = CustomFieldManager.FindField(labelName, fieldName);
             if (field == null)
             {
-                field = new FieldBase
+                field = new Field
                 {
                     Name = fieldName,
                     Parameters = FieldParameterParser.Parse(match.Groups["parameters"].Value),

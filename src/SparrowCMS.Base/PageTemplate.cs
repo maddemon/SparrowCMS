@@ -10,7 +10,7 @@ namespace SparrowCMS.Base
     {
         public PageTemplate()
         {
-            Labels = new List<ILabel>();
+            Labels = new List<Label>();
         }
 
         public string Name { get; set; }
@@ -19,7 +19,7 @@ namespace SparrowCMS.Base
 
         public string Content { get; set; }
 
-        public List<ILabel> Labels { get; set; }
+        public List<Label> Labels { get; set; }
 
         public void Init()
         {

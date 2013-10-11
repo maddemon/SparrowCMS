@@ -7,7 +7,7 @@ namespace SparrowCMS.Base.Parsers
 {
     class FieldParameterParser
     {
-        internal static IEnumerable<FieldParameter> Parse(string templateContent)
+        public static IEnumerable<FieldParameter> Parse(string templateContent)
         {
             throw new NotImplementedException();
         }

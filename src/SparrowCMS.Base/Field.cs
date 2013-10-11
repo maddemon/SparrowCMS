@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparrowCMS.Base
 {
-    public class FieldBase : IField
+    public class Field
     {
         public string Name { get; set; }
 

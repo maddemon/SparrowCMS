@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparrowCMS.Base
 {
-    public abstract class LabelBase : ILabel
+    public abstract class Label : ITemplate
     {
         public string LabelName { get; set; }
 
@@ -13,10 +13,14 @@ namespace SparrowCMS.Base
 
         public string Content { get; set; }
 
-        public List<IField> Fields { get; set; }
-
-        public List<IParameter> Parameters { get; set; }
-
         public abstract string GetReplacedContent();
+
+        public string TemplateContent { get; set; }
+
+        public IEnumerable<Field> Fields { get; set; }
+
+        public IEnumerable<IParameter> Parameters { get; set; }
+
+        public IEnumerable<Label> InnerLables { get; set; }
     }
 }

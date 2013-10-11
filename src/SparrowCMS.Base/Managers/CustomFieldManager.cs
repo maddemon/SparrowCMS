@@ -7,14 +7,14 @@ namespace SparrowCMS.Base.Managers
 {
     public class CustomFieldManager
     {
-        public static IField FindField(string labelName, string fieldName)
+        public static Field FindField(string labelName, string fieldName)
         {
             var className = labelName + "." + fieldName;
-            return Cache<IField>.GetOrSet(className, () =>
+            return Cache<Field>.GetOrSet(className, () =>
             {
                 var type = AssemblyHelper.GetType("Fields", className);
                 var field = Activator.CreateInstance(type);
-                return field == null ? null : (IField)field;
+                return field == null ? null : (Field)field;
             });
         }
     }

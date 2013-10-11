@@ -50,7 +50,7 @@ namespace SparrowCMS.Base
             return routeData;
         }
 
-        internal bool IsMatch(string absolutePath)
+        public bool IsMatch(string absolutePath)
         {
             throw new NotImplementedException();
         }

@@ -7,7 +7,7 @@ namespace SparrowCMS.Base
 {
     public class TemplateAnalyzer
     {
-        internal static IEnumerable<string> FindLabelTemplates(string Content)
+        public static IEnumerable<string> FindLabelTemplates(string Content)
         {
             throw new NotImplementedException();
         }
