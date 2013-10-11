@@ -45,7 +45,7 @@ namespace SparrowCMS.Base.Parsers
 
         private static Regex _regex = new Regex(@"{(?<name>[\w.]+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s\/]+))*)}([\s\S]*?){/(?<name>[\w.]+)}|{(?<name>[\w.]+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s\/]+))*)/}", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        public static Label Parse(string templateContent)
+        public static LabelBase Parse(string templateContent)
         {
             throw new NotImplementedException();
         }

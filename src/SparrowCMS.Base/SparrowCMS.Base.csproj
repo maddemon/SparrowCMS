@@ -53,23 +53,25 @@
     <Compile Include="Common\Cache.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="FieldParameter.cs" />
     <Compile Include="Field.cs" />
+    <Compile Include="FieldParameter.cs" />
+    <Compile Include="IParameterFunction.cs" />
+    <Compile Include="Labels\List\Label.cs" />
+    <Compile Include="Labels\PageLink\Label.cs" />
+    <Compile Include="Labels\PageLink\Fields\Next.cs" />
+    <Compile Include="Labels\Shared\Functions\Url.cs" />
+    <Compile Include="Labels\Shared\Parameters\DateFormat.cs" />
+    <Compile Include="Labels\Shared\Parameters\Format.cs" />
+    <Compile Include="Labels\Shared\Parameters\MaxLength.cs" />
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Parsers\FieldParameterParser.cs" />
     <Compile Include="Parsers\FieldParser.cs" />
     <Compile Include="LabelBase.cs" />
     <Compile Include="LabelParameter.cs" />
-    <Compile Include="Labels\Model.cs" />
-    <Compile Include="Labels\Include.cs" />
-    <Compile Include="Labels\List.cs" />
-    <Compile Include="Labels\Page.cs" />
-    <Compile Include="Labels\System.cs" />
     <Compile Include="Managers\CustomFieldManager.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PageBase.cs" />
-    <Compile Include="IParameter.cs" />
     <Compile Include="PageHandler.cs" />
     <Compile Include="Managers\PageManager.cs" />
     <Compile Include="PageTemplate.cs" />
@@ -84,9 +86,7 @@
     <Compile Include="UrlRoute.cs" />
     <Compile Include="UserGroup.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Fields\Page\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

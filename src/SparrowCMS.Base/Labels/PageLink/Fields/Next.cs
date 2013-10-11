@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Labels
+namespace SparrowCMS.Base.Labels.PageLink
 {
-    class System
+    public class Next :Field
     {
+
     }
 }

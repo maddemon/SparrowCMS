@@ -19,7 +19,7 @@ namespace SparrowCMS.Base
 
             foreach (var attr in Parameters)
             {
-                value = attr.GetFieldValue(value);
+                value = attr.GetReturnValue();
             }
 
             return value;
