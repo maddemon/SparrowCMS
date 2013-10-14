@@ -15,7 +15,7 @@ namespace SparrowCMS.Test
         {
             var templateContent = @"{Category.Field name=Name id=@article.id/}";
 
-            var label = LabelParser.Parse(templateContent);
+            var label = LabelParser.Parse(templateContent).FirstOrDefault();
 
             Assert.AreNotEqual(null, label);
             Assert.AreEqual("Category.Field", label.LabelName);
@@ -30,7 +30,7 @@ namespace SparrowCMS.Test
                  <a href=""@id"">@(title maxlength=20) @(posttime dateformat=""yyyy-MM-dd"")</a>
              {/Article.List}";
 
-            var label = LabelParser.Parse(templateContent);
+            var label = LabelParser.Parse(templateContent).FirstOrDefault();
 
             Assert.AreNotEqual(null, label);
             Assert.AreEqual("Article.List", label.LabelName);
@@ -48,7 +48,7 @@ namespace SparrowCMS.Test
              <a href=""page/@next"">下一页</a> | <a href=""page/@end"">尾页</a>
          {/PageLink}
 ";
-            var label = LabelParser.Parse(templateContent);
+            var label = LabelParser.Parse(templateContent).FirstOrDefault();
 
             Assert.AreNotEqual(null, label);
             Assert.AreEqual("PageLink", label.LabelName);

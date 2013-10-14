@@ -10,7 +10,6 @@ namespace SparrowCMS.Base
     {
         public PageTemplate()
         {
-            Labels = new List<LabelBase>();
         }
 
         public string Name { get; set; }
@@ -19,16 +18,11 @@ namespace SparrowCMS.Base
 
         public string Content { get; set; }
 
-        public List<LabelBase> Labels { get; set; }
+        public IEnumerable<LabelBase> Labels { get; set; }
 
         public void Init()
         {
-            var labelTemplates = TemplateAnalyzer.FindLabelTemplates(Content);
-            //replace include template
-            foreach (var tmpContent in labelTemplates)
-            {
-                Labels.Add(LabelParser.Parse(tmpContent));
-            }
+            Labels = LabelParser.Parse(Content);
         }
 
         public virtual string GetReplacedContent()

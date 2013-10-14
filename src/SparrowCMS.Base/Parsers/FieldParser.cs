@@ -12,25 +12,12 @@ namespace SparrowCMS.Base.Parsers
         //(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?("[^"]+"|[^\s]+))*)\)))
         private static Regex _fieldPattern = new Regex(@"(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s]+))*)\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        /// <summary>
-        /// 根据模板创建一个Field实例，如果是特殊Field，则反射具体类
-        /// </summary>
-        /// <param name="templateContent">
-        /// @(CreateTime format="yyyy-MM-dd")
-        /// @id
-        /// @(title maxlength=20)
-        /// {Category.Model id=@id}@Name{/Category.Model}
-        /// </param>
-        /// <returns></returns>
-        public static Field Parse(string labelName, string templateContent)
+        private static Field Parse(string labelName, Match match)
         {
-            if (!templateContent.StartsWith("@")) return null;
-
-            var match = _fieldPattern.Match(templateContent);
             if (match == null) return null;
 
             var fieldName = match.Groups["name"].Value;
-            var field = CustomFieldManager.FindField(labelName, fieldName);
+            var field = FieldFactory.GetInstance(labelName, fieldName);
             if (field == null)
             {
                 field = new Field
@@ -41,6 +28,14 @@ namespace SparrowCMS.Base.Parsers
             }
 
             return field;
+        }
+
+        public static IEnumerable<Field> Parse(string labelName, string templateContent)
+        {
+            foreach (Match m in _fieldPattern.Matches(templateContent))
+            {
+                yield return Parse(labelName, m);
+            }
         }
     }
 }

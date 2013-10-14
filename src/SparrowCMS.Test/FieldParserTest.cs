@@ -17,7 +17,7 @@ namespace SparrowCMS.Test
 
             var templateContent = @"@title";
 
-            var field = FieldParser.Parse(labelName, templateContent);
+            var field = FieldParser.Parse(labelName, templateContent).FirstOrDefault();
 
             Assert.AreNotEqual(null, field);
             Assert.AreEqual("title", field.Name);
@@ -29,7 +29,7 @@ namespace SparrowCMS.Test
             var labelName = "PageLink";
             var templateContent = "@prev";
 
-            var field = FieldParser.Parse(labelName, templateContent);
+            var field = FieldParser.Parse(labelName, templateContent).FirstOrDefault();
 
             Assert.AreNotEqual(null, field);
             Assert.AreEqual("prev", field.Name);

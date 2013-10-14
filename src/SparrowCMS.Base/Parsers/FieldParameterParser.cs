@@ -5,9 +5,9 @@ using System.Text;
 
 namespace SparrowCMS.Base.Parsers
 {
-    class FieldParameterParser
+    public class FieldParameterParser
     {
-        public static IEnumerable<FieldParameter> Parse(string templateContent)
+        public static IEnumerable<FieldParameter> Parse(string templateContents)
         {
             throw new NotImplementedException();
         }

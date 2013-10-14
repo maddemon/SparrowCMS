@@ -63,12 +63,14 @@
     <Compile Include="Labels\Shared\Parameters\DateFormat.cs" />
     <Compile Include="Labels\Shared\Parameters\Format.cs" />
     <Compile Include="Labels\Shared\Parameters\MaxLength.cs" />
+    <Compile Include="Managers\LabelFactory.cs" />
+    <Compile Include="Managers\FunctionFactory.cs" />
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Parsers\FieldParameterParser.cs" />
     <Compile Include="Parsers\FieldParser.cs" />
     <Compile Include="LabelBase.cs" />
     <Compile Include="LabelParameter.cs" />
-    <Compile Include="Managers\CustomFieldManager.cs" />
+    <Compile Include="Managers\FieldFactory.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PageBase.cs" />
@@ -81,7 +83,6 @@
     <Compile Include="ITemplate.cs" />
     <Compile Include="RouteData.cs" />
     <Compile Include="Site.cs" />
-    <Compile Include="TemplateAnalyzer.cs" />
     <Compile Include="UrlParameter.cs" />
     <Compile Include="UrlRoute.cs" />
     <Compile Include="UserGroup.cs" />

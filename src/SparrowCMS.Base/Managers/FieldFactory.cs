@@ -5,9 +5,9 @@ using System.Text;
 
 namespace SparrowCMS.Base.Managers
 {
-    public class CustomFieldManager
+    public class FieldFactory
     {
-        public static Field FindField(string labelName, string fieldName)
+        public static Field GetInstance(string labelName, string fieldName)
         {
             var className = labelName + "." + fieldName;
             return Cache<Field>.GetOrSet(className, () =>
