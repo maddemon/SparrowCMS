@@ -20,9 +20,13 @@ namespace SparrowCMS.Base
         public void Add(string name, string value)
         {
             if (_data.ContainsKey(name))
+            {
                 _data[name] += "," + value;
+            }
             else
+            {
                 _data.Add(name, value);
+            }
         }
 
         public string this[string name]

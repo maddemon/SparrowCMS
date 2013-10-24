@@ -13,7 +13,10 @@ namespace SparrowCMS.Base.Parsers
 
         private static LabelBase Parse(Match match)
         {
-            if (match == null) return null;
+            if (match == null)
+            {
+                return null;
+            }
 
             var labelName = match.Groups["name"].Value;
             var parameters = match.Groups["parameters"].Value;

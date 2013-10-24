@@ -29,13 +29,14 @@ namespace SparrowCMS.Base
             foreach (var type in assembly.GetTypes())
             {
                 if (!_types.ContainsKey(type.FullName))
+                {
                     _types.TryAdd(type.FullName.ToLower(), type);
+                }
             }
         }
 
         public static Type GetType(string[] classNames)
         {
-            Type type = null;
             foreach (var className in classNames)
             {
                 if (_types.ContainsKey(className.ToLower()))
@@ -43,13 +44,15 @@ namespace SparrowCMS.Base
                     return _types[className.ToLower()];
                 }
             }
-            return type;
+            return null;
         }
 
         public static T CreateInstance<T>(Type type, T defaultT = null) where T : class
         {
-            if (type == null) return defaultT;
-
+            if (type == null)
+            {
+                return defaultT;
+            }
             return Cache<T>.GetOrSet(type.FullName, () => (T)Activator.CreateInstance(type));
         }
     }

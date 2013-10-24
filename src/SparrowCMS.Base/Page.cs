@@ -11,8 +11,10 @@ namespace SparrowCMS.Base
 
         public void Init()
         {
-            if (Initialized) return;
-
+            if (Initialized)
+            {
+                return;
+            }
             //find all label's template content
             foreach (var template in Templates)
             {

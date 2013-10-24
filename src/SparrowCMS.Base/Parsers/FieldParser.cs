@@ -14,7 +14,10 @@ namespace SparrowCMS.Base.Parsers
 
         private static Field Parse(string labelName, Match match)
         {
-            if (match == null) return null;
+            if (match == null)
+            {
+                return null;
+            }
 
             var fieldName = match.Groups["name"].Value;
 
