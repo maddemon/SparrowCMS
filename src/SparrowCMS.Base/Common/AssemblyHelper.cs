@@ -7,22 +7,23 @@ namespace SparrowCMS.Base
 {
     public static class AssemblyHelper
     {
-        private static readonly string defaultNamespace;
-        private static readonly string pluginNamespace;
-        static AssemblyHelper()
+
+        public static Type GetType(string[] classNames)
         {
-            defaultNamespace = "SparrowCMS.Base";
-            pluginNamespace = "SparrowCMS.Plugin";
+            Type type = null;
+            foreach (var className in classNames)
+            {
+                type = Type.GetType(className, false, true);
+                if (type != null) break;
+            }
+            return type;
         }
 
-
-        public static Type GetType(string typeName, string className)
+        public static T CreateInstance<T>(Type type, T defaultT = null) where T : class
         {
-            return Cache<Type>.GetOrSet(typeName + "." + className, () =>
-            {
-                return Type.GetType(string.Format("{0}.{1}.{2}", defaultNamespace, typeName, className))
-                    ?? Type.GetType(string.Format("{0}.{1}.{2}", pluginNamespace, typeName, className));
-            });
+            if (type == null) return defaultT;
+
+            return Cache<T>.GetOrSet(type.FullName, () => (T)Activator.CreateInstance(type));
         }
     }
 }

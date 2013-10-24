@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparrowCMS.Base.Labels.Shared.Functions
 {
-    public class Url : IParameterFunction
+    public class Url : ILabelParameterFunction
     {
         /// <summary>
         /// 
