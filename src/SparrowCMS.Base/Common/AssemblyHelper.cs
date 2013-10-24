@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace SparrowCMS.Base
@@ -14,15 +15,21 @@ namespace SparrowCMS.Base
         {
             foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (!ass.FullName.StartsWith("Sparrow"))
-                {
-                    continue;
-                }
-                foreach (var type in ass.GetTypes())
-                {
-                    if (!_types.ContainsKey(type.FullName))
-                        _types.TryAdd(type.FullName.ToLower(), type);
-                }
+                AddAssembly(ass);
+            }
+        }
+
+        public static void AddAssembly(Assembly assembly)
+        {
+            if (assembly == null || !assembly.FullName.StartsWith("Sparrow"))
+            {
+                return;
+            }
+
+            foreach (var type in assembly.GetTypes())
+            {
+                if (!_types.ContainsKey(type.FullName))
+                    _types.TryAdd(type.FullName.ToLower(), type);
             }
         }
 
@@ -31,7 +38,7 @@ namespace SparrowCMS.Base
             Type type = null;
             foreach (var className in classNames)
             {
-                if(_types.ContainsKey(className.ToLower()))
+                if (_types.ContainsKey(className.ToLower()))
                 {
                     return _types[className.ToLower()];
                 }
