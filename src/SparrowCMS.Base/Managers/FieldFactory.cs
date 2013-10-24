@@ -16,7 +16,7 @@ namespace SparrowCMS.Base.Managers
         {
             foreach (var _namespace in _namespaces)
             {
-                yield return _namespace.Replace("{LabelName}", labelName).Replace("{FieldName}", fieldName);
+                yield return _namespace.Replace("{Label}", labelName).Replace("{Field}", fieldName);
             }
         }
 

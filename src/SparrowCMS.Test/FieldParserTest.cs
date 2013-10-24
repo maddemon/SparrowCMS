@@ -27,14 +27,14 @@ namespace SparrowCMS.Test
         public void TestCustomField()
         {
             var labelName = "PageLink";
-            var templateContent = "@prev";
+            var templateContent = "@next";
 
             var field = FieldParser.Parse(labelName, templateContent).FirstOrDefault();
 
             Assert.AreNotEqual(null, field);
-            Assert.AreEqual("prev", field.Name);
+            Assert.AreEqual("next", field.Name);
 
-            Assert.AreEqual("SparrowCMS.Base.Labels.PageLink.Fields.Prev", field.GetType().FullName);
+            Assert.AreEqual("SparrowCMS.Base.Labels.PageLink.Fields.Next", field.GetType().FullName);
         }
     }
 }

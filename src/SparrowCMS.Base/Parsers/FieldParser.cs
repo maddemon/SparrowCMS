@@ -21,7 +21,7 @@ namespace SparrowCMS.Base.Parsers
             var field = FieldFactory.GetInstance(labelName, fieldName);
             field.Name = fieldName;
             field.Parameters = FieldParameterParser.Parse(labelName, fieldName, match.Groups["parameters"].Value);
-
+            field.TemplateContent = match.Groups[0].Value;
             return field;
         }
 
