@@ -9,7 +9,7 @@ namespace SparrowCMS.Base.Parsers
 {
     public class LabelParser
     {
-        private static Regex _regex = new Regex(@"{(?<name>[\w.]+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s\/]+))*)}(?<inner>[\s\S]*?){/(?<name>[\w.]+)}|{(?<name>[\w.]+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s\/]+))*)/}", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static Regex _regex = new Regex(@"{(?<name>[\w.]+)(?<parameters>(\s+\w+\s*=\s*(""[^""]+""|[^\s\/]+|'[^']+'))*)\s*}(?<inner>[\s\S]*?){/(?<name>[\w.]+)}|{(?<name>[\w.]+)(?<parameters>(\s+\w+\s*=\s*(""[^""]+""|[^\s\/]+|'[^']+'))*)\s*/}", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         private static LabelBase Parse(Match match)
         {
@@ -26,7 +26,9 @@ namespace SparrowCMS.Base.Parsers
             {
                 return null;
             }
-            label.Parameters = LabelParameterParser.Parse(labelName, parameters.Split(' '));
+            label.TemplateContent = match.Groups[0].Value;
+            label.LabelName = labelName;
+            label.Parameters = LabelParameterParser.Parse(labelName, parameters);
 
             var innerContent = match.Groups["inner"].Value;
             if (string.IsNullOrEmpty(innerContent))

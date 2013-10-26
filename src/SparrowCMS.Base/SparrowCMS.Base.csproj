@@ -56,13 +56,15 @@
     <Compile Include="Field.cs" />
     <Compile Include="FieldParameter.cs" />
     <Compile Include="ILabelParameterFunction.cs" />
-    <Compile Include="Labels\List\Label.cs" />
-    <Compile Include="Labels\PageLink\Label.cs" />
+    <Compile Include="Labels\List\Default.cs" />
+    <Compile Include="Labels\PageLink\Default.cs" />
     <Compile Include="Labels\PageLink\Fields\Next.cs" />
+    <Compile Include="Labels\PageLink\List.cs" />
     <Compile Include="Labels\Shared\Functions\Url.cs" />
     <Compile Include="Labels\Shared\Parameters\DateFormat.cs" />
     <Compile Include="Labels\Shared\Parameters\Format.cs" />
     <Compile Include="Labels\Shared\Parameters\MaxLength.cs" />
+    <Compile Include="Labels\System\Default.cs" />
     <Compile Include="Managers\FieldParameterFactory.cs" />
     <Compile Include="Managers\LabelFactory.cs" />
     <Compile Include="Managers\LabelParameterFunctionFactory.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparrowCMS.Base.Labels.PageLink
 {
-    public class Label : LabelBase
+    public class Default : LabelBase
     {
         public override string GetReplacedContent()
         {

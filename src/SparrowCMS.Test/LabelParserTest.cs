@@ -13,12 +13,16 @@ namespace SparrowCMS.Test
         [TestMethod]
         public void TestSelfCloseLabel()
         {
-            var templateContent = @"{Category.Field name=Name id=@article.id/}";
+            var templateContent = @"{System name='SiteName' /}";
 
             var label = LabelParser.Parse(templateContent).FirstOrDefault();
 
             Assert.AreNotEqual(null, label);
-            Assert.AreEqual("Category.Field", label.LabelName);
+            Assert.AreEqual("System", label.LabelName);
+            var parameter = label.Parameters.FirstOrDefault();
+            Assert.AreNotEqual(null,parameter);
+            Assert.AreEqual("name", parameter.Name);
+            Assert.AreEqual("SiteName", parameter.Value);
         }
 
         [TestMethod]

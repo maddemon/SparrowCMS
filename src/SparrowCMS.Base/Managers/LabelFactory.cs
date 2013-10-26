@@ -8,7 +8,9 @@ namespace SparrowCMS.Base.Managers
     public class LabelFactory
     {
         private static string[] _namespaces = new string[]{
-                "SparrowCMS.Base.Labels.{Label}"
+                "SparrowCMS.Base.Labels.{Label}.Default"
+                ,"SparrowCMS.Plugin.Labels.{Label}.Default"
+                ,"SparrowCMS.Base.Labels.{Label}"
                 ,"SparrowCMS.Plugin.Labels.{Label}"
         };
 
@@ -23,7 +25,12 @@ namespace SparrowCMS.Base.Managers
         public static LabelBase GetInstance(string labelName)
         {
             var type = AssemblyHelper.GetType(GetClassNames(labelName).ToArray());
-            return AssemblyHelper.CreateInstance<LabelBase>(type, null);
+            var instance = AssemblyHelper.CreateInstance<LabelBase>(type, null);
+            if (instance != null)
+            {
+                instance.LabelName = labelName;
+            }
+            return instance;
         }
     }
 }
