@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Managers
+namespace SparrowCMS.Base
 {
     public class FieldParameterFactory
     {
         private static string[] _namespaces = new string[] {
                 "SparrowCMS.Base.Labels.{Label}.Parameters.{Parameter}",
                 "SparrowCMS.Base.Labels.Shared.Parameters.{Parameter}",
-                "SparrowCMS.Plugin.Labels.{Label}.Parameters.{Parameter}",
-                "SparrowCMS.Plugin.Labels.Shared.Parameters.{Parameter}",
+                "SparrowCMS.Plugin.{Plugin}.Labels.{Label}.Parameters.{Parameter}",
+                "SparrowCMS.Plugin.{Plugin}.Labels.Shared.Parameters.{Parameter}",
+                "SparrowCMS.Plugin.{Plugin}.{Label}.Parameters.{Parameter}",
+                "SparrowCMS.Plugin.{Plugin}.Shared.Parameters.{Parameter}",
             };
 
 
@@ -25,8 +27,8 @@ namespace SparrowCMS.Base.Managers
 
         public static FieldParameter GetInstance(string labelName, string parameterName)
         {
-            var type = AssemblyHelper.GetType(GetClassNames(labelName, parameterName).ToArray());
-            return AssemblyHelper.CreateInstance<FieldParameter>(type, new FieldParameter());
+            var type = FactoryBase.GetType(GetClassNames(labelName, parameterName).ToArray());
+            return FactoryBase.CreateInstance<FieldParameter>(type, new FieldParameter());
         }
     }
 }

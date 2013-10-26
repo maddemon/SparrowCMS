@@ -21,7 +21,7 @@ namespace SparrowCMS.Base.Parsers
             var labelName = match.Groups["name"].Value;
             var parameters = match.Groups["parameters"].Value;
 
-            var label = LabelFactory.GetInstance(labelName);
+            var label = Factory.GetInstance<LabelBase>(labelName);
             if (label == null)
             {
                 return null;

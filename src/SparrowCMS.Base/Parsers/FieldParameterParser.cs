@@ -27,7 +27,7 @@ namespace SparrowCMS.Base.Parsers
             {
                 var name = m.Groups["name"].Value;
                 var value = m.Groups["value"].Value;
-                var parameter = FieldParameterFactory.GetInstance(labelName, name);
+                var parameter = Factory.GetInstance<FieldParameter>(labelName, name) ?? new FieldParameter();
                 parameter.Name = name;
                 parameter.Value = value;
                 yield return parameter;

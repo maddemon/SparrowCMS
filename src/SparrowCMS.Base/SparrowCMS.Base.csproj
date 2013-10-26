@@ -49,14 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\AssemblyHelper.cs" />
+    <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Factory.cs" />
     <Compile Include="Common\Cache.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FieldParameter.cs" />
     <Compile Include="ILabelParameterFunction.cs" />
-    <Compile Include="Labels\List\Default.cs" />
+    <Compile Include="Attributes\LabelAttribute.cs" />
     <Compile Include="Labels\PageLink\Default.cs" />
     <Compile Include="Labels\PageLink\Fields\Next.cs" />
     <Compile Include="Labels\PageLink\List.cs" />
@@ -65,15 +66,11 @@
     <Compile Include="Labels\Shared\Parameters\Format.cs" />
     <Compile Include="Labels\Shared\Parameters\MaxLength.cs" />
     <Compile Include="Labels\System\Default.cs" />
-    <Compile Include="Managers\FieldParameterFactory.cs" />
-    <Compile Include="Managers\LabelFactory.cs" />
-    <Compile Include="Managers\LabelParameterFunctionFactory.cs" />
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Parsers\FieldParameterParser.cs" />
     <Compile Include="Parsers\FieldParser.cs" />
     <Compile Include="LabelBase.cs" />
     <Compile Include="LabelParameter.cs" />
-    <Compile Include="Managers\FieldFactory.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PageBase.cs" />

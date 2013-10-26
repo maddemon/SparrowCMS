@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Base", "SparrowCMS.Base\SparrowCMS.Base.csproj", "{59A060DE-FA5B-4D64-8121-A93FB25B31E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Test", "SparrowCMS.Test\SparrowCMS.Test.csproj", "{6AC8F64C-FBD9-458F-AFE5-F072D367EF0C}"
@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		SparrowCMS.vsmdi = SparrowCMS.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Plugin.Article", "SparrowCMS.Plugin.Article\SparrowCMS.Plugin.Article.csproj", "{709357D0-A45E-4126-AB2D-2E96F640EE12}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -29,6 +31,10 @@ Global
 		{6AC8F64C-FBD9-458F-AFE5-F072D367EF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AC8F64C-FBD9-458F-AFE5-F072D367EF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AC8F64C-FBD9-458F-AFE5-F072D367EF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,8 +9,6 @@ namespace SparrowCMS.Base
     {
         public string LabelName { get; set; }
 
-        public string ActionName { get; set; }
-
         public string Content { get; set; }
 
         public abstract string GetReplacedContent();

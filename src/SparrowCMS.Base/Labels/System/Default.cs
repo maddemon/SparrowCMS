@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SparrowCMS.Base.Labels.System
 {
+    [Label("System")]
     public class Default : LabelBase
     {
         public override string GetReplacedContent()

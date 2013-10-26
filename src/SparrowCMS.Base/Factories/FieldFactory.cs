@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Managers
+namespace SparrowCMS.Base
 {
     public class FieldFactory
     {
         private static string[] _namespaces = new string[]{
                 "SparrowCMS.Base.Labels.{Label}.Fields.{Field}"
-                ,"SparrowCMS.Plugin.Labels.{Label}.Fields.{Field}"
+                ,"SparrowCMS.Base.Labels.Shared.Fields.{Field}"
+                ,"SparrowCMS.Plugin.{Plugin}.Labels.{Label}.Fields.{Field}"
+                ,"SparrowCMS.Plugin.{Plugin}.Labels.Shared.Fields.{Field}"
+                ,"SparrowCMS.Plugin.{Plugin}.{Label}.Fields.{Field}"
+                ,"SparrowCMS.Plugin.{Plugin}.{Label}.Shared.Fields.{Field}"
         };
 
         private static IEnumerable<string> GetClassNames(string labelName, string fieldName)
@@ -22,8 +26,8 @@ namespace SparrowCMS.Base.Managers
 
         public static Field GetInstance(string labelName, string fieldName)
         {
-            var type = AssemblyHelper.GetType(GetClassNames(labelName, fieldName).ToArray());
-            return AssemblyHelper.CreateInstance<Field>(type, new Field());
+            var type = FactoryBase.GetType(GetClassNames(labelName, fieldName).ToArray());
+            return FactoryBase.CreateInstance<Field>(type, new Field());
         }
     }
 }
