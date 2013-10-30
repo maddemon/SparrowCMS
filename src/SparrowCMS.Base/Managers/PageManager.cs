@@ -12,7 +12,7 @@ namespace SparrowCMS.Base.Managers
             throw new NotImplementedException();
         }
 
-        public static Page GetPage(Site site, System.Web.HttpContext context)
+        public static Page GetCurrentPage(Site site, System.Web.HttpContext context)
         {
             Page currentPage = null;
 

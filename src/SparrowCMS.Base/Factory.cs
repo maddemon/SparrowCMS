@@ -69,7 +69,7 @@ namespace SparrowCMS.Base
             }
         }
 
-        private Type SearchType(string labelName, string typeName)
+        private Type SearchTypeFromAllAssemblies(string labelName, string typeName)
         {
             Type result = null;
 
@@ -92,15 +92,15 @@ namespace SparrowCMS.Base
             }
 
             //寻找Base的共享类
-            result = FindType(AllTypes["Shared"], labelName, typeName);
+            result = SearchTypeFromSpecifiedTypes(AllTypes["Shared"], labelName, typeName);
             if (result != null) return result;
             //寻找未知的归属类
-            result = FindType(AllTypes["Others"], labelName, typeName);
+            result = SearchTypeFromSpecifiedTypes(AllTypes["Others"], labelName, typeName);
             if (result != null) return result;
             return null;
         }
 
-        private Type FindType(IEnumerable<Type> types, string labelName, string typeName)
+        private Type SearchTypeFromSpecifiedTypes(IEnumerable<Type> types, string labelName, string typeName)
         {
             var names = labelName.ToLower().Split('.');
             foreach (var type in types)
@@ -125,7 +125,7 @@ namespace SparrowCMS.Base
 
         public T GetInstance<T>(string labelName, string typeName = "Default")
         {
-            var type = SearchType(labelName, typeName);
+            var type = SearchTypeFromAllAssemblies(labelName, typeName);
             if (type == null)
             {
                 return default(T);

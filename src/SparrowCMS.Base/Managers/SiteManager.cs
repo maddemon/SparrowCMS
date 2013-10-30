@@ -7,7 +7,7 @@ namespace SparrowCMS.Base.Managers
 {
     public class SiteManager
     {
-        public static Site GetSite(string p)
+        public static Site GetCurrentSite(string p)
         {
             throw new NotImplementedException();
         }
