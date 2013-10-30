@@ -6,9 +6,9 @@ using System.Text;
 namespace SparrowCMS.Base.Labels.PageLink
 {
     [Label("PageLink")]
-    public class Default : LabelBase
+    public class Default : ILabel
     {
-        public override string GetReplacedContent()
+        public string GetReplacedContent(string innerHtml)
         {
             throw new NotImplementedException();
         }

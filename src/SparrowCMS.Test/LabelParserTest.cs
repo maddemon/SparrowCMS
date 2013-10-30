@@ -57,8 +57,6 @@ namespace SparrowCMS.Test
             Assert.AreNotEqual(null, label);
             Assert.AreEqual("PageLink", label.LabelName);
 
-            var pagelistLabel = label.InnerLables.FirstOrDefault();
-            Assert.AreNotEqual(null, pagelistLabel);
         }
     }
 }

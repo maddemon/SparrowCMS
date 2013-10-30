@@ -9,7 +9,7 @@ namespace SparrowCMS.Base
 {
     public class Factory
     {
-        private static Factory Instance = new Factory();
+        public static Factory Instance = new Factory();
         private ConcurrentDictionary<string, List<Type>> AllTypes;
 
         private Factory()
@@ -123,7 +123,7 @@ namespace SparrowCMS.Base
             return null;
         }
 
-        private T CreateInstance<T>(string labelName, string typeName)
+        public T GetInstance<T>(string labelName, string typeName = "Default")
         {
             var type = SearchType(labelName, typeName);
             if (type == null)
@@ -132,11 +132,6 @@ namespace SparrowCMS.Base
             }
 
             return (T)Activator.CreateInstance(type);
-        }
-
-        public static T GetInstance<T>(string labelName, string typeName = "Default")
-        {
-            return Instance.CreateInstance<T>(labelName, typeName);
         }
     }
 }

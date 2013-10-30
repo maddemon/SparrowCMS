@@ -7,11 +7,11 @@ using SparrowCMS.Base.Managers;
 
 namespace SparrowCMS.Base.Parsers
 {
-    public class LabelParser
+    public class LabelDescriptionParser
     {
         private static Regex _regex = new Regex(@"{(?<name>[\w.]+)(?<parameters>(\s+\w+\s*=\s*(""[^""]+""|[^\s\/]+|'[^']+'))*)\s*}(?<inner>[\s\S]*?){/(?<name>[\w.]+)}|{(?<name>[\w.]+)(?<parameters>(\s+\w+\s*=\s*(""[^""]+""|[^\s\/]+|'[^']+'))*)\s*/}", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        private static LabelBase Parse(Match match)
+        private static LabelDescription Parse(Match match)
         {
             if (match == null)
             {
@@ -21,29 +21,27 @@ namespace SparrowCMS.Base.Parsers
             var labelName = match.Groups["name"].Value;
             var parameters = match.Groups["parameters"].Value;
 
-            var label = Factory.GetInstance<LabelBase>(labelName);
-            if (label == null)
+            var desc = new LabelDescription
             {
-                return null;
-            }
-            label.TemplateContent = match.Groups[0].Value;
-            label.LabelName = labelName;
-            label.Parameters = LabelParameterParser.Parse(labelName, parameters);
+                LabelName = labelName,
+                TemplateContent =  match.Groups[0].Value,
+                Parameters = LabelParameterParser.Parse(labelName, parameters),
+                InnerHtml = match.Groups["inner"].Value
+            };
 
-            var innerContent = match.Groups["inner"].Value;
-            if (string.IsNullOrEmpty(innerContent))
+            if (string.IsNullOrEmpty(desc.InnerHtml))
             {
-                return label;
+                return desc;
             }
 
-            label.Fields = FieldParser.Parse(labelName, innerContent);
+            desc.FieldDescriptions = FieldDescriptionParser.Parse(labelName, desc.InnerHtml);
 
-            label.InnerLables = Parse(innerContent);
+            desc.InnerLabelDescriptions = Parse(desc.InnerHtml);
 
-            return label;
+            return desc;
         }
 
-        public static IEnumerable<LabelBase> Parse(string templateContent)
+        public static IEnumerable<LabelDescription> Parse(string templateContent)
         {
             foreach (Match m in _regex.Matches(templateContent))
             {

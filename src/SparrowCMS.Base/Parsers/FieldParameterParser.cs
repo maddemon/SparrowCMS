@@ -18,20 +18,26 @@ namespace SparrowCMS.Base.Parsers
         /// <returns></returns>
         public static IEnumerable<FieldParameter> Parse(string labelName, string fieldName, string parametersTemplateContent)
         {
-            if (string.IsNullOrEmpty(parametersTemplateContent))
+            if (!string.IsNullOrEmpty(parametersTemplateContent))
             {
-                yield return null;
+                foreach (Match m in _regex.Matches(parametersTemplateContent))
+                {
+                    yield return Parse(labelName, m);
+                }
             }
+        }
 
-            foreach (Match m in _regex.Matches(parametersTemplateContent))
+        private static FieldParameter Parse(string labelName, Match m)
+        {
+            var name = m.Groups["name"].Value;
+            var value = m.Groups["value"].Value;
+            var parameter = Factory.Instance.GetInstance<FieldParameter>(labelName, name);
+            if (parameter != null)
             {
-                var name = m.Groups["name"].Value;
-                var value = m.Groups["value"].Value;
-                var parameter = Factory.GetInstance<FieldParameter>(labelName, name) ?? new FieldParameter();
-                parameter.Name = name;
                 parameter.Value = value;
-                yield return parameter;
+                return parameter;
             }
+            return null;
         }
     }
 }

@@ -7,6 +7,12 @@ namespace SparrowCMS.Base.Labels.Shared.Fields
 {
     public class Format : FieldParameter
     {
-        
+        public override string GetReturnValue(object fieldValue)
+        {
+            if (fieldValue == null)
+                return null;
+
+            return Value.Replace("$this", fieldValue.ToString());
+        }
     }
 }

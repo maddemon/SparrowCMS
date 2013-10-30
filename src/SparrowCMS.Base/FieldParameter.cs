@@ -7,15 +7,11 @@ namespace SparrowCMS.Base
 {
     public class FieldParameter
     {
-        public virtual string Name { get; set; }
-
         public virtual string Value { get; set; }
-        
-        public object FieldValue { get; set; }
 
-        public virtual string GetReturnValue()
+        public virtual string GetReturnValue(object fieldValue)
         {
-            return FieldValue.ToString();
+            return fieldValue == null ? null : fieldValue.ToString();
         }
     }
 }

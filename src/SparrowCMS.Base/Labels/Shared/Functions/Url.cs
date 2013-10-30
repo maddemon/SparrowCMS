@@ -5,14 +5,14 @@ using System.Text;
 
 namespace SparrowCMS.Base.Labels.Shared.Functions
 {
-    public class Url : ILabelParameterFunction
+    public class Url : IFunction
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="originalValue">Url(Id)</param>
         /// <returns></returns>
-        public string GetParameterValue(string originalValue)
+        public string GetValue(string originalValue)
         {
             var name = originalValue.Substring(originalValue.IndexOf('(') + 1).TrimEnd(')');
 

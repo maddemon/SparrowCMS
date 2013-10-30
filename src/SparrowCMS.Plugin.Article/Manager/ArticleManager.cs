@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Labels.PageLink
+namespace SparrowCMS.Plugin.Article.Manager
 {
-    [Label("PageLink.List")]
-    public class List : ILabel
+    public class ArticleManager
     {
-        public string GetReplacedContent(string innerHtml)
+        public static List<Model.Article> GetList()
         {
             throw new NotImplementedException();
         }

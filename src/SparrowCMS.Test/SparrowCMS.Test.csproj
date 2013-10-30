@@ -45,10 +45,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FieldParserTest.cs" />
-    <Compile Include="LabelParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LabelParameterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SparrowCMS.Base\SparrowCMS.Base.csproj">

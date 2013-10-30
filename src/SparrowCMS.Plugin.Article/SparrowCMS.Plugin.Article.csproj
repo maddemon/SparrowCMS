@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Labels\List\Default.cs" />
+    <Compile Include="Manager\ArticleManager.cs" />
+    <Compile Include="Model\Article.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

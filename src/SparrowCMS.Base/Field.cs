@@ -13,16 +13,18 @@ namespace SparrowCMS.Base
 
         public string TemplateContent { get; set; }
 
-        public virtual string GetValue(object rowEntity)
+        public virtual string GetValue(Document doc)
         {
-            var value = rowEntity.GetPropertyValueToString(Name);
+            var fieldValue = doc[Name];
 
-            foreach (var attr in Parameters)
+            var result = string.Empty;
+
+            foreach (var p in Parameters)
             {
-                value = attr.GetReturnValue();
+                result = p.GetReturnValue(fieldValue);
             }
 
-            return value;
+            return string.IsNullOrEmpty(result) ? fieldValue.ToString() : result;
         }
     }
 }

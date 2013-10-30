@@ -7,9 +7,15 @@ namespace SparrowCMS.Base.Labels.Shared.Fields
 {
     public class DateFormat : FieldParameter
     {
-        public override string GetReturnValue()
+        public override string GetReturnValue(object fieldValue)
         {
-            return ((DateTime)FieldValue).ToString(Value);
+            if (fieldValue is DateTime)
+            {
+                var dateFormat = Value;
+                return ((DateTime)fieldValue).ToString(dateFormat);
+            }
+            return base.GetReturnValue(fieldValue);
         }
+
     }
 }

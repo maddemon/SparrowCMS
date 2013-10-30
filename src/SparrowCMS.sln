@@ -5,13 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Base", "SparrowC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Test", "SparrowCMS.Test\SparrowCMS.Test.csproj", "{6AC8F64C-FBD9-458F-AFE5-F072D367EF0C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0D1B40F-9553-41AE-9FDC-AFD6E69B7C82}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		SparrowCMS.vsmdi = SparrowCMS.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Plugin.Article", "SparrowCMS.Plugin.Article\SparrowCMS.Plugin.Article.csproj", "{709357D0-A45E-4126-AB2D-2E96F640EE12}"
 EndProject
 Global

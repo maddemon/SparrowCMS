@@ -20,7 +20,7 @@ namespace SparrowCMS.Base.Parsers
 
             if (value.Contains('(') && value.Contains(')'))
             {
-                labelParameter.ParameterFunction = Factory.GetInstance<ILabelParameterFunction>(labelName, value);
+                labelParameter.ParameterFunction = Factory.Instance.GetInstance<IFunction>(labelName, value);
             }
             return labelParameter;
         }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Labels.PageLink.Fields
+namespace SparrowCMS.Plugin.Article.Model
 {
-    public class Next : Field
+    public class Article
     {
-
     }
 }

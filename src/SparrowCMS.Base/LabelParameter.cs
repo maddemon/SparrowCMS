@@ -11,13 +11,13 @@ namespace SparrowCMS.Base
 
         public virtual string Value { get; set; }
 
-        public virtual ILabelParameterFunction ParameterFunction { get; set; }
+        public virtual IFunction ParameterFunction { get; set; }
 
         public virtual string GetReturnValue()
         {
             if (ParameterFunction != null)
             {
-                return ParameterFunction.GetParameterValue(Value);
+                return ParameterFunction.GetValue(Value);
             }
 
             return Value;
