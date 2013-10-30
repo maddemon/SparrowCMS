@@ -59,10 +59,12 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Field.cs" />
+    <Compile Include="FieldBuilder.cs" />
     <Compile Include="FieldDescription.cs" />
-    <Compile Include="FieldParameter.cs" />
-    <Compile Include="IFunction.cs" />
+    <Compile Include="FieldAttribute.cs" />
+    <Compile Include="IParameterFunction.cs" />
     <Compile Include="Attributes\LabelAttribute.cs" />
+    <Compile Include="LabelBuilder.cs" />
     <Compile Include="LabelDescription.cs" />
     <Compile Include="Labels\PageLink\Default.cs" />
     <Compile Include="Labels\PageLink\Fields\Next.cs" />
@@ -75,10 +77,9 @@
     <Compile Include="Labels\Shared\Parameters\MaxLength.cs" />
     <Compile Include="Labels\System\Default.cs" />
     <Compile Include="Managers\SiteManager.cs" />
-    <Compile Include="ParameterDescription.cs" />
-    <Compile Include="Parsers\FieldParameterParser.cs" />
+    <Compile Include="Parsers\FieldAttributeParser.cs" />
     <Compile Include="Parsers\FieldDescriptionParser.cs" />
-    <Compile Include="LabelBase.cs" />
+    <Compile Include="ILabel.cs" />
     <Compile Include="LabelParameter.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="Page.cs" />

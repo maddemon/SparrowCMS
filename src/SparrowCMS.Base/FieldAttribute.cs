@@ -5,11 +5,13 @@ using System.Text;
 
 namespace SparrowCMS.Base
 {
-    public class FieldParameter
+    public class FieldAttribute
     {
-        public virtual string Value { get; set; }
+        public string Name { get; set; }
 
-        public virtual string GetReturnValue(object fieldValue)
+        public string Value { get; set; }
+
+        public virtual string ConvertFieldValue(object fieldValue)
         {
             return fieldValue == null ? null : fieldValue.ToString();
         }

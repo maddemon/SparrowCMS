@@ -5,16 +5,16 @@ using System.Text;
 
 namespace SparrowCMS.Base.Labels.Shared.Functions
 {
-    public class Url : IFunction
+    public class Url : IParameterFunction
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="originalValue">Url(Id)</param>
+        /// <param name="literalValue">Url(Id)</param>
         /// <returns></returns>
-        public string GetValue(string originalValue)
+        public string GetParameterValue(string literalValue)
         {
-            var name = originalValue.Substring(originalValue.IndexOf('(') + 1).TrimEnd(')');
+            var name = literalValue.Substring(literalValue.IndexOf('(') + 1).TrimEnd(')');
 
             return Context.Current.CurrentPage.RouteData[name];
         }

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace SparrowCMS.Base.Labels.Shared.Fields
 {
-    public class Format : FieldParameter
+    public class Format : FieldAttribute
     {
-        public override string GetReturnValue(object fieldValue)
+        public override string ConvertFieldValue(object fieldValue)
         {
             if (fieldValue == null)
                 return null;

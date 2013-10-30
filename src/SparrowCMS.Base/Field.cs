@@ -9,19 +9,23 @@ namespace SparrowCMS.Base
     {
         public string Name { get; set; }
 
-        public IEnumerable<FieldParameter> Parameters { get; set; }
+        public IEnumerable<FieldAttribute> Attributes { get; set; }
 
         public string TemplateContent { get; set; }
 
-        public virtual string GetValue(Document doc)
+        public virtual object GetValue(Document doc)
         {
-            var fieldValue = doc[Name];
+            return doc[Name]; 
+        }
 
+        public virtual string GetReplacedContent(Document doc)
+        {
+            var fieldValue = GetValue(doc);
             var result = string.Empty;
 
-            foreach (var p in Parameters)
+            foreach (var p in Attributes)
             {
-                result = p.GetReturnValue(fieldValue);
+                result = p.ConvertFieldValue(fieldValue);
             }
 
             return string.IsNullOrEmpty(result) ? fieldValue.ToString() : result;

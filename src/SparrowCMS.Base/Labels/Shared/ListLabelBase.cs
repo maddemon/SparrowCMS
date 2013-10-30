@@ -31,7 +31,7 @@ namespace SparrowCMS.Base.Labels.Shared
             {
                 foreach (var field in Fields)
                 {
-                    result.Append(innerHtml.Replace(field.TemplateContent, field.GetValue(data)));
+                    result.Append(innerHtml.Replace(field.TemplateContent, field.GetReplacedContent(data)));
                 }
             }
 

@@ -20,19 +20,22 @@ namespace SparrowCMS.Base.Parsers
 
             if (value.Contains('(') && value.Contains(')'))
             {
-                labelParameter.ParameterFunction = Factory.Instance.GetInstance<IFunction>(labelName, value);
+                labelParameter.ParameterFunction = Factory.Instance.GetInstance<IParameterFunction>(labelName, value);
             }
             return labelParameter;
         }
 
         private static Regex _regex = new Regex(@"(?<name>\w+)\s*=\s*(?<value>""[^""]+""|[^\s\/]+|'[^']+')", RegexOptions.Compiled);
 
-        public static IEnumerable<LabelParameter> Parse(string labelName, string parametersTemplateContent)
+        public static Dictionary<string, LabelParameter> Parse(string labelName, string parametersTemplateContent)
         {
+            var result = new Dictionary<string, LabelParameter>();
             foreach (Match match in _regex.Matches(parametersTemplateContent))
             {
-                yield return Parse(labelName, match);
+                var parameter = Parse(labelName,match);
+                result.Add(parameter.Name, parameter);
             }
+            return result;
         }
     }
 }

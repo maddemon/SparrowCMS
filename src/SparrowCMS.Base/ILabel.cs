@@ -9,4 +9,11 @@ namespace SparrowCMS.Base
     {
         string GetReplacedContent(string innerHtml);
     }
+
+    //public abstract class Label
+    //{
+    //    public IEnumerable<Field> Fields { get; set; }
+
+    //    public abstract string GetReplacedContent(string innerHtml);
+    //}
 }

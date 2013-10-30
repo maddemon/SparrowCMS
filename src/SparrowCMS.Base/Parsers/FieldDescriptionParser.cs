@@ -25,7 +25,7 @@ namespace SparrowCMS.Base.Parsers
             {
                 FieldName = fieldName,
                 TemplateContent = match.Groups[0].Value,
-                Parameters = FieldParameterParser.Parse(labelName, fieldName, match.Groups["parameters"].Value),
+                Attributes = FieldAttributeParser.Parse(labelName, fieldName, match.Groups["parameters"].Value),
 
             };
 

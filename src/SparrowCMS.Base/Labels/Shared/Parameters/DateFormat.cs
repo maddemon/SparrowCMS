@@ -5,16 +5,16 @@ using System.Text;
 
 namespace SparrowCMS.Base.Labels.Shared.Fields
 {
-    public class DateFormat : FieldParameter
+    public class DateFormat : FieldAttribute
     {
-        public override string GetReturnValue(object fieldValue)
+        public override string ConvertFieldValue(object fieldValue)
         {
             if (fieldValue is DateTime)
             {
                 var dateFormat = Value;
                 return ((DateTime)fieldValue).ToString(dateFormat);
             }
-            return base.GetReturnValue(fieldValue);
+            return base.ConvertFieldValue(fieldValue);
         }
 
     }

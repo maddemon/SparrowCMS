@@ -17,7 +17,7 @@ namespace SparrowCMS.Base.Labels.Shared
 
             foreach (var field in Fields)
             {
-                innerHtml = innerHtml.Replace(field.TemplateContent, field.GetValue(data));
+                innerHtml = innerHtml.Replace(field.TemplateContent, field.GetReplacedContent(data));
             }
 
             return innerHtml;
