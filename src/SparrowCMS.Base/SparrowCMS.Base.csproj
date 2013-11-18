@@ -63,7 +63,7 @@
     <Compile Include="FieldDescription.cs" />
     <Compile Include="FieldAttribute.cs" />
     <Compile Include="IParameterFunction.cs" />
-    <Compile Include="Attributes\LabelAttribute.cs" />
+    <Compile Include="Attributes\LabelNameAttribute.cs" />
     <Compile Include="LabelBuilder.cs" />
     <Compile Include="LabelDescription.cs" />
     <Compile Include="Labels\PageLink\Default.cs" />
@@ -72,9 +72,9 @@
     <Compile Include="Labels\Shared\DetailLabelBase.cs" />
     <Compile Include="Labels\Shared\Functions\Url.cs" />
     <Compile Include="Labels\Shared\ListLabelBase.cs" />
-    <Compile Include="Labels\Shared\Parameters\DateFormat.cs" />
-    <Compile Include="Labels\Shared\Parameters\Format.cs" />
-    <Compile Include="Labels\Shared\Parameters\MaxLength.cs" />
+    <Compile Include="Labels\Shared\Attributes\DateFormat.cs" />
+    <Compile Include="Labels\Shared\Attributes\Format.cs" />
+    <Compile Include="Labels\Shared\Attributes\MaxLength.cs" />
     <Compile Include="Labels\System\Default.cs" />
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Parsers\FieldAttributeParser.cs" />

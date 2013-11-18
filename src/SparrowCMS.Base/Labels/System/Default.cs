@@ -6,7 +6,7 @@ using SparrowCMS.Base.Labels.Shared;
 
 namespace SparrowCMS.Base.Labels.System
 {
-    [Label("System")]
+    [LabelName("System")]
     public class Default : DetailLabelBase
     {
         protected override Document GetData()

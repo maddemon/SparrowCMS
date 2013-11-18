@@ -5,8 +5,8 @@ using System.Text;
 
 namespace SparrowCMS.Base
 {
-    public class LabelAttribute : NameAttribute
+    public class LabelNameAttribute : NameAttribute
     {
-        public LabelAttribute(string style) : base(style) { }
+        public LabelNameAttribute(string style) : base(style) { }
     }
 }

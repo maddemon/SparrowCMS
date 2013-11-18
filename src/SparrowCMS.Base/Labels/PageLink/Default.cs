@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparrowCMS.Base.Labels.PageLink
 {
-    [Label("PageLink")]
+    [LabelName("PageLink")]
     public class Default : ILabel
     {
         public string GetReplacedContent(string innerHtml)

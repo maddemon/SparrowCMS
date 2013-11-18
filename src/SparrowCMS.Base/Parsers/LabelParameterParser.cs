@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using SparrowCMS.Base.Managers;
 
 namespace SparrowCMS.Base.Parsers
 {
@@ -14,9 +11,7 @@ namespace SparrowCMS.Base.Parsers
             var name = match.Groups["name"].Value;
             var value = match.Groups["value"].Value.Trim('"').Trim('\'');
 
-            var labelParameter = new LabelParameter();
-            labelParameter.Name = name;
-            labelParameter.Value = value;
+            var labelParameter = new LabelParameter {Name = name, Value = value};
 
             if (value.Contains('(') && value.Contains(')'))
             {
@@ -25,12 +20,12 @@ namespace SparrowCMS.Base.Parsers
             return labelParameter;
         }
 
-        private static Regex _regex = new Regex(@"(?<name>\w+)\s*=\s*(?<value>""[^""]+""|[^\s\/]+|'[^']+')", RegexOptions.Compiled);
+        private static readonly Regex Regex = new Regex(@"(?<name>\w+)\s*=\s*(?<value>""[^""]+""|[^\s\/]+|'[^']+')", RegexOptions.Compiled);
 
         public static Dictionary<string, LabelParameter> Parse(string labelName, string parametersTemplateContent)
         {
             var result = new Dictionary<string, LabelParameter>();
-            foreach (Match match in _regex.Matches(parametersTemplateContent))
+            foreach (Match match in Regex.Matches(parametersTemplateContent))
             {
                 var parameter = Parse(labelName,match);
                 result.Add(parameter.Name, parameter);

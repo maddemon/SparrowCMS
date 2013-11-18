@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using SparrowCMS.Base.Managers;
 
 namespace SparrowCMS.Base.Parsers
 {
     public class FieldAttributeParser
     {
-        private static Regex _regex = new Regex(@"(?<name>\w+)\s*=\s*(""(?<value>[^""]+)""|(?<value>[^\s]+))", RegexOptions.Compiled);
+        private static readonly Regex Regex = new Regex(@"(?<name>\w+)\s*=\s*(""(?<value>[^""]+)""|(?<value>[^\s]+))", RegexOptions.Compiled);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="parametersTemplateContent">format="some text $this" dateformat="yyyy/MM/dd"</param>
+        /// <param name="fieldName"></param>
+        /// <param name="labelName"></param>
+        /// <param name="attributesTemplateContent">format="some text $this" dateformat="yyyy/MM/dd"</param>
         /// <returns></returns>
-        public static IEnumerable<FieldAttribute> Parse(string labelName, string fieldName, string parametersTemplateContent)
+        public static IEnumerable<FieldAttribute> Parse(string labelName, string fieldName, string attributesTemplateContent)
         {
-            if (!string.IsNullOrEmpty(parametersTemplateContent))
+            if (!string.IsNullOrEmpty(attributesTemplateContent))
             {
-                foreach (Match m in _regex.Matches(parametersTemplateContent))
+                foreach (Match m in Regex.Matches(attributesTemplateContent))
                 {
                     var parameter =  Parse(labelName, m);
                     if (parameter != null)
@@ -35,13 +33,13 @@ namespace SparrowCMS.Base.Parsers
         {
             var name = m.Groups["name"].Value;
             var value = m.Groups["value"].Value;
-            var parameter = Factory.Instance.GetInstance<FieldAttribute>(labelName, name);
-            if (parameter != null)
+            var attribute = Factory.Instance.GetInstance<FieldAttribute>(labelName, name);
+            if (attribute != null)
             {
-                parameter.Name = name;
-                parameter.Value = value;
+                attribute.Name = name;
+                attribute.Value = value;
             }
-            return parameter;
+            return attribute;
         }
     }
 }

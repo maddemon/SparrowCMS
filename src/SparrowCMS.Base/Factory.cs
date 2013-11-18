@@ -7,10 +7,57 @@ using System.Text;
 
 namespace SparrowCMS.Base
 {
+    internal enum ClassType
+    {
+        Parameter,
+        Function,
+        Attribute,
+        Unknown,
+        Label,
+        Field,
+    }
+
+    internal class SearchType
+    {
+        public SearchType(Type type)
+        {
+            Type = type;
+
+            ClassType = GetClassType(type.FullName);
+
+            var attr = type.GetCustomAttributes(true).FirstOrDefault(a => a is LabelNameAttribute);
+            if (attr != null)
+            {
+                AliasName = ((LabelNameAttribute)attr).Name;
+
+            }
+        }
+
+        public static ClassType GetClassType(string typeName)
+        {
+            foreach (var name in Enum.GetNames(typeof(ClassType)))
+            {
+                if (typeName.Contains(name))
+                {
+                    return (ClassType)Enum.Parse(typeof(ClassType), name);
+                }
+            }
+            return ClassType.Unknown;
+        }
+
+        public Type Type { get; set; }
+
+        public ClassType ClassType { get; set; }
+
+        public string AliasName { get; set; }
+
+    }
+
     public class Factory
     {
+
         public static Factory Instance = new Factory();
-        private ConcurrentDictionary<string, List<Type>> AllTypes;
+        private readonly List<SearchType> _allTypes = new List<SearchType>();
 
         private Factory()
         {
@@ -19,19 +66,24 @@ namespace SparrowCMS.Base
 
         private void InitTypes()
         {
-            AllTypes = new ConcurrentDictionary<string, List<Type>>();
-            AllTypes.TryAdd("Shared", new List<Type>());
-            AllTypes.TryAdd("Others", new List<Type>());
-
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(assembly => assembly.FullName.StartsWith("Sparrow")))
             {
-                if (assembly.FullName.StartsWith("Sparrow"))
-                {
-                    AddAssembly(assembly);
-                }
+                AddAssembly(assembly);
             }
         }
 
+        /// <summary>
+        /// 类名字空间约束 & 查询规则
+        /// ·插件的Label类可以不放在labels文件夹下，但其他Field、Parameter、Function和Attribute必须放在对应的文件夹下。
+        /// ·公共的其他类放在Shared文件夹下
+        /// ·插件DLL名称最好包含Label名称的一部分或其前缀
+        /// 
+        /// ·优先查询插件dll
+        /// ·优先查询非共享类
+        /// 
+        /// 插件之间的类名要避免冲突，特别是别名！
+        /// </summary>
+        /// <param name="assembly"></param>
         public void AddAssembly(Assembly assembly)
         {
             if (assembly == null)
@@ -41,91 +93,38 @@ namespace SparrowCMS.Base
 
             foreach (var type in assembly.GetTypes())
             {
-                var key = type.FullName;
-                var attr = type.GetCustomAttributes(true).FirstOrDefault(a => a is LabelAttribute);
-                if (attr != null)
-                {
-                    key = ((LabelAttribute)attr).Name;
-                    if (!AllTypes.ContainsKey(key))
-                    {
-                        AllTypes.TryAdd(key, new List<Type>());
-                    }
-                    AllTypes[key].Add(type);
-                }
-                else
-                {
-                    foreach (var kv in AllTypes)
-                    {
-                        if (type.FullName.Contains(kv.Key))
-                        {
-                            AllTypes[kv.Key].Add(type);
-                        }
-                        else
-                        {
-                            AllTypes["Others"].Add(type);
-                        }
-                    }
-                }
+                _allTypes.Add(new SearchType(type));
             }
         }
 
-        private Type SearchTypeFromAllAssemblies(string labelName, string typeName)
+        private Type Search(string labelName, string typeName, ClassType classType)
         {
-            Type result = null;
+            if (classType == ClassType.Unknown) return null;
 
-            if (AllTypes.ContainsKey(labelName))
+            var typeNamespaces = new List<string>
             {
-                //寻找包含该typeName的所有类型
-                var types = AllTypes[labelName].Where(t => t.FullName.ToLower().Contains(typeName.ToLower()));
-                //寻找插件下的非共享类
-                result = types.FirstOrDefault(t => t.FullName.Contains("Plugin") && !t.FullName.Contains("Shared"));
-                if (result != null) return result;
-                //寻找插件下的共享类
-                result = types.FirstOrDefault(t => t.FullName.Contains("Plugin") && t.FullName.Contains("Shared"));
-                if (result != null) return result;
-                //寻找系统Base的非共享类
-                result = types.FirstOrDefault(t => !t.FullName.Contains("Shared"));
-                if (result != null) return result;
-                //寻找Base的共享类
-                result = types.FirstOrDefault(t => t.FullName.Contains("Shared"));
-                if (result != null) return result;
-            }
+                labelName + "." + typeName,
+                labelName + classType + "s." + typeName,
+                labelName + ".Shared." + classType +"s."+ typeName,
+                "Base.Labels." + labelName + "." + typeName,
+                "Base.Labels." + labelName + "." + classType + "s." + typeName,
+                "Base.Labels.Shared." + classType + "s." + typeName,
+            };
+            if (classType == ClassType.Label) typeNamespaces.Add(labelName);
 
-            //寻找Base的共享类
-            result = SearchTypeFromSpecifiedTypes(AllTypes["Shared"], labelName, typeName);
-            if (result != null) return result;
-            //寻找未知的归属类
-            result = SearchTypeFromSpecifiedTypes(AllTypes["Others"], labelName, typeName);
-            if (result != null) return result;
-            return null;
-        }
-
-        private Type SearchTypeFromSpecifiedTypes(IEnumerable<Type> types, string labelName, string typeName)
-        {
-            var names = labelName.ToLower().Split('.');
-            foreach (var type in types)
+            foreach (var ns in typeNamespaces)
             {
-                var hasContains = true;
-                foreach (var name in type.FullName.ToLower().Split('.'))
-                {
-                    if (!names.Contains(name))
-                    {
-                        hasContains = false;
-                    }
-                }
-
-                if (hasContains && type.FullName.ToLower().Contains(typeName.ToLower()))
-                {
-                    return type;
-                }
+                var searchType = _allTypes.FirstOrDefault(t => t.ClassType == classType && t.Type.FullName.ToLower().Contains(ns.ToLower()));
+                if (searchType != null) return searchType.Type;
             }
-
             return null;
         }
 
         public T GetInstance<T>(string labelName, string typeName = "Default")
         {
-            var type = SearchTypeFromAllAssemblies(labelName, typeName);
+            var classType = SearchType.GetClassType(typeof(T).FullName);
+            var type = Search(labelName, typeName, classType);
+
             if (type == null)
             {
                 return default(T);

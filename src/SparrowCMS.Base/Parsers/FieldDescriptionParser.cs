@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using SparrowCMS.Base.Managers;
 
 namespace SparrowCMS.Base.Parsers
 {
     public class FieldDescriptionParser
     {
         //(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?("[^"]+"|[^\s]+))*)\)))
-        private static Regex _regex = new Regex(@"(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s]+))*)\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static readonly Regex Regex = new Regex(@"(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?(""[^""]+""|[^\s]+))*)\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         private static FieldDescription Parse(string labelName, Match match)
         {
@@ -34,7 +30,7 @@ namespace SparrowCMS.Base.Parsers
 
         public static IEnumerable<FieldDescription> Parse(string labelName, string templateContent)
         {
-            foreach (Match m in _regex.Matches(templateContent))
+            foreach (Match m in Regex.Matches(templateContent))
             {
                 yield return Parse(labelName, m);
             }
