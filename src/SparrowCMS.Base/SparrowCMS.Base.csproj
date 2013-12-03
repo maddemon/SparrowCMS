@@ -75,7 +75,7 @@
     <Compile Include="Labels\Shared\Attributes\DateFormat.cs" />
     <Compile Include="Labels\Shared\Attributes\Format.cs" />
     <Compile Include="Labels\Shared\Attributes\MaxLength.cs" />
-    <Compile Include="Labels\System\Default.cs" />
+    <Compile Include="Labels\System.cs" />
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Parsers\FieldAttributeParser.cs" />
     <Compile Include="Parsers\FieldDescriptionParser.cs" />

@@ -7,7 +7,7 @@ namespace SparrowCMS.Base
 {
     public class RouteData
     {
-        private Dictionary<string, string> _data = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _data = new Dictionary<string, string>();
 
         public void Insert(string name, string value)
         {

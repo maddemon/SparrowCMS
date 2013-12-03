@@ -54,8 +54,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FieldAttributeParserTest.cs" />
     <Compile Include="FieldDescriptionParserTest.cs" />
+    <Compile Include="LabelBuilderTest.cs" />
     <Compile Include="LabelDescriptionParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

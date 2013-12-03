@@ -7,7 +7,7 @@ using SparrowCMS.Base.Labels.Shared;
 
 namespace SparrowCMS.Plugin.Article.Labels.List
 {
-    [Label("Article.List")]
+    [LabelName("Article.List")]
     public class Default : ListLabelBase, ILabel
     {
         public int CategoryId { get; set; }

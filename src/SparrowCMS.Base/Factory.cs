@@ -103,18 +103,19 @@ namespace SparrowCMS.Base
 
             var typeNamespaces = new List<string>
             {
-                labelName + "." + typeName,
-                labelName + classType + "s." + typeName,
-                labelName + ".Shared." + classType +"s."+ typeName,
-                "Base.Labels." + labelName + "." + typeName,
-                "Base.Labels." + labelName + "." + classType + "s." + typeName,
-                "Base.Labels.Shared." + classType + "s." + typeName,
+                string.Format("{0}.{1}",labelName , typeName),
+                string.Format("{0}.{1}s.{2}",labelName ,classType , typeName),
+                string.Format("{0}.Shared.{1}s.{2}",labelName , classType , typeName),
+                string.Format("Base.Labels.{0}.{1}", labelName, typeName),
+                string.Format("Base.Labels.{0}.{1}s.{2}" , labelName , classType , typeName),
+                string.Format("Base.Labels.Shared.{0}s.{1}",classType , typeName),
             };
+
             if (classType == ClassType.Label) typeNamespaces.Add(labelName);
 
             foreach (var ns in typeNamespaces)
             {
-                var searchType = _allTypes.FirstOrDefault(t => t.ClassType == classType && t.Type.FullName.ToLower().Contains(ns.ToLower()));
+                var searchType = _allTypes.FirstOrDefault(t => t.ClassType == classType && ((t.AliasName != null && t.AliasName.ToLower() == ns.ToLower()) || t.Type.FullName.ToLower().Contains(ns.ToLower())));
                 if (searchType != null) return searchType.Type;
             }
             return null;
