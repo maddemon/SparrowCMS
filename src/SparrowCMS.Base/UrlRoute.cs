@@ -52,7 +52,7 @@ namespace SparrowCMS.Base
 
         public bool IsMatch(string absolutePath)
         {
-            throw new NotImplementedException();
+            return GetRegex().IsMatch(absolutePath);
         }
     }
 }

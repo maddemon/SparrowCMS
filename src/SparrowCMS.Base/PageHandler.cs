@@ -8,25 +8,34 @@ namespace SparrowCMS.Base
 {
     public class PageHandler : IHttpAsyncHandler , System.Web.SessionState.IRequiresSessionState
     {
+        private void ProcessContext(HttpContext context)
+        {
+            Context.Init(context);
+            context.Response.Write(Context.Current.CurrentPage.GetReplacedContext());
+        }
+
+        private ProcessContextDelegate _delegate;
+        private delegate void ProcessContextDelegate(HttpContext context);
 
         public IAsyncResult BeginProcessRequest(HttpContext context, AsyncCallback cb, object extraData)
         {
-            throw new NotImplementedException();
+            _delegate = new ProcessContextDelegate(ProcessContext);
+            return _delegate.BeginInvoke(context, cb, extraData);
         }
 
         public void EndProcessRequest(IAsyncResult result)
         {
-            throw new NotImplementedException();
+            _delegate.EndInvoke(result);
         }
 
         public bool IsReusable
         {
-            get { throw new NotImplementedException(); }
+            get { return true; }
         }
 
         public void ProcessRequest(HttpContext context)
         {
-            throw new NotImplementedException();
+            ProcessContext(context);
         }
     }
 }

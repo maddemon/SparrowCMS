@@ -7,9 +7,16 @@ namespace SparrowCMS.Base.Managers
 {
     public class PageManager
     {
-        public static IEnumerable<Page> GetPages(Site site)
+        private static string _cacheKye = "cms_pages";
+        
+        private static IEnumerable<Page> GetPages(Site site)
         {
-            throw new NotImplementedException();
+            return Cache<List<Page>>.GetOrSet(_cacheKye, GetPagesFromDb);
+        }
+
+        private static List<Page> GetPagesFromDb()
+        {
+            return new List<Page>();
         }
 
         public static Page GetCurrentPage(Site site, System.Web.HttpContext context)
@@ -25,10 +32,7 @@ namespace SparrowCMS.Base.Managers
                 }
             }
 
-            if (!currentPage.Initialized)
-            {
-                currentPage.Init();
-            }
+            currentPage.Init();
 
             return currentPage;
         }

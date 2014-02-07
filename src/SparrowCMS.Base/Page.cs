@@ -5,29 +5,33 @@ using System.Text;
 
 namespace SparrowCMS.Base
 {
-    public class Page : PageBase
+    public class Page
     {
-        public bool Initialized { get; set; }
+        private bool _initialized;
 
         public void Init()
         {
-            if (Initialized)
+            if (_initialized)
             {
                 return;
             }
             //find all label's template content
-            foreach (var template in Templates)
-            {
-                template.Init();
-            }
+            Template.Init();
 
-            Initialized = true;
+            _initialized = true;
         }
+
+        public PageTemplate Template { get; set; }
 
         public OutputCache OutputCache { get; set; }
 
         public UrlRoute UrlRoute { get; set; }
 
         public RouteData RouteData { get; set; }
+
+        public string GetReplacedContext()
+        {
+            return Template.GetReplacedContent();
+        }
     }
 }
