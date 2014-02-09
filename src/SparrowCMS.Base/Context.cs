@@ -23,6 +23,9 @@ namespace SparrowCMS.Base
 
         public static void Init(HttpContext context)
         {
+#if SingleSite
+            Current.Site = new Site();
+#else
             //set current site
             var site = SiteManager.GetCurrentSite(context.Request.Url.Host);
             if (site == null)
@@ -31,9 +34,9 @@ namespace SparrowCMS.Base
             }
 
             Current.Site = site;
-
+#endif
             //set current page
-            var page = PageManager.GetCurrentPage(site, context);
+            var page = PageManager.GetCurrentPage(Current.Site, context);
             if (page == null)
             {
                 throw new HttpException(404, "PAGE NOT FOUND!");

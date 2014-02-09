@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SparrowCMS.Base.Parsers;
 
 namespace SparrowCMS.Base
 {
-    public class PageTemplate : ITemplate
+    public class Template
     {
-        public PageTemplate()
-        {
-        }
-
         public string Name { get; set; }
 
         public string StaticFilePath { get; set; }
@@ -36,19 +31,5 @@ namespace SparrowCMS.Base
 
             return Content;
         }
-
-        //private string GetReplacedInnerHtml(LabelDescription desc)
-        //{
-        //    if (desc.InnerLabelDescriptions.Count() > 0)
-        //    {
-        //        foreach (var d in desc.InnerLabelDescriptions)
-        //        {
-        //            ReplaceInnerHtml(d);
-        //        }
-        //    }
-
-        //    var label = desc.CreateLabel();
-        //    return label.GetReplacedContent(desc.InnerHtml);
-        //}
     }
 }

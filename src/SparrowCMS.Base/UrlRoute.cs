@@ -9,22 +9,28 @@ namespace SparrowCMS.Base
 {
     public class UrlRoute
     {
-        public string Pattern { get; set; }
 
-        public List<UrlParameter> UrlParameters { get; set; }
+        private static Regex _parameterRegex = new Regex(@"\(\?\<(?<key>\w+)\>|((?<key>\w+)=[^=]+)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        private Regex GetRegex()
+        private Regex _urlRegex;
+        private string _pattern;
+        public UrlRoute(string urlPattern)
         {
-            return Cache<Regex>.GetOrSet(Pattern, () =>
-            {
-                var regexPattern = Pattern;
-                foreach (var p in UrlParameters)
-                {
-                    regexPattern = regexPattern.Replace("{" + p.Name + "}", string.Format("(?<{0}>{1})", p.Name, p.Pattern));
-                }
+            _pattern = urlPattern;
+            _urlRegex = new Regex(_pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        }
 
-                return new Regex(regexPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            });
+        private IEnumerable<string> GetParameterNames()
+        {
+            var matchs = _parameterRegex.Matches(_pattern);
+            if (matchs == null || matchs.Count == 0)
+            {
+                throw new Exception("urlpattern is error");
+            }
+            foreach (Match m in matchs)
+            {
+                yield return m.Groups["key"].Value;
+            }
         }
 
         public RouteData GetRouteData(HttpContext context)
@@ -33,26 +39,27 @@ namespace SparrowCMS.Base
 
             var routeData = new RouteData();
 
-            var match = GetRegex().Match(absolutePath);
+            var match = _urlRegex.Match(absolutePath);
 
             if (match == null)
             {
-                throw new Exception(string.Format("{0} does not match {1}", absolutePath, Pattern));
+                throw new Exception(string.Format("{0} does not match {1}", absolutePath, _pattern));
             }
 
-            foreach (var p in UrlParameters)
+            var parameterNams = GetParameterNames();
+
+            foreach (var name in GetParameterNames())
             {
-                routeData.Add(p.Name, match.Groups[p.Name].Value);
+                var group = match.Groups[name];
+                routeData.Add(name, group == null ? context.Request.QueryString[name] : match.Groups[name].Value);
             }
-
-            //filter unknown querystring?cookies?forms?
 
             return routeData;
         }
 
         public bool IsMatch(string absolutePath)
         {
-            return GetRegex().IsMatch(absolutePath);
+            return _urlRegex.IsMatch(absolutePath);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace SparrowCMS.Base.Managers
 {
@@ -30,6 +31,11 @@ namespace SparrowCMS.Base.Managers
                     currentPage = page;
                     break;
                 }
+            }
+
+            if (currentPage == null)
+            {
+                throw new HttpException(404, "PAGE NOT FOUND!");
             }
 
             currentPage.Init();

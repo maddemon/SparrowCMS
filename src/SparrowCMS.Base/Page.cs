@@ -21,7 +21,15 @@ namespace SparrowCMS.Base
             _initialized = true;
         }
 
-        public PageTemplate Template { get; set; }
+        public string Name { get; set; }
+
+        public string Title { get; set; }
+
+        public string Keywords { get; set; }
+
+        public string Description { get; set; }
+
+        public Template Template { get; set; }
 
         public OutputCache OutputCache { get; set; }
 
