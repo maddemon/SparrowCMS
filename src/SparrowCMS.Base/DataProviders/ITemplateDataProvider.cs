@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SparrowCMS.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.DataProvider
+namespace SparrowCMS.Core.DataProviders
 {
     public interface ITemplateDataProvider
     {

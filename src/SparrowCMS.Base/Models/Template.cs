@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Model
+namespace SparrowCMS.Core.Models
 {
     public class Template
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public string StaticFilePath { get; set; }
-
+        
         public string Content { get; set; }
 
+        [NotMapped]
         public IEnumerable<LabelDescription> LabelDescriptions { get; set; }
 
         public void Init()
