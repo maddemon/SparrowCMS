@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Core
 {
     public class PageHandler : IHttpAsyncHandler , System.Web.SessionState.IRequiresSessionState
     {

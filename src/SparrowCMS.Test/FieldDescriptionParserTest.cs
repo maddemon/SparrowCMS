@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using SparrowCMS.Base.Parsers;
+using SparrowCMS.Core.Parsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using SparrowCMS.Base;
+using SparrowCMS.Core;
 using System.Collections.Generic;
 
 namespace SparrowCMS.Test

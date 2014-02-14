@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SparrowCMS.Core.Managers;
+using SparrowCMS.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using SparrowCMS.Base.Managers;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Core
 {
     public class Context
     {

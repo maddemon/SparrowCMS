@@ -1,10 +1,11 @@
-﻿using SparrowCMS.Base.IDataProvider;
+﻿using SparrowCMS.Core.DataProviders;
+using SparrowCMS.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Managers
+namespace SparrowCMS.Core.Managers
 {
     public class SiteManager
     {

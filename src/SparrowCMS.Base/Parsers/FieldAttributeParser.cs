@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace SparrowCMS.Base.Parsers
+namespace SparrowCMS.Core.Parsers
 {
     public class FieldAttributeParser
     {

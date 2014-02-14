@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Model
 {
     public class Template
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string StaticFilePath { get; set; }

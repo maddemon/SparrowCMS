@@ -45,9 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SparrowCMS.Base\SparrowCMS.Base.csproj">
+    <ProjectReference Include="..\SparrowCMS.Base\SparrowCMS.Core.csproj">
       <Project>{59a060de-fa5b-4d64-8121-a93fb25b31e7}</Project>
-      <Name>SparrowCMS.Base</Name>
+      <Name>SparrowCMS.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

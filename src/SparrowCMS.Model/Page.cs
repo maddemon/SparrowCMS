@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Model
 {
     public class Page
     {
@@ -20,6 +20,8 @@ namespace SparrowCMS.Base
 
             _initialized = true;
         }
+
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

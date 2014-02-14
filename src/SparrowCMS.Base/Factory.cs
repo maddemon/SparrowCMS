@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Core
 {
     internal enum ClassType
     {

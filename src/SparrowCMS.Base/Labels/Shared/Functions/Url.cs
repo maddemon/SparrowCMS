@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Labels.Shared.Functions
+namespace SparrowCMS.Core.Labels.Shared.Functions
 {
     public class Url : IParameterFunction
     {

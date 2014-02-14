@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SparrowCMS.Base.Parsers
+namespace SparrowCMS.Core.Parsers
 {
     public class LabelParameterParser
     {

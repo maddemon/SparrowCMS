@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SparrowCMS.Core.Common;
+using SparrowCMS.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace SparrowCMS.Base.Managers
+namespace SparrowCMS.Core.Managers
 {
     public class PageManager
     {

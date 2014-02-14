@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Core
 {
     [Flags]
     public enum UserGroup

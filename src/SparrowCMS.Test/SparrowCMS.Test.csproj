@@ -60,9 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SparrowCMS.Base\SparrowCMS.Base.csproj">
+    <ProjectReference Include="..\SparrowCMS.Base\SparrowCMS.Core.csproj">
       <Project>{59A060DE-FA5B-4D64-8121-A93FB25B31E7}</Project>
-      <Name>SparrowCMS.Base</Name>
+      <Name>SparrowCMS.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

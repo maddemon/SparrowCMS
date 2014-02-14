@@ -8,8 +8,8 @@
     <ProjectGuid>{59A060DE-FA5B-4D64-8121-A93FB25B31E7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SparrowCMS.Base</RootNamespace>
-    <AssemblyName>SparrowCMS.Base</AssemblyName>
+    <RootNamespace>SparrowCMS.Core</RootNamespace>
+    <AssemblyName>SparrowCMS.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -43,6 +43,7 @@
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -53,19 +54,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\NameAttribute.cs" />
-    <Compile Include="Document.cs" />
-    <Compile Include="Factory.cs" />
     <Compile Include="Common\Cache.cs" />
     <Compile Include="Common\Extensions.cs" />
+    <Compile Include="DataProviders\DataProviderFactory.cs" />
+    <Compile Include="DataProviders\IPageDataProvider.cs" />
+    <Compile Include="DataProviders\ISiteDataProvider.cs" />
+    <Compile Include="DataProviders\ITemplateDataProvider.cs" />
+    <Compile Include="Document.cs" />
+    <Compile Include="Factory.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FieldBuilder.cs" />
     <Compile Include="FieldDescription.cs" />
     <Compile Include="FieldAttribute.cs" />
-    <Compile Include="IDataProvider\DataProviderFactory.cs" />
-    <Compile Include="IDataProvider\IPageDataProvider.cs" />
-    <Compile Include="IDataProvider\ISiteDataProvider.cs" />
-    <Compile Include="IDataProvider\ITemplateDataProvider.cs" />
     <Compile Include="IParameterFunction.cs" />
     <Compile Include="Attributes\LabelNameAttribute.cs" />
     <Compile Include="LabelBuilder.cs" />
@@ -80,29 +81,30 @@
     <Compile Include="Labels\Shared\Attributes\Format.cs" />
     <Compile Include="Labels\Shared\Attributes\MaxLength.cs" />
     <Compile Include="Labels\System.cs" />
+    <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Managers\SiteManager.cs" />
-    <Compile Include="Template.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Site.cs" />
+    <Compile Include="Models\Template.cs" />
+    <Compile Include="PageHandlerFactory.cs" />
+    <Compile Include="Table.cs" />
     <Compile Include="Parsers\FieldAttributeParser.cs" />
     <Compile Include="Parsers\FieldDescriptionParser.cs" />
     <Compile Include="ILabel.cs" />
     <Compile Include="LabelParameter.cs" />
     <Compile Include="OutputCache.cs" />
-    <Compile Include="Page.cs" />
     <Compile Include="PageHandler.cs" />
-    <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Parsers\LabelParameterParser.cs" />
     <Compile Include="Parsers\LabelDescriptionParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITemplate.cs" />
     <Compile Include="RouteData.cs" />
-    <Compile Include="Site.cs" />
     <Compile Include="UrlRoute.cs" />
     <Compile Include="UserGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

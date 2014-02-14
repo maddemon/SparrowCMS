@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SparrowCMS.Base;
-using SparrowCMS.Base.Labels.Shared;
+using SparrowCMS.Core;
+using SparrowCMS.Core.Labels.Shared;
 
 namespace SparrowCMS.Plugin.Article.Labels.List
 {

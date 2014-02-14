@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base.Labels.PageLink
+namespace SparrowCMS.Core.Labels.PageLink
 {
     [LabelName("PageLink.List")]
     public class List : ILabel

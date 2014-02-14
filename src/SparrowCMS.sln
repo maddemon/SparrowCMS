@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Base", "SparrowCMS.Base\SparrowCMS.Base.csproj", "{59A060DE-FA5B-4D64-8121-A93FB25B31E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Core", "SparrowCMS.Base\SparrowCMS.Core.csproj", "{59A060DE-FA5B-4D64-8121-A93FB25B31E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Test", "SparrowCMS.Test\SparrowCMS.Test.csproj", "{6AC8F64C-FBD9-458F-AFE5-F072D367EF0C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Plugin.Article", "SparrowCMS.Plugin.Article\SparrowCMS.Plugin.Article.csproj", "{709357D0-A45E-4126-AB2D-2E96F640EE12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleSite", "ExampleSite\ExampleSite.csproj", "{1E573F3A-1066-45AB-8D6D-43F45798062E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Web", "SparrowCMS.Web\SparrowCMS.Web.csproj", "{84E73B8F-3D7A-4EC8-91F2-492C7BE0DFCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.DAL.SqlServer", "SparrowCMS.DAL.SqlServer\SparrowCMS.DAL.SqlServer.csproj", "{100D8A6A-1B56-40FB-B16A-B782C0AE4E88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.DataProvider.SqlServer", "SparrowCMS.DataProvider.SqlServer\SparrowCMS.DataProvider.SqlServer.csproj", "{100D8A6A-1B56-40FB-B16A-B782C0AE4E88}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -32,10 +32,10 @@ Global
 		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E573F3A-1066-45AB-8D6D-43F45798062E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E573F3A-1066-45AB-8D6D-43F45798062E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E573F3A-1066-45AB-8D6D-43F45798062E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E573F3A-1066-45AB-8D6D-43F45798062E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84E73B8F-3D7A-4EC8-91F2-492C7BE0DFCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84E73B8F-3D7A-4EC8-91F2-492C7BE0DFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84E73B8F-3D7A-4EC8-91F2-492C7BE0DFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84E73B8F-3D7A-4EC8-91F2-492C7BE0DFCE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{100D8A6A-1B56-40FB-B16A-B782C0AE4E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{100D8A6A-1B56-40FB-B16A-B782C0AE4E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{100D8A6A-1B56-40FB-B16A-B782C0AE4E88}.Release|Any CPU.ActiveCfg = Release|Any CPU

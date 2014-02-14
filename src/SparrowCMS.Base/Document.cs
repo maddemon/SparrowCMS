@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 
-namespace SparrowCMS.Base
+namespace SparrowCMS.Core
 {
     public class Document : DynamicObject
     {
