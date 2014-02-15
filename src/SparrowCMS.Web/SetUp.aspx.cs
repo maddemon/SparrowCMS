@@ -95,7 +95,7 @@ namespace SparrowCMS.Web
 
 
             var webNode = doc.Root.Element("system.web");
-            var handlerNode = webNode.Element("httpHandlers");
+            var handlerNode = webNode.Element("httpModules");
             if (handlerNode == null)
             {
                 handlerNode = new XElement("httpModules");
@@ -122,7 +122,7 @@ namespace SparrowCMS.Web
             var handlerNode1 = serverNode.Element("modules");
             if (handlerNode1 == null)
             {
-                handlerNode1 = new XElement("handlers");
+                handlerNode1 = new XElement("modules");
 
                 var item = new XElement("add");
                 item.Name = "add";
