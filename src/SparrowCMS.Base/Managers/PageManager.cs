@@ -42,13 +42,13 @@ namespace SparrowCMS.Core.Managers
 
                 var templateElement = pageElement.Element("template");
                 var layout = templateElement.Attribute("layout") == null ? null : templateElement.Attribute("layout").Value;
-               
+
                 page.Template = new Template(templateElement.Value, layout);
 
                 result.Add(page);
             }
 
-            return result;
+            return result.OrderByDescending(e => e.UrlPattern).ToList();
         }
 
         public static Page GetCurrentPage(Site site, System.Web.HttpContext context)

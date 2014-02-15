@@ -14,22 +14,23 @@ namespace SparrowCMS.Core
 
         private Regex _urlRegex;
         private string _pattern;
+        private IEnumerable<string> _parameterNames;
         public UrlRoute(string urlPattern)
         {
             _pattern = urlPattern;
             _urlRegex = new Regex(_pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            _parameterNames = GetParameterNames();
         }
 
         private IEnumerable<string> GetParameterNames()
         {
             var matchs = _parameterRegex.Matches(_pattern);
-            if (matchs == null || matchs.Count == 0)
+            if (matchs != null && matchs.Count > 0)
             {
-                throw new Exception("urlpattern is error");
-            }
-            foreach (Match m in matchs)
-            {
-                yield return m.Groups["key"].Value;
+                foreach (Match m in matchs)
+                {
+                    yield return m.Groups["key"].Value;
+                }
             }
         }
 
@@ -46,9 +47,7 @@ namespace SparrowCMS.Core
                 throw new Exception(string.Format("{0} does not match {1}", absolutePath, _pattern));
             }
 
-            var parameterNams = GetParameterNames();
-
-            foreach (var name in GetParameterNames())
+            foreach (var name in _parameterNames)
             {
                 var group = match.Groups[name];
                 routeData.Add(name, group == null ? context.Request.QueryString[name] : match.Groups[name].Value);
@@ -59,6 +58,10 @@ namespace SparrowCMS.Core
 
         public bool IsMatch(string absolutePath)
         {
+            if (_parameterNames == null || _parameterNames.Count() == 0)
+            {
+                return absolutePath.StartsWith(_pattern);
+            }
             return _urlRegex.IsMatch(absolutePath);
         }
     }

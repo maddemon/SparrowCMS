@@ -15,6 +15,7 @@ namespace SparrowCMS.Core
 
         public virtual object GetValue(Document doc)
         {
+            if (doc == null) return null;
             return doc[Name]; 
         }
 
