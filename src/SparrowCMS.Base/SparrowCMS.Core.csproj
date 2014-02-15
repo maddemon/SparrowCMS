@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -60,12 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\NameAttribute.cs" />
-    <Compile Include="Common\Cache.cs" />
+    <Compile Include="Common\AppSettings.cs" />
+    <Compile Include="Common\LocalCache.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="DataProviders\DataProviderFactory.cs" />
-    <Compile Include="DataProviders\IPageDataProvider.cs" />
-    <Compile Include="DataProviders\ISiteDataProvider.cs" />
-    <Compile Include="DataProviders\ITemplateDataProvider.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Context.cs" />
@@ -88,9 +87,11 @@
     <Compile Include="Labels\Shared\Attributes\MaxLength.cs" />
     <Compile Include="Labels\System.cs" />
     <Compile Include="Managers\PageManager.cs" />
+    <Compile Include="Common\ShareCache.cs" />
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\Template.cs" />
     <Compile Include="PageHandlerFactory.cs" />

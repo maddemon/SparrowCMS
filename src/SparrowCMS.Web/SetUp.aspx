@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SetUp.aspx.cs" Inherits="SparrowCMS.Web.SetUp" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Setup.aspx.cs" Inherits="SparrowCMS.Web.Setup" %>
 
 <!DOCTYPE html>
 

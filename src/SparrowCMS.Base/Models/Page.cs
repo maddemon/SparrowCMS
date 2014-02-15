@@ -22,16 +22,9 @@ namespace SparrowCMS.Core.Models
             _initialized = true;
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        public int SiteId { get; set; }
-
-        public int TemplateId { get; set; }
-
         public string Name { get; set; }
 
-        public string Title { get; set; }
+        public Role Role { get; set; }
 
         public string Keywords { get; set; }
 
@@ -39,16 +32,12 @@ namespace SparrowCMS.Core.Models
 
         public string UrlPattern { get; set; }
 
-        [ForeignKey("TemplateId")]
         public Template Template { get; set; }
 
-        [NotMapped]
         public OutputCache OutputCache { get; set; }
 
-        [NotMapped]
         public UrlRoute UrlRoute { get; set; }
 
-        [NotMapped]
         public RouteData RouteData { get; set; }
 
         public string GetReplacedContext()

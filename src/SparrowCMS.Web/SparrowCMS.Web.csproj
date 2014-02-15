@@ -14,7 +14,7 @@
     <RootNamespace>SparrowCMS.Web</RootNamespace>
     <AssemblyName>SparrowCMS.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -57,26 +57,51 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SetUp.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Setup.aspx" />
+    <Content Include="templates\admin\index.html" />
+    <Content Include="templates\admin\_layout.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetUp.aspx.cs">
-      <DependentUpon>SetUp.aspx</DependentUpon>
+    <Compile Include="Setup.aspx.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SetUp.aspx.designer.cs">
-      <DependentUpon>SetUp.aspx</DependentUpon>
+    <Compile Include="Setup.aspx.designer.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="configs\pages.config" />
+    <Content Include="configs\sites.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SparrowCMS.Base\SparrowCMS.Core.csproj">
+      <Project>{59a060de-fa5b-4d64-8121-a93fb25b31e7}</Project>
+      <Name>SparrowCMS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SparrowCMS.DataProvider.SqlServer\SparrowCMS.DataProvider.SqlServer.csproj">
+      <Project>{100d8a6a-1b56-40fb-b16a-b782c0ae4e88}</Project>
+      <Name>SparrowCMS.DataProvider.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SparrowCMS.Plugin.Article\SparrowCMS.Plugin.Article.csproj">
+      <Project>{709357d0-a45e-4126-ab2d-2e96f640ee12}</Project>
+      <Name>SparrowCMS.Plugin.Article</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="static\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -89,16 +114,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1853/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

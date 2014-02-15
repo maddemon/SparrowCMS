@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SparrowCMS.Core.DataProviders;
+using SparrowCMS.Core.Managers;
+using SparrowCMS.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +15,7 @@ namespace SparrowCMS.Web
     {
         public void Page_Load(object sender, EventArgs e)
         {
-            var step = string.Empty;
+            var step = Request.QueryString["step"];
             if (string.IsNullOrEmpty(step))
             {
                 if (Request.HttpMethod == "POST")
@@ -21,7 +24,7 @@ namespace SparrowCMS.Web
                     Response.Redirect("/setup.aspx?step=initdata", true);
                 }
             }
-            else if(step == "initdata")
+            else if (step == "initdata")
             {
                 InitData();
                 Response.Redirect("/setup.aspx?step=handlers", true);
@@ -62,12 +65,7 @@ namespace SparrowCMS.Web
                 dbTypeNode.SetAttributeValue("key", "DbType");
                 dbTypeNode.SetAttributeValue("value", "SqlServer");
 
-                var siteNode = new XElement("add");
-                siteNode.SetAttributeValue("key", "SiteName");
-                siteNode.SetAttributeValue("value", Request["SiteName"]);
-
                 appNode.Add(dbTypeNode);
-                appNode.Add(siteNode);
 
                 doc.Root.Add(appNode);
             }
@@ -78,7 +76,14 @@ namespace SparrowCMS.Web
 
         public void InitData()
         {
+            //add default site
+            var request = HttpContext.Current.Request;
+            var site = new Site
+            {
+                Name = request["SiteName"],
+            };
 
+            SiteManager.AddSite(site);
         }
 
         public void RegisterHandlers()
@@ -98,13 +103,22 @@ namespace SparrowCMS.Web
                 item.Name = "add";
                 item.SetAttributeValue("verb", "*");
                 item.SetAttributeValue("path", "*");
-                item.SetAttributeValue("type", "SparrowCMS.Base.PageHandlerFactory");
+                item.SetAttributeValue("type", "SparrowCMS.Core.PageHandlerFactory");
                 handlerNode.Add(item);
 
                 webNode.Add(handlerNode);
             }
 
             var serverNode = doc.Root.Element("system.webServer");
+            if (serverNode == null)
+            {
+                serverNode = new XElement("system.webServer");
+                var validationNode = new XElement("validation");
+                validationNode.SetAttributeValue("validateIntegratedModeConfiguration", "false");
+                serverNode.Add(validationNode);
+
+                doc.Root.Add(serverNode);
+            }
             var handlerNode1 = serverNode.Element("handlers");
             if (handlerNode1 == null)
             {
@@ -115,7 +129,7 @@ namespace SparrowCMS.Web
                 item.SetAttributeValue("name", "pageHandlerFactory");
                 item.SetAttributeValue("verb", "*");
                 item.SetAttributeValue("path", "*");
-                item.SetAttributeValue("type", "SparrowCMS.Base.PageHandlerFactory");
+                item.SetAttributeValue("type", "SparrowCMS.Core.PageHandlerFactory");
 
                 handlerNode1.Add(item);
 

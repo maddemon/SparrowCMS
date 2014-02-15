@@ -9,10 +9,13 @@ namespace SparrowCMS.Core.Managers
 {
     public class SiteManager
     {
-        private ISiteDataProvider _dao;
         public static Site GetCurrentSite(string host)
         {
             return new Site();
+        }
+        public static void AddSite(Site site)
+        { 
+            
         }
     }
 }

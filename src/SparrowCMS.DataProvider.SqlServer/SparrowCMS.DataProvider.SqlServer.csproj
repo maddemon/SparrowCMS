@@ -55,10 +55,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="PageDataProvider.cs" />
-    <Compile Include="SiteDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TemplateDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SparrowCMS.Base\SparrowCMS.Core.csproj">

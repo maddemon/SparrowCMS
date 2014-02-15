@@ -9,7 +9,7 @@ namespace SparrowCMS.Core.Labels
     {
         public string GetReplacedContent(string innerHtml)
         {
-            throw new NotImplementedException();
+            return "";
         }
     }
 }

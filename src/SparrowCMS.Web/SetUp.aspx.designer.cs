@@ -10,7 +10,7 @@
 namespace SparrowCMS.Web {
     
     
-    public partial class SetUp {
+    public partial class Setup {
         
         /// <summary>
         /// form1 control.
