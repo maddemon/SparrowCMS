@@ -27,7 +27,7 @@ namespace SparrowCMS.Core.Common
             get
             {
                 path = path.ToLower();
-                return _values.ContainsKey(path) ? _values[path] : string.Empty;
+                return _values.ContainsKey(path) ? _values[path] : null;
             }
             set
             {

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="CMSHttpModule.cs" />
     <Compile Include="Common\AppSettings.cs" />
     <Compile Include="Common\LocalCache.cs" />
     <Compile Include="Common\Extensions.cs" />
@@ -94,7 +95,6 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\Template.cs" />
-    <Compile Include="PageHandlerFactory.cs" />
     <Compile Include="Table.cs" />
     <Compile Include="Parsers\FieldAttributeParser.cs" />
     <Compile Include="Parsers\FieldDescriptionParser.cs" />

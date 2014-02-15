@@ -98,12 +98,12 @@ namespace SparrowCMS.Web
             var handlerNode = webNode.Element("httpHandlers");
             if (handlerNode == null)
             {
-                handlerNode = new XElement("httpHandlers");
+                handlerNode = new XElement("httpModules");
+
                 var item = new XElement("add");
                 item.Name = "add";
-                item.SetAttributeValue("verb", "*");
-                item.SetAttributeValue("path", "*");
-                item.SetAttributeValue("type", "SparrowCMS.Core.PageHandlerFactory");
+                item.SetAttributeValue("name", "CMSHttpModule");
+                item.SetAttributeValue("type", "SparrowCMS.Core.CMSHttpModule");
                 handlerNode.Add(item);
 
                 webNode.Add(handlerNode);
@@ -119,17 +119,15 @@ namespace SparrowCMS.Web
 
                 doc.Root.Add(serverNode);
             }
-            var handlerNode1 = serverNode.Element("handlers");
+            var handlerNode1 = serverNode.Element("modules");
             if (handlerNode1 == null)
             {
                 handlerNode1 = new XElement("handlers");
 
                 var item = new XElement("add");
                 item.Name = "add";
-                item.SetAttributeValue("name", "pageHandlerFactory");
-                item.SetAttributeValue("verb", "*");
-                item.SetAttributeValue("path", "*");
-                item.SetAttributeValue("type", "SparrowCMS.Core.PageHandlerFactory");
+                item.SetAttributeValue("name", "CMSHttpModule");
+                item.SetAttributeValue("type", "SparrowCMS.Core.CMSHttpModule");
 
                 handlerNode1.Add(item);
 
