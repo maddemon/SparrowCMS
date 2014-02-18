@@ -1,0 +1,160 @@
+body {
+  font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+  font-size: 12px;
+}
+body,
+h1,
+h2,
+h3,
+form,
+p,
+ul,
+li {
+  padding: 0px;
+  margin: 0px;
+}
+a:link {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+li {
+  list-style: none;
+}
+.header {
+  background-color: #0094ff;
+  color: #fff;
+  height: 45px;
+  width: 100%;
+  position: absolute;
+}
+.header .brand {
+  float: left;
+  font-size: 20px;
+  line-height: 45px;
+  font-weight: 400;
+  width: 180px;
+  text-align: center;
+}
+.header .brand span {
+  color: #ddd;
+  font-weight: normal;
+}
+.header a {
+  color: #fff;
+}
+.header a:hover {
+  color: #ddd;
+}
+.navbar {
+  margin-left: 200px;
+}
+.navbar li {
+  float: left;
+  font-size: 14px;
+  line-height: 35px;
+  padding: 5px 10px;
+  margin: 0px 10px;
+  display: inline-block;
+}
+.header .account {
+  float: right;
+  line-height: 45px;
+  margin-right: 10px;
+}
+.body .nav {
+  width: 180px;
+  background: #f1f1f1;
+  height: auto;
+  position: absolute;
+  top: 45px;
+  bottom: 20px;
+}
+.body .nav ul {
+  font-size: 14px;
+  line-height: 30px;
+  margin: 5px 10px;
+  text-indent: 5px;
+}
+.body .nav li {
+  text-indent: 15px;
+  font-size: 12px;
+}
+.body .nav li a {
+  color: #555;
+}
+.body .container {
+  padding: 5px;
+  position: absolute;
+  top: 45px;
+  left: 180px;
+  bottom: 20px;
+  right: 0px;
+  overflow: auto;
+}
+.footer {
+  position: absolute;
+  height: 20px;
+  bottom: 0px;
+  background: #e1e1e1;
+  width: 100%;
+}
+.toolbar {
+  overflow: hidden;
+  height: 30px;
+}
+.link-button {
+  border: solid 1px #ddd;
+  min-width: 60px;
+  display: inline-block;
+  background-color: #f1f1f1;
+  padding: 0px 10px;
+  line-height: 24px;
+  color: #000;
+}
+.link-button:hover {
+  background-color: #0094ff;
+  color: #fff;
+  text-decoration: none;
+}
+.icon-add {
+  text-indent: 20px;
+}
+.icon-edit {
+  text-indent: 20px;
+}
+.icon-delete {
+  text-indent: 20px;
+}
+.icon-save {
+  text-indent: 20px;
+}
+.search-box {
+  float: right;
+}
+.datagrid {
+  border: none;
+  border-spacing: 0px;
+  border-collapse: collapse;
+  width: 100%;
+}
+.datagrid thead {
+  background-color: #f1f1f1;
+  line-height: 25px;
+  border-top: solid 1px #dddddd;
+  border-bottom: solid 1px #dddddd;
+}
+.datagrid thead th {
+  font-weight: normal;
+  text-align: left;
+  color: #666;
+}
+.datagrid tbody tr {
+  color: #444;
+  line-height: 25px;
+  border-bottom: solid 1px #dddddd;
+}
+.datagrid tbody tr:hover {
+  background-color: #f1f1f1;
+}

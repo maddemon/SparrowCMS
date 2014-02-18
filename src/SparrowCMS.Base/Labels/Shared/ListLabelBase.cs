@@ -25,14 +25,16 @@ namespace SparrowCMS.Core.Labels.Shared
         {
             InitDatas();
 
-            var result = new StringBuilder();
+            var result = string.Empty;
 
             foreach (var data in _datas)
             {
+                var row = innerHtml;
                 foreach (var field in Fields)
                 {
-                    result.Append(innerHtml.Replace(field.TemplateContent, field.GetReplacedContent(data)));
+                    row = row.Replace(field.TemplateContent, field.GetReplacedContent(data));
                 }
+                result += row;
             }
 
             return result.ToString();

@@ -59,6 +59,12 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Setup.aspx" />
+    <Content Include="static\admin.css">
+      <DependentUpon>admin.less</DependentUpon>
+    </Content>
+    <Content Include="static\admin.min.css">
+      <DependentUpon>admin.less</DependentUpon>
+    </Content>
     <Content Include="templates\admin\index.html" />
     <Content Include="templates\admin\_layout.html" />
     <Content Include="templates\index.html" />
@@ -80,6 +86,7 @@
   <ItemGroup>
     <Content Include="configs\pages.config" />
     <Content Include="configs\sites.config" />
+    <Content Include="static\admin.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -101,9 +108,7 @@
       <Name>SparrowCMS.Plugin.Article</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="static\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

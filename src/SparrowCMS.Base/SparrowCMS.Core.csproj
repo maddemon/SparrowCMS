@@ -61,10 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Attributes\ParameterAttribute.cs" />
     <Compile Include="CMSHttpModule.cs" />
     <Compile Include="Common\AppSettings.cs" />
     <Compile Include="Common\LocalCache.cs" />
-    <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\DocumentExtensions.cs" />
     <Compile Include="DataProviders\DataProviderFactory.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Factory.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Labels\PageLink\Default.cs" />
     <Compile Include="Labels\PageLink\Fields\Next.cs" />
     <Compile Include="Labels\PageLink\List.cs" />
+    <Compile Include="Labels\Page\List.cs" />
     <Compile Include="Labels\Shared\DetailLabelBase.cs" />
     <Compile Include="Labels\Shared\Functions\Url.cs" />
     <Compile Include="Labels\Shared\ListLabelBase.cs" />

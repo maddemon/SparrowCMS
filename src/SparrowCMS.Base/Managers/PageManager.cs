@@ -12,14 +12,14 @@ namespace SparrowCMS.Core.Managers
 {
     public class PageManager
     {
-        private static string _cacheKye = "cms_pages";
+        private static string _cacheKey = "cms_pages";
 
-        private static IEnumerable<Page> GetPages(Site site)
+        public static IEnumerable<Page> GetPages(Site site)
         {
-            return ShareCache.GetOrSet<List<Page>>(_cacheKye, GetPagesFromConfig);
+            return ShareCache.GetOrSet<IEnumerable<Page>>(_cacheKey, GetPagesFromConfig);
         }
 
-        private static List<Page> GetPagesFromConfig()
+        private static IEnumerable<Page> GetPagesFromConfig()
         {
             var filePath = Path.Combine(Environment.CurrentDirectory, "configs/pages.config");
             var doc = XDocument.Load(filePath);
@@ -51,18 +51,9 @@ namespace SparrowCMS.Core.Managers
             return result.OrderByDescending(e => e.UrlPattern).ToList();
         }
 
-        public static Page GetCurrentPage(Site site, System.Web.HttpContext context)
+        public static Page GetCurrentPage(Site site, HttpContext context)
         {
-            Page currentPage = null;
-
-            foreach (var page in GetPages(site))
-            {
-                if (page.UrlRoute.IsMatch(context.Request.Url.AbsolutePath))
-                {
-                    currentPage = page;
-                    break;
-                }
-            }
+            var currentPage = GetPages(site).FirstOrDefault(page => page.UrlRoute.IsMatch(context.Request.Url.AbsolutePath));
 
             if (currentPage == null)
             {

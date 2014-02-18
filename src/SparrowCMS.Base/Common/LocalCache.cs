@@ -12,6 +12,9 @@ namespace SparrowCMS.Core.Common
 
         public static T GetOrSet<T>(string key, Func<T> getValueFunc)
         {
+#if DEBUG
+            return getValueFunc();
+#endif
             if (!_data.ContainsKey(key))
             {
                 _data.TryAdd(key, getValueFunc());
@@ -21,6 +24,10 @@ namespace SparrowCMS.Core.Common
 
         public static T Get<T>(string key)
         {
+#if DEBUG
+            return default(T);
+#endif
+
             if (_data.ContainsKey(key))
             {
                 return (T)_data[key];
@@ -31,11 +38,18 @@ namespace SparrowCMS.Core.Common
 
         public static void Set<T>(string key, T value)
         {
+#if DEBUG
+            return;
+#endif
             _data.TryAdd(key, value);
         }
 
         public static void Remove(string key)
-        { 
+        {
+#if DEBUG
+            return;
+#endif
+
             object data;
             _data.TryRemove(key, out data);
         }

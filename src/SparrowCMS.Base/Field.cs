@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SparrowCMS.Core.Common;
 
 namespace SparrowCMS.Core
 {
@@ -16,19 +17,41 @@ namespace SparrowCMS.Core
         public virtual object GetValue(Document doc)
         {
             if (doc == null) return null;
-            return doc[Name]; 
+            if (Name.Contains("."))
+            {
+                Document subDoc = null;
+                var names = Name.Split('.');
+                for (var i = 0; i < names.Length - 1; i++)
+                {
+                    if (subDoc == null)
+                    {
+                        subDoc = doc[names[i]] as Document;
+                    }
+                    else
+                    {
+                        subDoc = subDoc[names[i]] as Document;
+                    }
+                }
+                if (subDoc == null) { return null; }
+                return subDoc[names[names.Length - 1]];
+            }
+            return doc[Name];
         }
 
         public virtual string GetReplacedContent(Document doc)
         {
             var fieldValue = GetValue(doc);
+            if (fieldValue == null) return null;
+
             var result = string.Empty;
 
-            foreach (var p in Attributes)
+            if (Attributes != null)
             {
-                result = p.ConvertFieldValue(fieldValue);
+                foreach (var p in Attributes)
+                {
+                    result = p.ConvertFieldValue(fieldValue);
+                }
             }
-
             return string.IsNullOrEmpty(result) ? fieldValue.ToString() : result;
         }
     }

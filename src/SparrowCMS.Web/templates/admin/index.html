@@ -1,1 +1,43 @@
-﻿<h1>欢迎光临</h1>
+﻿<div class="nav">
+    <ul>
+        System
+        <li><a href="#/admin/site/list">Sites</a></li>
+        <li><a href="#/admin/page/list">Pages</a></li>
+        <li><a href="#">Configs</a></li>
+        <li><a href="#">Logs</a></li>
+        <li><a href="#">Docs</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="toolbar">
+        <a href="#" class="link-button icon-add">Add</a>
+        <a href="#" class="link-button icon-edit">Edit</a>
+        <a href="#" class="link-button icon-delete">Delete</a>
+        <div class="search-box">
+            <input type="text" value="keyword" />
+            <input type="button" value="Search" />
+        </div>
+    </div>
+    <table class="datagrid">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>UrlPattern</th>
+                <th>Template</th>
+                <th>Layout</th>
+                <th style="width:100px;">Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {Page.List}
+            <tr>
+                <td>@Name</td>
+                <td>@UrlPattern</td>
+                <td>@Template.FilePath</td>
+                <td>@Layout</td>
+                <td><a href="#">Edit</a> <a href="#">Delete</a></td>
+            </tr>
+            {/Page.List}
+        </tbody>
+    </table>
+</div>

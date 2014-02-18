@@ -8,18 +8,24 @@ namespace SparrowCMS.Core
 {
     public class Document : DynamicObject
     {
-        private Dictionary<string, object> _data = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _data = new Dictionary<string, object>();
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            var key = binder.Name.ToLower();
-            return _data.TryGetValue(key, out result);
+            var key = binder.Name;
+            _data.TryGetValue(key, out result);
+            return true;
         }
 
         public override bool TrySetMember(SetMemberBinder binder, object value)
         {
-            this[binder.Name.ToLower()] = value;
+            this[binder.Name] = value;
             return true;
+        }
+
+        public override IEnumerable<string> GetDynamicMemberNames()
+        {
+            return _data.Keys;
         }
 
         public object this[string key]
@@ -36,6 +42,7 @@ namespace SparrowCMS.Core
                     _data.Add(key, value);
             }
         }
+
     }
 
 }
