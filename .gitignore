@@ -215,3 +215,6 @@ pip-log.txt
 .mr.developer.cfg
 /src/packages
 /src/SparrowCMS.Web/static/bootstrap
+/src/SparrowCMS.Web/static/font-awesome
+/src/SparrowCMS.Web/static/main.css
+/src/SparrowCMS.Web/static/main.min.css

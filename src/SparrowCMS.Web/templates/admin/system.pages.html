@@ -1,0 +1,31 @@
+﻿    <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+            <input type="text" value="" class="form-control" />
+            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+            &nbsp;
+        <a href="#" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span>Add</a>
+        </div>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>UrlPattern</th>
+                <th>Template</th>
+                <th>Layout</th>
+                <th style="width: 80px;">Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {Page.List}
+            <tr>
+                <td>@Name</td>
+                <td>@UrlPattern</td>
+                <td>@Template.FilePath</td>
+                <td>@Template.Layout</td>
+                <td><a href="#" class="btn-xs" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="#" class="btn-xs" title="delete"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
+            {/Page.List}
+        </tbody>
+    </table>
