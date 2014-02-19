@@ -59,13 +59,17 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Setup.aspx" />
-    <Content Include="static\admin.css">
-      <DependentUpon>admin.less</DependentUpon>
+    <Content Include="static\main.css">
+      <DependentUpon>main.less</DependentUpon>
     </Content>
-    <Content Include="static\admin.min.css">
-      <DependentUpon>admin.less</DependentUpon>
+    <Content Include="static\main.min.css">
+      <DependentUpon>main.less</DependentUpon>
     </Content>
+    <Content Include="templates\admin\system.docs.html" />
+    <Content Include="templates\admin\system.configs.html" />
     <Content Include="templates\admin\index.html" />
+    <Content Include="templates\admin\system.pages.html" />
+    <Content Include="templates\admin\system.sites.html" />
     <Content Include="templates\admin\_layout.html" />
     <Content Include="templates\index.html" />
     <Content Include="Web.config" />
@@ -86,7 +90,8 @@
   <ItemGroup>
     <Content Include="configs\pages.config" />
     <Content Include="configs\sites.config" />
-    <Content Include="static\admin.less" />
+    <Content Include="static\main.less" />
+    <Content Include="templates\admin\system.logs.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
