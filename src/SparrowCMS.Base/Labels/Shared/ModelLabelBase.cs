@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparrowCMS.Core.Labels.Shared
 {
-    public abstract class DetailLabelBase : ILabel
+    public abstract class ModelLabelBase : ILabel
     {
         protected abstract Document GetData();
 

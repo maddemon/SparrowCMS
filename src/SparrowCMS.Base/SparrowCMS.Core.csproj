@@ -74,7 +74,7 @@
     <Compile Include="FieldBuilder.cs" />
     <Compile Include="FieldDescription.cs" />
     <Compile Include="FieldAttribute.cs" />
-    <Compile Include="IParameterFunction.cs" />
+    <Compile Include="IFunction.cs" />
     <Compile Include="Attributes\LabelNameAttribute.cs" />
     <Compile Include="LabelBuilder.cs" />
     <Compile Include="LabelDescription.cs" />
@@ -82,7 +82,8 @@
     <Compile Include="Labels\PageLink\Fields\Next.cs" />
     <Compile Include="Labels\PageLink\List.cs" />
     <Compile Include="Labels\Page\List.cs" />
-    <Compile Include="Labels\Shared\DetailLabelBase.cs" />
+    <Compile Include="Labels\Page\Model.cs" />
+    <Compile Include="Labels\Shared\ModelLabelBase.cs" />
     <Compile Include="Labels\Shared\Functions\Url.cs" />
     <Compile Include="Labels\Shared\ListLabelBase.cs" />
     <Compile Include="Labels\Shared\Attributes\DateFormat.cs" />

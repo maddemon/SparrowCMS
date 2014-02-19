@@ -42,6 +42,10 @@ namespace SparrowCMS.Core.Models
             foreach (var desc in LabelDescriptions)
             {
                 var label = LabelBuilder.Build(desc);
+                if (label == null)
+                {
+                    continue;
+                }
                 var replacedHtml = label.GetReplacedContent(desc.InnerHtml);
                 Content = Content.Replace(desc.TemplateContent, replacedHtml);
             }

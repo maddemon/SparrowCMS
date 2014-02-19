@@ -50,7 +50,22 @@ namespace SparrowCMS.Core
             foreach (var name in _parameterNames)
             {
                 var group = match.Groups[name];
-                routeData.Add(name, group == null ? context.Request.QueryString[name] : match.Groups[name].Value);
+                routeData.Add(name, group == null ? null : match.Groups[name].Value);
+            }
+
+            foreach (var name in context.Request.QueryString.AllKeys)
+            {
+                routeData.Add(name, context.Request.QueryString[name]);
+            }
+
+            foreach (var name in context.Request.Form.AllKeys)
+            {
+                routeData.Add(name, context.Request.Form[name]);
+            }
+
+            foreach (var name in context.Request.Cookies.AllKeys)
+            {
+                routeData.Add(name, context.Request.Cookies[name].Value);
             }
 
             return routeData;

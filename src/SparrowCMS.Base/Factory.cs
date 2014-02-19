@@ -106,9 +106,9 @@ namespace SparrowCMS.Core
                 string.Format("{0}.{1}",labelName , typeName),
                 string.Format("{0}.{1}s.{2}",labelName ,classType , typeName),
                 string.Format("{0}.Shared.{1}s.{2}",labelName , classType , typeName),
-                string.Format("Base.Labels.{0}.{1}", labelName, typeName),
-                string.Format("Base.Labels.{0}.{1}s.{2}" , labelName , classType , typeName),
-                string.Format("Base.Labels.Shared.{0}s.{1}",classType , typeName),
+                string.Format("Core.Labels.{0}.{1}", labelName, typeName),
+                string.Format("Core.Labels.{0}.{1}s.{2}" , labelName , classType , typeName),
+                string.Format("Core.Labels.Shared.{0}s.{1}",classType , typeName),
             };
 
             if (classType == ClassType.Label) typeNamespaces.Add(labelName);

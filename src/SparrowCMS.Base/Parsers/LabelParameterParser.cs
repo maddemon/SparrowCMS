@@ -6,18 +6,24 @@ namespace SparrowCMS.Core.Parsers
 {
     public class LabelParameterParser
     {
+
         private static LabelParameter Parse(string labelName, Match match)
         {
             var name = match.Groups["name"].Value;
             var value = match.Groups["value"].Value.Trim('"').Trim('\'');
 
-            var labelParameter = new LabelParameter {Name = name, Value = value};
+            var labelParameter = new LabelParameter { Name = name, Value = value };
 
-            if (value.Contains('(') && value.Contains(')'))
-            {
-                labelParameter.ParameterFunction = Factory.Instance.GetInstance<IParameterFunction>(labelName, value);
-            }
+            labelParameter.Function = ParseFunction(labelName, value);
+
             return labelParameter;
+        }
+        private static Regex functionRegex = new Regex(@"(?<name>[^)(]+)\([^)(]+\)", RegexOptions.Compiled);
+        private static IFunction ParseFunction(string labelName,string value)
+        {
+            var match = functionRegex.Match(value);
+            if (match == null || match.Groups.Count <= 1) return null;
+            return Factory.Instance.GetInstance<IFunction>(labelName, match.Groups["name"].Value);
         }
 
         private static readonly Regex Regex = new Regex(@"(?<name>\w+)\s*=\s*(?<value>""[^""]+""|[^\s\/]+|'[^']+')", RegexOptions.Compiled);
@@ -27,7 +33,7 @@ namespace SparrowCMS.Core.Parsers
             var result = new Dictionary<string, LabelParameter>();
             foreach (Match match in Regex.Matches(parametersTemplateContent))
             {
-                var parameter = Parse(labelName,match);
+                var parameter = Parse(labelName, match);
                 result.Add(parameter.Name, parameter);
             }
             return result;

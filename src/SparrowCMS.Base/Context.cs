@@ -22,8 +22,11 @@ namespace SparrowCMS.Core
         {
         }
 
-        public static void Init(HttpContext context)
+        public void Init(HttpContext context)
         {
+
+            //set httpcontext
+            Current.HttpContext = context;
 #if SingleSite
             Current.Site = new Site();
 #else
@@ -37,16 +40,13 @@ namespace SparrowCMS.Core
             Current.Site = site;
 #endif
             //set current page
-            var page = PageManager.GetCurrentPage(Current.Site, context);
+            var page = PageManager.GetCurrentPage(Current.Site, this);
             if (page == null)
             {
                 throw new HttpException(404, "PAGE NOT FOUND!");
             }
 
             Current.CurrentPage = page;
-
-            //set httpcontext
-            Current.HttpContext = context;
         }
     }
 }

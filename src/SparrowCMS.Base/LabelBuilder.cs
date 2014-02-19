@@ -10,10 +10,11 @@ namespace SparrowCMS.Core
         public static ILabel Build(LabelDescription labelDescription)
         {
             var label = Factory.Instance.GetInstance<ILabel>(labelDescription.LabelName);
-            
-            SetParameters(label, labelDescription);
-            SetFields(label, labelDescription);
-
+            if (label != null)
+            {
+                SetParameters(label, labelDescription);
+                SetFields(label, labelDescription);
+            }
             return label;
         }
 

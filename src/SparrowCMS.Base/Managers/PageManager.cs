@@ -51,16 +51,16 @@ namespace SparrowCMS.Core.Managers
             return result.OrderByDescending(e => e.UrlPattern).ToList();
         }
 
-        public static Page GetCurrentPage(Site site, HttpContext context)
+        public static Page GetCurrentPage(Site site, Context context)
         {
-            var currentPage = GetPages(site).FirstOrDefault(page => page.UrlRoute.IsMatch(context.Request.Url.AbsolutePath));
+            var currentPage = GetPages(site).FirstOrDefault(page => page.UrlRoute.IsMatch(context.HttpContext.Request.Url.AbsolutePath));
 
             if (currentPage == null)
             {
                 throw new HttpException(404, "PAGE NOT FOUND!");
             }
 
-            currentPage.Init();
+            currentPage.Init(context);
 
             return currentPage;
         }

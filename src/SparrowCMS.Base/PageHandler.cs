@@ -10,7 +10,7 @@ namespace SparrowCMS.Core
     {
         private void ProcessContext(HttpContext context)
         {
-            Context.Init(context);
+            Context.Current.Init(context);
             context.Response.Write(Context.Current.CurrentPage.GetReplacedContext());
         }
 

@@ -10,7 +10,7 @@ namespace SparrowCMS.Core.Models
     {
         private bool _initialized;
 
-        public void Init()
+        public void Init(Context context)
         {
             if (_initialized)
             {
@@ -18,7 +18,7 @@ namespace SparrowCMS.Core.Models
             }
             //find all label's template content
             Template.Init();
-
+            RouteData = UrlRoute.GetRouteData(context.HttpContext);
             _initialized = true;
         }
 

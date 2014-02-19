@@ -10,6 +10,8 @@ namespace SparrowCMS.Core.Common
         public static Document ToDocument<T>(this T data)
         {
             var doc = new Document();
+            if (data == null) return doc;
+
             foreach (var p in data.GetType().GetProperties())
             {
                 var value =  p.GetValue(data, null);

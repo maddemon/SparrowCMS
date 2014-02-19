@@ -68,6 +68,7 @@
     <Content Include="templates\admin\system.docs.html" />
     <Content Include="templates\admin\system.configs.html" />
     <Content Include="templates\admin\index.html" />
+    <Content Include="templates\admin\system.pages.edit.html" />
     <Content Include="templates\admin\system.pages.html" />
     <Content Include="templates\admin\system.sites.html" />
     <Content Include="templates\admin\_layout.html" />
