@@ -14,6 +14,8 @@ namespace SparrowCMS.Core
             InnerLabelDescriptions = new List<LabelDescription>();
         }
 
+        public Guid ID { get; set; }
+
         public string LabelName { get; set; }
 
         public string TemplateContent { get; set; }

@@ -78,9 +78,8 @@
     <Compile Include="Attributes\LabelNameAttribute.cs" />
     <Compile Include="LabelBuilder.cs" />
     <Compile Include="LabelDescription.cs" />
-    <Compile Include="Labels\PageLink\Default.cs" />
-    <Compile Include="Labels\PageLink\Fields\Next.cs" />
-    <Compile Include="Labels\PageLink\List.cs" />
+    <Compile Include="Labels\Pagination\Default.cs" />
+    <Compile Include="Labels\Pagination\List.cs" />
     <Compile Include="Labels\Page\List.cs" />
     <Compile Include="Labels\Page\Model.cs" />
     <Compile Include="Labels\Shared\ModelLabelBase.cs" />

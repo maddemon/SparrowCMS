@@ -9,19 +9,11 @@ namespace SparrowCMS.Core
     {
         private readonly Dictionary<string, string> _data = new Dictionary<string, string>();
 
-        public void Insert(string name, string value)
-        {
-            if (!_data.ContainsKey(name))
-            {
-                _data.Add(name, value);
-            }
-        }
-
         public void Add(string name, string value)
         {
             if (_data.ContainsKey(name))
             {
-                _data[name] += "," + value;
+                _data[name] = value;
             }
             else
             {

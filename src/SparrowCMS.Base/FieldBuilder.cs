@@ -14,6 +14,7 @@ namespace SparrowCMS.Core
             SetAttributes(field, description);
             field.Name = description.FieldName;
             field.TemplateContent = description.TemplateContent;
+            field.LabelName = description.LabelName;
             return field;
         }
 

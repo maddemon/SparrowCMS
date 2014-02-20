@@ -8,6 +8,8 @@ namespace SparrowCMS.Core
 {
     public class Field
     {
+        public string LabelName { get; set; }
+
         public string Name { get; set; }
 
         public IEnumerable<FieldAttribute> Attributes { get; set; }
@@ -17,10 +19,15 @@ namespace SparrowCMS.Core
         public virtual object GetValue(Document doc)
         {
             if (doc == null) return null;
+            var prefix = LabelName + ".";
+            if (Name.StartsWith(prefix))
+            {
+                Name = Name.Replace(prefix, "");
+            }
             if (Name.Contains("."))
             {
-                Document subDoc = null;
                 var names = Name.Split('.');
+                Document subDoc = null;
                 for (var i = 0; i < names.Length - 1; i++)
                 {
                     if (subDoc == null)
@@ -32,7 +39,7 @@ namespace SparrowCMS.Core
                         subDoc = subDoc[names[i]] as Document;
                     }
                 }
-                if (subDoc == null) { return null; }
+                if (subDoc == null) { return TemplateContent; }
                 return subDoc[names[names.Length - 1]];
             }
             return doc[Name];

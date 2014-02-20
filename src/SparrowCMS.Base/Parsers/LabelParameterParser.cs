@@ -34,7 +34,7 @@ namespace SparrowCMS.Core.Parsers
             foreach (Match match in Regex.Matches(parametersTemplateContent))
             {
                 var parameter = Parse(labelName, match);
-                result.Add(parameter.Name, parameter);
+                result.Add(parameter.Name.ToLower(), parameter);
             }
             return result;
         }

@@ -13,6 +13,10 @@ namespace SparrowCMS.Core.Labels.Shared
 
         public IEnumerable<Field> Fields { get; set; }
 
+        public int RecordCount { get; set; }
+
+        public string PaginationId { get; set; }
+
         protected virtual void InitDatas()
         {
             if (_datas == null)
@@ -21,11 +25,28 @@ namespace SparrowCMS.Core.Labels.Shared
             }
         }
 
+        protected virtual int GetRecordCount()
+        {
+            return RecordCount = RecordCount > 0 ? RecordCount : _datas.Count();
+        }
+
+        private void SavePaginationRecordCount()
+        {
+            if (!string.IsNullOrEmpty(PaginationId))
+            {
+                var recordCount = GetRecordCount();
+                Context.Current.CurrentPage.ViewData[PaginationId] = recordCount;
+            }
+        }
+
         public virtual string GetReplacedContent(string innerHtml)
         {
             InitDatas();
 
+            SavePaginationRecordCount();
+
             var result = string.Empty;
+            if (_datas == null) return result;
 
             foreach (var data in _datas)
             {

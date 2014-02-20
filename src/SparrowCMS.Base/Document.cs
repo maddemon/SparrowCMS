@@ -12,14 +12,14 @@ namespace SparrowCMS.Core
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            var key = binder.Name;
+            var key = binder.Name.ToLower();
             _data.TryGetValue(key, out result);
             return true;
         }
 
         public override bool TrySetMember(SetMemberBinder binder, object value)
         {
-            this[binder.Name] = value;
+            this[binder.Name.ToLower()] = value;
             return true;
         }
 
@@ -32,10 +32,12 @@ namespace SparrowCMS.Core
         {
             get
             {
+                key = key.ToLower();
                 return _data.ContainsKey(key) ? _data[key] : null;
             }
             set
             {
+                key = key.ToLower();
                 if (_data.ContainsKey(key))
                     _data[key] = value;
                 else
