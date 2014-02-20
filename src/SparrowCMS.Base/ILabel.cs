@@ -11,38 +11,39 @@ namespace SparrowCMS.Core
         string GetReplacedContent(string innerHtml);
     }
 
-    //public abstract class Label
-    //{
-    //    public Guid ID { get; set; }
+    public static class LabelUtils
+    {
+        public static string GetRelacedModelContent(this ILabel label, string innerHtml, Document model, IEnumerable<Field> fields = null)
+        {
+            if (fields != null)
+            {
+                foreach (var field in fields)
+                {
+                    innerHtml = innerHtml.Replace(field.TemplateContent, field.GetReplacedContent(model));
+                }
+            }
+            
+            return label.GetReplacedInnerLabelContent(innerHtml, model);
+        }
 
-    //    public IEnumerable<LabelParameter> Parameters { get; set; }
+        public static string GetReplacedInnerLabelContent(this ILabel label, string innerHtml, Document parentModel)
+        {
+            ////has inner by parameter
+            //if (Parameters != null && Parameters.Any(e => e.Name.ToLower() == "inner"))
+            //{
 
-    //    public IEnumerable<Field> Fields { get; set; }
-
-    //    public abstract string GetReplacedContent(string innerHtml);
-
-    //    protected virtual string GetReplacedModelContent(string innerHtml, Document model)
-    //    {
-    //        if (Fields != null)
-    //        {
-    //            foreach (var field in Fields)
-    //            {
-    //                innerHtml = innerHtml.Replace(field.TemplateContent, field.GetReplacedContent(model));
-    //            }
-    //        }
-
-    //        //if has inner label
-    //        //get inner label
-    //        var innerLabelDescriptions = LabelDescriptionParser.Parse(innerHtml);
-    //        if (innerLabelDescriptions != null && innerLabelDescriptions.Count() > 0)
-    //        {
-    //            foreach (var desc in innerLabelDescriptions)
-    //            {
-    //                var innerLabel = LabelBuilder.Build(desc);
-    //                innerHtml = innerLabel.GetReplacedContent(innerHtml);
-    //            }
-    //        }
-    //        return innerHtml;
-    //    }
-    //}
+            //}
+            //处理内嵌标签
+            var innerLabelDescriptions = LabelDescriptionParser.Parse(innerHtml);
+            if (innerLabelDescriptions != null && innerLabelDescriptions.Count() > 0)
+            {
+                foreach (var desc in innerLabelDescriptions)
+                {
+                    var innerLabel = LabelBuilder.Build(desc);
+                    innerHtml = innerHtml.Replace(desc.TemplateContent, innerLabel.GetReplacedContent(desc.InnerHtml));
+                }
+            }
+            return innerHtml;
+        }
+    }
 }

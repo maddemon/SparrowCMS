@@ -16,21 +16,7 @@ namespace SparrowCMS.Core.Labels.Shared
         {
             var data = GetData();
 
-            foreach (var field in Fields)
-            {
-                innerHtml = innerHtml.Replace(field.TemplateContent, field.GetReplacedContent(data));
-            }
-
-            var innerLabelDescriptions = LabelDescriptionParser.Parse(innerHtml);
-            if (innerLabelDescriptions != null && innerLabelDescriptions.Count() > 0)
-            {
-                foreach (var desc in innerLabelDescriptions)
-                {
-                    var innerLabel = LabelBuilder.Build(desc);
-                    innerHtml = innerHtml.Replace(desc.TemplateContent, innerLabel.GetReplacedContent(desc.InnerHtml));
-                }
-            }
-            return innerHtml;
+            return this.GetRelacedModelContent(innerHtml, data, Fields);
         }
     }
 }

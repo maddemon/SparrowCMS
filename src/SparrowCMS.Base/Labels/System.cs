@@ -8,20 +8,13 @@ namespace SparrowCMS.Core.Labels
 {
     public class System : ILabel
     {
-        public List<LabelParameter> Parameters { get; set; }
+        public string Name { get; set; }
 
         public string GetReplacedContent(string innerHtml)
         {
-            if (Parameters != null)
+            if (!string.IsNullOrEmpty(Name))
             {
-                var nameParameter = Parameters.FirstOrDefault(e => e.Name == "name");
-                if (nameParameter == null)
-                {
-                    return null;
-                }
-                var configKey = nameParameter.Value;
-
-                var data = ShareCache.Get<object>(configKey);
+                var data = ShareCache.Get<object>(Name);
                 return data == null ? null : data.ToString();
             }
             return null;

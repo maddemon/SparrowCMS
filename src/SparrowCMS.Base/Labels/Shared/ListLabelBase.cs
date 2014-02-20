@@ -7,27 +7,29 @@ namespace SparrowCMS.Core.Labels.Shared
 {
     public abstract class ListLabelBase : ILabel
     {
-        private IEnumerable<Document> _datas = null;
-
-        public abstract IEnumerable<Document> GetDatas();
+        public IEnumerable<LabelParameter> Parameters { get; set; }
 
         public IEnumerable<Field> Fields { get; set; }
+
+        private IEnumerable<Document> _rows = null;
+
+        public abstract IEnumerable<Document> GetDatas();
 
         public int RecordCount { get; set; }
 
         public string PaginationId { get; set; }
 
-        protected virtual void InitDatas()
+        protected virtual void InitRows()
         {
-            if (_datas == null)
+            if (_rows == null)
             {
-                _datas = GetDatas();
+                _rows = GetDatas();
             }
         }
 
         protected virtual int GetRecordCount()
         {
-            return RecordCount = RecordCount > 0 ? RecordCount : _datas.Count();
+            return RecordCount = RecordCount > 0 ? RecordCount : _rows.Count();
         }
 
         private void SavePaginationRecordCount()
@@ -39,26 +41,27 @@ namespace SparrowCMS.Core.Labels.Shared
             }
         }
 
+        protected virtual string GetRepeatTemplate(string innerHtml)
+        {
+            return innerHtml;
+        }
+
         public virtual string GetReplacedContent(string innerHtml)
         {
-            InitDatas();
-
+            InitRows();
             SavePaginationRecordCount();
 
-            var result = string.Empty;
-            if (_datas == null) return result;
+            var repeatResult = string.Empty;
+            if (_rows == null) return repeatResult;
 
-            foreach (var data in _datas)
+            var rowTemplate = GetRepeatTemplate(innerHtml);
+            foreach (var row in _rows)
             {
-                var row = innerHtml;
-                foreach (var field in Fields)
-                {
-                    row = row.Replace(field.TemplateContent, field.GetReplacedContent(data));
-                }
-                result += row;
+                repeatResult += this.GetRelacedModelContent(rowTemplate, row, Fields);
+
             }
 
-            return result.ToString();
+            return innerHtml.Replace(rowTemplate, repeatResult);
         }
     }
 }

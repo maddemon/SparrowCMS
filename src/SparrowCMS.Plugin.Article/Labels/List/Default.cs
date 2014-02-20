@@ -19,7 +19,7 @@ namespace SparrowCMS.Plugin.Article.Labels.List
             throw new NotImplementedException();
         }
 
-        public override string GetReplacedContent(string innerHtml)
+        public  string GetReplacedContent(string innerHtml)
         {
             return base.GetReplacedContent(innerHtml);
         }
