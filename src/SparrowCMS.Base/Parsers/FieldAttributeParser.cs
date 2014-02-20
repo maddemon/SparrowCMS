@@ -5,7 +5,7 @@ namespace SparrowCMS.Core.Parsers
 {
     public class FieldAttributeParser
     {
-        private static readonly Regex Regex = new Regex(@"(?<name>\w+)\s*=\s*(""(?<value>[^""]+)""|(?<value>[^\s]+))", RegexOptions.Compiled);
+        private static readonly Regex Regex = new Regex(@"(?<name>\w+)\s*=\s*(""(?<value>[^""]+)""|'(?<value>[^']+)'|(?<value>[^\s)(]+))", RegexOptions.Compiled);
 
         /// <summary>
         /// 

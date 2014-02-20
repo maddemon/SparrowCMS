@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        {Page.List PageSize = "5" PaginationId="pages"}
+        {Page.List PageSize="5" page="Url(page)" PaginationId="pages"}
             <tr>
                 <td>@Name</td>
                 <td>@UrlPattern</td>
@@ -34,11 +34,11 @@
                 <div>
                     <ul class="pagination">
                         <li><a href="/admin/system/pages?page=1">&laquo;</a></li>
-                        <li><a href="/admin/system/pages?page=@prev">Previous</a></li>
+                        @(prev format='<li><a href="/admin/system/pages?page=$this">Previous</a></li>')
                         {Pagination.List size=5 pageCount="@pageCount" pageIndex="@page" pageSize="@(pageSize)"}
                             <li><a href="/admin/system/pages?page=@Pagination.List.page">@Pagination.List.page</a></li>
                         {/Pagination.List}
-                        <li><a href="/admin/system/pages?page=@next">Next</a></li>
+                        @(next format='<li><a href="/admin/system/pages?page=$this">Next</a></li>')
                         <li><a href="/admin/system/pages?page=@end">&raquo;</a></li>
                     </ul>
                 </div>

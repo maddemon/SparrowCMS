@@ -16,14 +16,14 @@ namespace SparrowCMS.Core
         public virtual object ConvertParameterValue(Type type)
         {
             var value = Value;
+            if (Function != null)
+            {
+                value = Function.GetParameterValue(Value);
+            }
             if (string.IsNullOrEmpty(value))
             {
                 if (type.IsValueType) return Activator.CreateInstance(type);
                 return null;
-            }
-            if (Function != null)
-            {
-                value = Function.GetParameterValue(Value);
             }
 
             return Convert.ChangeType(value, type);

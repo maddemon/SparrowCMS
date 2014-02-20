@@ -6,7 +6,7 @@ using System.Text;
 namespace SparrowCMS.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class ParameterAttribute : Attribute
+    public class ParameterFlagAttribute : Attribute
     {
     }
 }

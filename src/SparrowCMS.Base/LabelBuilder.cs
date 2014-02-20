@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SparrowCMS.Core.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace SparrowCMS.Core
@@ -37,6 +39,9 @@ namespace SparrowCMS.Core
         {
             foreach (var p in label.GetType().GetProperties())
             {
+                var attribute = p.GetCustomAttributes(typeof(FieldFlagAttribute), false).FirstOrDefault();
+                if (attribute != null) continue;
+
                 if (labelDescription.Parameters.ContainsKey(p.Name.ToLower()))
                 {
                     var parameter = labelDescription.Parameters[p.Name.ToLower()];
@@ -48,15 +53,31 @@ namespace SparrowCMS.Core
 
         private static void SetFields(ILabel label, LabelDescription labelDescription)
         {
-            var p = label.GetType().GetProperty("Fields");
-            if (p != null)
+            foreach (var p in label.GetType().GetProperties())
             {
-                var list = new List<Field>();
-                foreach (var fieldDescription in labelDescription.FieldDescriptions)
+                var attribute = p.GetCustomAttributes(typeof(FieldFlagAttribute), false).FirstOrDefault();
+                if (attribute == null)
                 {
-                    list.Add(FieldBuilder.Build(fieldDescription));
+                    if (p.Name == "Fields")
+                    {
+                        var list = new List<Field>();
+                        foreach (var fieldDescription in labelDescription.FieldDescriptions)
+                        {
+                            list.Add(FieldBuilder.Build(fieldDescription));
+                        }
+                        p.SetValue(label, list, null);
+                    }
                 }
-                p.SetValue(label, list, null);
+                else
+                {
+                    var fieldDesc = labelDescription.FieldDescriptions.FirstOrDefault(e => e.FieldName.ToLower() == p.Name.ToLower());
+                    if (fieldDesc != null)
+                    {
+                        var field = FieldBuilder.Build(fieldDesc);
+                        if (field.GetType() != p.PropertyType) continue;
+                        p.SetValue(label, field, null);
+                    }
+                }
             }
         }
     }

@@ -60,8 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\FieldFlagAttribute.cs" />
+    <Compile Include="Attributes\LabelNameAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
-    <Compile Include="Attributes\ParameterAttribute.cs" />
+    <Compile Include="Attributes\ParameterFlagAttribute.cs" />
     <Compile Include="CMSHttpModule.cs" />
     <Compile Include="Common\AppSettings.cs" />
     <Compile Include="Common\LocalCache.cs" />
@@ -75,10 +77,11 @@
     <Compile Include="FieldDescription.cs" />
     <Compile Include="FieldAttribute.cs" />
     <Compile Include="IFunction.cs" />
-    <Compile Include="Attributes\LabelNameAttribute.cs" />
     <Compile Include="LabelBuilder.cs" />
     <Compile Include="LabelDescription.cs" />
     <Compile Include="Labels\Pagination\Default.cs" />
+    <Compile Include="Labels\Pagination\Fields\Next.cs" />
+    <Compile Include="Labels\Pagination\Fields\Prev.cs" />
     <Compile Include="Labels\Pagination\List.cs" />
     <Compile Include="Labels\Page\List.cs" />
     <Compile Include="Labels\Page\Model.cs" />

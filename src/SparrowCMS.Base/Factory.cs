@@ -115,7 +115,7 @@ namespace SparrowCMS.Core
 
             foreach (var ns in typeNamespaces)
             {
-                var searchType = _allTypes.FirstOrDefault(t => t.ClassType == classType && ((t.AliasName != null && t.AliasName.ToLower() == ns.ToLower()) || t.Type.FullName.ToLower().Contains(ns.ToLower())));
+                var searchType = _allTypes.FirstOrDefault(t => (t.AliasName != null && t.AliasName.ToLower() == ns.ToLower()) || t.Type.FullName.ToLower().Contains(ns.ToLower()));
                 if (searchType != null) return searchType.Type;
             }
             return null;

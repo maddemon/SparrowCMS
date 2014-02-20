@@ -1,4 +1,6 @@
-﻿using SparrowCMS.Core.Labels.Shared;
+﻿using SparrowCMS.Core.Labels.Pagination.Fields;
+using SparrowCMS.Core.Labels.Shared;
+using SparrowCMS.Core.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +14,19 @@ namespace SparrowCMS.Core.Labels.Pagination
 
         public int PageSize { get; set; }
 
+        [FieldFlag]
+        public Prev Prev { get; set; }
+
+        [FieldFlag]
+        public Next Next { get; set; }
+
         protected override Document GetData()
         {
             var data = new Document();
             var page = 1;
             int.TryParse(Context.Current.CurrentPage.RouteData["page"], out page);
-            data["page"] = page == 0 ? 1 : page;
+            if (page == 0) page = 1;
+            data["page"] = page;
             data["next"] = page + 1;
             data["prev"] = page == 1 ? 1 : page - 1;
             data["pagesize"] = PageSize;

@@ -20,7 +20,13 @@ namespace SparrowCMS.Core
 
         private static void SetAttributes(Field field, FieldDescription description)
         {
-            var property = field.GetType().GetProperty("Fields");
+            foreach (var p in field.GetType().GetProperties())
+            {
+                var attr = description.Attributes.FirstOrDefault(e => e.Name.ToLower() == p.Name.ToLower());
+                p.SetValue(field, attr, null);
+            }
+
+            var property = field.GetType().GetProperty("Attributes");
             if (property != null)
             {
                 property.SetValue(field, description.Attributes, null);
