@@ -11,7 +11,7 @@ namespace SparrowCMS.Core
     {
         public static ILabel Build(LabelDescription labelDescription)
         {
-            var label = Factory.Instance.GetInstance<ILabel>(labelDescription.LabelName);
+            var label = Factory.Instance.GetInstance<ILabel>(labelDescription.LabelName, labelDescription.ClassName);
             if (label != null)
             {
                 //SetInnerLabel(label, labelDescription);

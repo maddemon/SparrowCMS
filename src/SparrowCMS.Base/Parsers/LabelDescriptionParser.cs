@@ -16,13 +16,21 @@ namespace SparrowCMS.Core.Parsers
             }
 
             var labelName = match.Groups["name"].Value;
+            var className = "Default";
             var parameters = match.Groups["parameters"].Value;
+            if (labelName.Contains("."))
+            {
+                className = labelName.Split('.')[1];
+                labelName = labelName.Split('.')[0];
+            }
+
 
             var desc = new LabelDescription
             {
                 ID = Guid.NewGuid(),
                 LabelName = labelName,
-                TemplateContent =  match.Groups[0].Value,
+                ClassName = className,
+                TemplateContent = match.Groups[0].Value,
                 Parameters = LabelParameterParser.Parse(labelName, parameters),
                 InnerHtml = match.Groups["inner"].Value
             };
@@ -32,7 +40,7 @@ namespace SparrowCMS.Core.Parsers
                 return desc;
             }
 
-            desc.FieldDescriptions = FieldDescriptionParser.Parse(labelName, desc.InnerHtml);
+            desc.FieldDescriptions = FieldDescriptionParser.Parse(labelName + (className == "Default" ? null : "." + className), desc.InnerHtml);
 
             //desc.InnerLabelDescriptions = Parse(desc.InnerHtml);
 

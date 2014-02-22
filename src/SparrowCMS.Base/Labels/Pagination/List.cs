@@ -25,7 +25,7 @@ namespace SparrowCMS.Core.Labels.Pagination
             for (; startPage <= endPage; startPage++)
             {
                 dynamic doc = new Document();
-                doc.Page = startPage;
+                doc.Index = startPage;
                 data.Add(doc);
             }
             return data;

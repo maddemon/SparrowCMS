@@ -18,6 +18,8 @@ namespace SparrowCMS.Core
 
         public string LabelName { get; set; }
 
+        public string ClassName { get; set; }
+
         public string TemplateContent { get; set; }
 
         public string InnerHtml { get; set; }

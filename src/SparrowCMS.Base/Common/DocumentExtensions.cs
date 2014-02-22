@@ -61,7 +61,7 @@ namespace SparrowCMS.Core.Common
 
         public static bool IsBasicType(this Type type)
         {
-            return type.IsPrimitive  || type == typeof(string) || type.IsEnum;
+            return type.IsPrimitive  || type == typeof(string) || type.IsEnum || type == typeof(Guid);
         }
     }
 

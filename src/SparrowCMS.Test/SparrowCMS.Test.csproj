@@ -74,6 +74,10 @@
       <Project>{59A060DE-FA5B-4D64-8121-A93FB25B31E7}</Project>
       <Name>SparrowCMS.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SparrowCMS.Plugin.Article\SparrowCMS.Plugin.Article.csproj">
+      <Project>{709357d0-a45e-4126-ab2d-2e96f640ee12}</Project>
+      <Name>SparrowCMS.Plugin.Article</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,6 +11,7 @@ namespace SparrowCMS.Core
 
         public void Add(string name, string value)
         {
+            name = name.ToLower();
             if (_data.ContainsKey(name))
             {
                 _data[name] = value;
@@ -25,6 +26,7 @@ namespace SparrowCMS.Core
         {
             get
             {
+                name = name.ToLower();
                 return _data.ContainsKey(name) ? _data[name] : string.Empty;
             }
         }

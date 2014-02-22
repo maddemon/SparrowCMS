@@ -10,11 +10,12 @@ namespace SparrowCMS.Core.Labels.Page
 {
     public class Model : ModelLabelBase
     {
-        public string UrlPattern { get; set; }
+        public string Id { get; set; }
 
         protected override Document GetData()
         {
-            return PageManager.GetPages(null).FirstOrDefault(e => e.UrlPattern == UrlPattern).ToDocument();
+            var model = PageManager.GetPages(null).FirstOrDefault(e => e.Id.ToString() == Id) ?? new Models.Page();
+            return model.ToDocument();
         }
     }
 }

@@ -2,7 +2,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="myModalLabel">Add/Edit Page</h4>
 </div>
-{Page.Model urlpattern="Url(urlpattern)"}
+{Page.Model Id="Url(Id)"}
 <div class="modal-body">
     <form class="form-horizontal" action="/admin/api/?action=page.save" method="post">
         <div class="form-group">

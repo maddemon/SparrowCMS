@@ -31,10 +31,12 @@ namespace SparrowCMS.Core.Parsers
 
         public static IEnumerable<FieldDescription> Parse(string labelName, string templateContent)
         {
+            var result = new List<FieldDescription>();
             foreach (Match m in Regex.Matches(templateContent))
             {
-                yield return Parse(labelName, m);
+                result.Add(Parse(labelName, m));
             }
+            return result;
         }
     }
 }

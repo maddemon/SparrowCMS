@@ -16,17 +16,19 @@ namespace SparrowCMS.Core.Parsers
         /// <returns></returns>
         public static IEnumerable<FieldAttribute> Parse(string labelName, string fieldName, string attributesTemplateContent)
         {
+            var result = new List<FieldAttribute>();
             if (!string.IsNullOrEmpty(attributesTemplateContent))
             {
                 foreach (Match m in Regex.Matches(attributesTemplateContent))
                 {
-                    var parameter =  Parse(labelName, m);
+                    var parameter = Parse(labelName, m);
                     if (parameter != null)
                     {
-                        yield return parameter;
+                        result.Add(parameter);
                     }
                 }
             }
+            return result;
         }
 
         private static FieldAttribute Parse(string labelName, Match m)

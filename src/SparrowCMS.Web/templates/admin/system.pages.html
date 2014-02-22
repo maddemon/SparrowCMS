@@ -23,8 +23,8 @@
                 <td>@UrlPattern</td>
                 <td>@Template.FilePath</td>
                 <td>@Template.Layout</td>
-                <td><a href="/admin/system/pages/edit?urlpattern=@UrlPattern" data-toggle="modal" data-target="#myModal" class="btn-xs" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a href="#" class="btn-xs" title="delete"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a href="/admin/system/pages/edit?id=@Id" data-toggle="modal" data-target="#myModal" class="btn-xs" title="edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="/admin/api?action=page.delete&id=@Id" class="btn-xs" title="delete"><span class="glyphicon glyphicon-remove"></span></a></td>
             </tr>
         {/Page.List}
     </tbody>
@@ -36,7 +36,7 @@
                         <li><a href="/admin/system/pages?page=1">&laquo;</a></li>
                         @(prev format='<li><a href="/admin/system/pages?page=$this">Previous</a></li>')
                         {Pagination.List size=5 pageCount="@pageCount" pageIndex="@page" pageSize="@(pageSize)"}
-                            <li><a href="/admin/system/pages?page=@Pagination.List.page">@Pagination.List.page</a></li>
+                            <li><a href="/admin/system/pages?page=@Pagination.List.index">@Pagination.List.index</a></li>
                         {/Pagination.List}
                         @(next format='<li><a href="/admin/system/pages?page=$this">Next</a></li>')
                         <li><a href="/admin/system/pages?page=@end">&raquo;</a></li>

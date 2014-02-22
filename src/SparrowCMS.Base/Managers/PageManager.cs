@@ -19,10 +19,14 @@ namespace SparrowCMS.Core.Managers
             return ShareCache.GetOrSet<List<Page>>(_cacheKey, GetPagesFromConfig);
         }
 
+        private static string GetConfigPath()
+        {
+            return Path.Combine(Environment.CurrentDirectory, "configs/pages.config");
+        }
+
         private static List<Page> GetPagesFromConfig()
         {
-            var filePath = Path.Combine(Environment.CurrentDirectory, "configs/pages.config");
-            var doc = XDocument.Load(filePath);
+            var doc = XDocument.Load(GetConfigPath());
             var result = new List<Page>();
 
             foreach (var pageElement in doc.Root.Elements("page"))
@@ -32,6 +36,16 @@ namespace SparrowCMS.Core.Managers
                     Name = pageElement.Element("name").Value,
                     UrlPattern = pageElement.Element("url").Value,
                 };
+
+                var idAttr = pageElement.Attribute("id");
+                if (idAttr == null)
+                {
+                    page.Id = Guid.NewGuid();
+                }
+                else
+                {
+                    page.Id = Guid.Parse(idAttr.Value);
+                }
 
                 page.UrlRoute = new UrlRoute(page.UrlPattern);
 
@@ -47,6 +61,8 @@ namespace SparrowCMS.Core.Managers
 
                 result.Add(page);
             }
+
+            SaveConfigFile(result);
 
             return result.OrderByDescending(e => e.UrlPattern).ToList();
         }
@@ -67,10 +83,45 @@ namespace SparrowCMS.Core.Managers
 
         public static void Save(Models.Page model)
         {
+            
             var pages = GetPages(null);
-            pages.Add(model);
-            //pages to xml
-            //save xml
+            var index = pages.FindIndex(e => e.Id == model.Id);
+            if (index > -1)
+            {
+                pages[index] = model;
+            }
+            else
+            {
+                pages.Add(model);
+            }
+
+            ShareCache.Set(_cacheKey, pages);
+            SaveConfigFile(pages);
+        }
+
+        private static void SaveConfigFile(IEnumerable<Page> pages)
+        {
+            var doc = new XDocument();
+            var root = new XElement("pages");
+            foreach (var page in pages)
+            {
+                var node = new XElement("page");
+                node.SetAttributeValue("id", page.Id.ToString());
+                node.Add(new XElement("name", page.Name));
+                node.Add(new XElement("role", page.Role));
+                node.Add(new XElement("url", page.UrlPattern));
+
+                var templateNode= new XElement("template",page.Template.FilePath);
+                if(!string.IsNullOrEmpty(page.Template.Layout))
+                {
+                    templateNode.SetAttributeValue("layout",page.Template.Layout);
+                }
+                node.Add(templateNode);
+                root.Add(node);
+            }
+            doc.Add(root);
+
+            File.WriteAllText(GetConfigPath(), doc.ToString());
         }
     }
 }

@@ -37,21 +37,32 @@ namespace SparrowCMS.Core
             if (classType == ClassType.Unknown) return null;
             if (classType == ClassType.Api)
             {
-                return new List<string> { 
-                 string.Format("{0}.Apis.{1}",parentName,className),
-                 string.Format("Core.Apis.{0}",className)
+                return new List<string> 
+                { 
+                    string.Format("{0}.Apis.{1}",parentName,className),
+                    string.Format("Core.Apis.{0}",className)
+                };
+            }
+
+            if (classType == ClassType.Label)
+            {
+                return new List<string>
+                {
+                   //string.Format("{0}",parentName),
+                   string.Format("{0}.{1}",parentName , className),
+                   string.Format("{0}.Labels.{1}",parentName , className),
+                   string.Format("Core.Labels.{1}",parentName , className),
+                   string.Format("{0}.Shared.Labels.{1}",parentName , className),
+                   string.Format("Core.Shared.Labels.{1}",parentName , className)
                 };
             }
 
             return new List<string>
             {
-                string.Format("{0}.{1}",parentName , className),
                 string.Format("{0}.{1}s.{2}",parentName ,classType , className),
                 string.Format("{0}.Shared.{1}s.{2}",parentName , classType , className),
-                string.Format("Core.Labels.{0}.{1}", parentName, className),
                 string.Format("Core.Labels.{0}.{1}s.{2}" , parentName , classType , className),
                 string.Format("Core.Labels.Shared.{0}s.{1}",classType , className),
-                string.Format("Core.Apis.{1}",classType,className)
             };
 
         }

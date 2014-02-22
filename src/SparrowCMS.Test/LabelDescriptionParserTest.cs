@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using SparrowCMS.Core;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace SparrowCMS.Test
 {
@@ -38,8 +39,9 @@ namespace SparrowCMS.Test
              {/Article.List}";
 
             var labelDescription = LabelDescriptionParser.Parse(templateContent).FirstOrDefault();
-
-            Assert.AreEqual("Article.List", labelDescription.LabelName);
+            Factory.Instance.AddAssembly(Assembly.Load("SparrowCMS.Plugin.Article"));
+            var label = LabelBuilder.Build(labelDescription);
+            Assert.AreEqual("Article", labelDescription.LabelName);
 
         }
 
