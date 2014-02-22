@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiFactory.cs" />
+    <Compile Include="Apis\Page.cs" />
     <Compile Include="Attributes\FieldFlagAttribute.cs" />
     <Compile Include="Attributes\LabelNameAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
@@ -76,9 +78,12 @@
     <Compile Include="FieldBuilder.cs" />
     <Compile Include="FieldDescription.cs" />
     <Compile Include="FieldAttribute.cs" />
+    <Compile Include="IApi.cs" />
     <Compile Include="IFunction.cs" />
     <Compile Include="LabelBuilder.cs" />
     <Compile Include="LabelDescription.cs" />
+    <Compile Include="Labels\Api.cs" />
+    <Compile Include="Labels\Page\Save.cs" />
     <Compile Include="Labels\Pagination\Default.cs" />
     <Compile Include="Labels\Pagination\Fields\Next.cs" />
     <Compile Include="Labels\Pagination\Fields\Prev.cs" />
@@ -95,16 +100,16 @@
     <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Common\ShareCache.cs" />
     <Compile Include="Managers\SiteManager.cs" />
+    <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\Template.cs" />
-    <Compile Include="Table.cs" />
     <Compile Include="Parsers\FieldAttributeParser.cs" />
     <Compile Include="Parsers\FieldDescriptionParser.cs" />
     <Compile Include="ILabel.cs" />
-    <Compile Include="LabelParameter.cs" />
+    <Compile Include="Parameter.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="PageHandler.cs" />
     <Compile Include="Parsers\LabelParameterParser.cs" />
@@ -119,6 +124,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

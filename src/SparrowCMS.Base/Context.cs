@@ -2,6 +2,7 @@
 using SparrowCMS.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -47,6 +48,24 @@ namespace SparrowCMS.Core
             }
 
             Current.CurrentPage = page;
+        }
+
+        public IEnumerable<string> GetRequestAllKeys()
+        {
+            return Current.HttpContext.Request.QueryString.AllKeys.Select(e => e.ToLower()).Concat(Context.Current.HttpContext.Request.Form.AllKeys.Select(e => e.ToLower()));
+        }
+
+        public string GetPostData()
+        {
+            using (var sr = new StreamReader(Context.Current.HttpContext.Request.InputStream))
+            {
+                return sr.ReadToEnd();
+            }
+        }
+
+        public string Request(string key)
+        {
+            return Current.CurrentPage.RouteData[key];
         }
     }
 }

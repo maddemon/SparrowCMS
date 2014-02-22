@@ -14,12 +14,12 @@ namespace SparrowCMS.Core.Managers
     {
         private static string _cacheKey = "cms_pages";
 
-        public static IEnumerable<Page> GetPages(Site site)
+        public static List<Page> GetPages(Site site)
         {
-            return ShareCache.GetOrSet<IEnumerable<Page>>(_cacheKey, GetPagesFromConfig);
+            return ShareCache.GetOrSet<List<Page>>(_cacheKey, GetPagesFromConfig);
         }
 
-        private static IEnumerable<Page> GetPagesFromConfig()
+        private static List<Page> GetPagesFromConfig()
         {
             var filePath = Path.Combine(Environment.CurrentDirectory, "configs/pages.config");
             var doc = XDocument.Load(filePath);
@@ -63,6 +63,14 @@ namespace SparrowCMS.Core.Managers
             currentPage.Init(context);
 
             return currentPage;
+        }
+
+        public static void Save(Models.Page model)
+        {
+            var pages = GetPages(null);
+            pages.Add(model);
+            //pages to xml
+            //save xml
         }
     }
 }

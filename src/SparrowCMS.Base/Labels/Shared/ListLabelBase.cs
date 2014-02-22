@@ -7,7 +7,7 @@ namespace SparrowCMS.Core.Labels.Shared
 {
     public abstract class ListLabelBase : ILabel
     {
-        public IEnumerable<LabelParameter> Parameters { get; set; }
+        public IEnumerable<Parameter> Parameters { get; set; }
 
         public IEnumerable<Field> Fields { get; set; }
 
@@ -41,6 +41,14 @@ namespace SparrowCMS.Core.Labels.Shared
             }
         }
 
+        //<!--header>
+        //<!--end-->
+        //<!--repeat-->
+        //<!--end-->
+        //<!--null-->
+        //<!--end-->
+        //<!--footer-->
+        //<!--end-->
         protected virtual string GetRepeatTemplate(string innerHtml)
         {
             return innerHtml;

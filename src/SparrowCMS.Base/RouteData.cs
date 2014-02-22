@@ -28,5 +28,13 @@ namespace SparrowCMS.Core
                 return _data.ContainsKey(name) ? _data[name] : string.Empty;
             }
         }
+
+        public IEnumerable<string> AllKeys
+        {
+            get
+            {
+                return _data.Keys;
+            }
+        }
     }
 }

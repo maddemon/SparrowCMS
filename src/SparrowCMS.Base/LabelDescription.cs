@@ -9,7 +9,7 @@ namespace SparrowCMS.Core
     {
         public LabelDescription()
         {
-            Parameters = new Dictionary<string, LabelParameter>();
+            Parameters = new Dictionary<string, Parameter>();
             FieldDescriptions = new List<FieldDescription>();
             InnerLabelDescriptions = new List<LabelDescription>();
         }
@@ -22,7 +22,7 @@ namespace SparrowCMS.Core
 
         public string InnerHtml { get; set; }
 
-        public Dictionary<string, LabelParameter> Parameters { get; set; }
+        public Dictionary<string, Parameter> Parameters { get; set; }
 
         public IEnumerable<FieldDescription> FieldDescriptions { get; set; }
 

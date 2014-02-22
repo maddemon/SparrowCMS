@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SparrowCMS.Core
 {
-    internal enum ClassType
+    public enum ClassType
     {
         Parameter,
         Function,
@@ -15,15 +15,53 @@ namespace SparrowCMS.Core
         Unknown,
         Label,
         Field,
+        Api
     }
 
-    internal class SearchType
+    public static class SearchHelper
     {
-        public SearchType(Type type)
+        public static ClassType GetSearhType(string className)
+        {
+            foreach (var name in Enum.GetNames(typeof(ClassType)))
+            {
+                if (className.Contains(name))
+                {
+                    return (ClassType)Enum.Parse(typeof(ClassType), name);
+                }
+            }
+            return ClassType.Unknown;
+        }
+
+        public static IEnumerable<string> GetNamespaces(this ClassType classType, string parentName, string className)
+        {
+            if (classType == ClassType.Unknown) return null;
+            if (classType == ClassType.Api)
+            {
+                return new List<string> { 
+                 string.Format("{0}.Apis.{1}",parentName,className),
+                 string.Format("Core.Apis.{0}",className)
+                };
+            }
+
+            return new List<string>
+            {
+                string.Format("{0}.{1}",parentName , className),
+                string.Format("{0}.{1}s.{2}",parentName ,classType , className),
+                string.Format("{0}.Shared.{1}s.{2}",parentName , classType , className),
+                string.Format("Core.Labels.{0}.{1}", parentName, className),
+                string.Format("Core.Labels.{0}.{1}s.{2}" , parentName , classType , className),
+                string.Format("Core.Labels.Shared.{0}s.{1}",classType , className),
+                string.Format("Core.Apis.{1}",classType,className)
+            };
+
+        }
+    }
+
+    internal class ClassDescription
+    {
+        public ClassDescription(Type type)
         {
             Type = type;
-
-            ClassType = GetClassType(type.FullName);
 
             var attr = type.GetCustomAttributes(true).FirstOrDefault(a => a is LabelNameAttribute);
             if (attr != null)
@@ -33,21 +71,7 @@ namespace SparrowCMS.Core
             }
         }
 
-        public static ClassType GetClassType(string typeName)
-        {
-            foreach (var name in Enum.GetNames(typeof(ClassType)))
-            {
-                if (typeName.Contains(name))
-                {
-                    return (ClassType)Enum.Parse(typeof(ClassType), name);
-                }
-            }
-            return ClassType.Unknown;
-        }
-
         public Type Type { get; set; }
-
-        public ClassType ClassType { get; set; }
 
         public string AliasName { get; set; }
 
@@ -57,7 +81,7 @@ namespace SparrowCMS.Core
     {
 
         public static Factory Instance = new Factory();
-        private readonly List<SearchType> _allTypes = new List<SearchType>();
+        private readonly List<ClassDescription> _allTypes = new List<ClassDescription>();
 
         private Factory()
         {
@@ -93,45 +117,36 @@ namespace SparrowCMS.Core
 
             foreach (var type in assembly.GetTypes())
             {
-                _allTypes.Add(new SearchType(type));
+                _allTypes.Add(new ClassDescription(type));
             }
         }
 
-        private Type Search(string labelName, string typeName, ClassType classType)
+        private ClassDescription GetClassDescription(string parentName, string className, ClassType classType)
         {
             if (classType == ClassType.Unknown) return null;
 
-            var typeNamespaces = new List<string>
-            {
-                string.Format("{0}.{1}",labelName , typeName),
-                string.Format("{0}.{1}s.{2}",labelName ,classType , typeName),
-                string.Format("{0}.Shared.{1}s.{2}",labelName , classType , typeName),
-                string.Format("Core.Labels.{0}.{1}", labelName, typeName),
-                string.Format("Core.Labels.{0}.{1}s.{2}" , labelName , classType , typeName),
-                string.Format("Core.Labels.Shared.{0}s.{1}",classType , typeName),
-            };
-
-            if (classType == ClassType.Label) typeNamespaces.Add(labelName);
+            var typeNamespaces = classType.GetNamespaces(parentName, className);
 
             foreach (var ns in typeNamespaces)
             {
                 var searchType = _allTypes.FirstOrDefault(t => (t.AliasName != null && t.AliasName.ToLower() == ns.ToLower()) || t.Type.FullName.ToLower().Contains(ns.ToLower()));
-                if (searchType != null) return searchType.Type;
+                if (searchType != null) return searchType;
             }
             return null;
         }
 
-        public T GetInstance<T>(string labelName, string typeName = "Default")
+        public T GetInstance<T>(string parentName, string className = "Default")
         {
-            var classType = SearchType.GetClassType(typeof(T).FullName);
-            var type = Search(labelName, typeName, classType);
+            var searchType = SearchHelper.GetSearhType(typeof(T).FullName);
 
-            if (type == null)
+            var desc = GetClassDescription(parentName, className, searchType);
+
+            if (desc == null)
             {
                 return default(T);
             }
 
-            return (T)Activator.CreateInstance(type);
+            return (T)Activator.CreateInstance(desc.Type);
         }
     }
 }

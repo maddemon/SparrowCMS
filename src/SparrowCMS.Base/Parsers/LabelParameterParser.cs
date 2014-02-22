@@ -7,12 +7,12 @@ namespace SparrowCMS.Core.Parsers
     public class LabelParameterParser
     {
 
-        private static LabelParameter Parse(string labelName, Match match)
+        private static Parameter Parse(string labelName, Match match)
         {
             var name = match.Groups["name"].Value;
             var value = match.Groups["value"].Value.Trim('"').Trim('\'');
 
-            var labelParameter = new LabelParameter { Name = name, Value = value };
+            var labelParameter = new Parameter { Name = name, Value = value };
 
             labelParameter.Function = ParseFunction(labelName, value);
 
@@ -28,9 +28,9 @@ namespace SparrowCMS.Core.Parsers
 
         private static readonly Regex Regex = new Regex(@"(?<name>\w+)\s*=\s*(?<value>""[^""]+""|[^\s\/]+|'[^']+')", RegexOptions.Compiled);
 
-        public static Dictionary<string, LabelParameter> Parse(string labelName, string parametersTemplateContent)
+        public static Dictionary<string, Parameter> Parse(string labelName, string parametersTemplateContent)
         {
-            var result = new Dictionary<string, LabelParameter>();
+            var result = new Dictionary<string, Parameter>();
             foreach (Match match in Regex.Matches(parametersTemplateContent))
             {
                 var parameter = Parse(labelName, match);

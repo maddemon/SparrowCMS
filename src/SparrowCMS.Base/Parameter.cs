@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SparrowCMS.Core.Common;
 
 namespace SparrowCMS.Core
 {
-    public class LabelParameter
+    public class Parameter
     {
         public virtual string Name { get; set; }
 
@@ -20,10 +21,10 @@ namespace SparrowCMS.Core
             {
                 value = Function.GetParameterValue(Value);
             }
+
             if (string.IsNullOrEmpty(value))
             {
-                if (type.IsValueType) return Activator.CreateInstance(type);
-                return null;
+                return type.GetDefaultValue();
             }
 
             return Convert.ChangeType(value, type);
