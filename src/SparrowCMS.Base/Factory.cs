@@ -51,9 +51,11 @@ namespace SparrowCMS.Core
                    //string.Format("{0}",parentName),
                    string.Format("{0}.{1}",parentName , className),
                    string.Format("{0}.Labels.{1}",parentName , className),
-                   string.Format("Core.Labels.{1}",parentName , className),
                    string.Format("{0}.Shared.Labels.{1}",parentName , className),
-                   string.Format("Core.Shared.Labels.{1}",parentName , className)
+                   string.Format("Core.Labels.{0}",parentName),
+                   string.Format("Core.Labels.{0}.{1}",parentName,className),
+                   string.Format("Core.Shared.Labels.{0}",parentName),
+                   string.Format("Core.Shared.Labels.{0}.{1}",parentName,className)
                 };
             }
 
@@ -70,22 +72,39 @@ namespace SparrowCMS.Core
 
     internal class ClassDescription
     {
-        public ClassDescription(Type type)
+        public ClassDescription()
         {
-            Type = type;
-
-            var attr = type.GetCustomAttributes(true).FirstOrDefault(a => a is LabelNameAttribute);
-            if (attr != null)
-            {
-                AliasName = ((LabelNameAttribute)attr).Name;
-
-            }
         }
 
         public Type Type { get; set; }
 
         public string AliasName { get; set; }
 
+        private static string[] _classTypes;
+        static ClassDescription()
+        {
+            _classTypes = Enum.GetNames(typeof(ClassType));
+        }
+
+        internal static ClassDescription Create(Type type)
+        {
+            var result = new ClassDescription { Type = type };
+
+            var attr = type.GetCustomAttributes(true).FirstOrDefault(a => a is NameAttribute);
+            if (attr != null)
+            {
+                result.AliasName = ((NameAttribute)attr).Name;
+                return result;
+            }
+            foreach (var name in _classTypes)
+            {
+                if (type.FullName.Contains(name + "s"))
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
     }
 
     public class Factory
@@ -126,9 +145,14 @@ namespace SparrowCMS.Core
                 return;
             }
 
+            var classTypes = Enum.GetNames(typeof(ClassType));
             foreach (var type in assembly.GetTypes())
             {
-                _allTypes.Add(new ClassDescription(type));
+                var desc = ClassDescription.Create(type);
+                if (desc != null)
+                {
+                    _allTypes.Add(desc);
+                }
             }
         }
 
