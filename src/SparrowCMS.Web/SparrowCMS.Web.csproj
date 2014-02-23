@@ -65,6 +65,7 @@
     <Content Include="static\main.min.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
+    <Content Include="templates\api.html" />
     <Content Include="templates\admin\system.docs.html" />
     <Content Include="templates\admin\system.configs.html" />
     <Content Include="templates\admin\index.html" />

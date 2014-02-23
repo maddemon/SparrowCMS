@@ -49,6 +49,7 @@
             </div>
         </div>
     </div>
+    <div id="alert" class="myalert alert"></div>
 </body>
 </html>
 <script>
@@ -67,5 +68,13 @@
         $("#myModal").on("hidden.bs.modal", function () {
             $(this).removeData("bs.modal");
         });
+
+        $.closeModal = function () {
+            $("#myModal").modal("hide");
+        };
+
+        $.alert = function (message, type) {
+            $("#alert").removeClass().addClass("myalert").addClass("alert").addClass("alert-" + type).html(message).show(0).delay(3000).hide(0);
+        };
     })();
 </script>

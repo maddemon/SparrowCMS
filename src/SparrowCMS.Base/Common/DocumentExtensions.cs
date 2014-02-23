@@ -46,15 +46,21 @@ namespace SparrowCMS.Core.Common
                 return type.GetDefaultValue();
             }
 
-            if (type.IsBasicType())
+            if (type == typeof(Guid))
             {
-                return Convert.ChangeType(value, type);
+                return Guid.Parse(value);
             }
 
             if (type.IsEnum)
             {
                 return Enum.Parse(type, value, true);
             }
+
+            if (type.IsBasicType())
+            {
+                return Convert.ChangeType(value, type);
+            }
+
 
             return type.GetDefaultValue();
         }

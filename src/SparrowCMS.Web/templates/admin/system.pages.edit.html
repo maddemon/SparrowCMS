@@ -4,7 +4,7 @@
 </div>
 {Page.Model Id="Url(Id)"}
 <div class="modal-body">
-    <form class="form-horizontal" action="/admin/api/?action=page.save" method="post">
+    <form id="page-edit-form" class="form-horizontal" action="/admin/api/?action=page.save&id=@Id" method="post">
         <div class="form-group">
             <label class="col-sm-2 control-label">Name：</label>
             <div class="col-sm-10">
@@ -20,7 +20,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Template:</label>
             <div class="col-sm-10">
-                <input type="text" name="Template" class="form-control" value="@Template.FilePath" />
+                <input type="text" name="FilePath" class="form-control" value="@Template.FilePath" />
             </div>
         </div>
         <div class="form-group">
@@ -30,6 +30,19 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label">Role:</label>
+            <div class="col-sm-10">
+                <select id="page-role-select" name="Role" class="form-control">
+                    <option>Everyone</option>
+                    <option>User</option>
+                    <option>Admin</option>
+                </select>
+            </div>
+            <script>
+                $("#page-role-select").val("@Role");
+            </script>
+        </div>
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
@@ -37,3 +50,21 @@
     </form>
 </div>
 {/Page.Model}
+<script>
+    (function () {
+        $("#page-edit-form").submit(function () {
+            var data = $(this).serialize();
+            var url = $(this).attr("action");
+            $.post(url, data, function (json) {
+                console.log(typeof(json))
+                if (json.result) {
+                    $.alert("保存成功", "success");
+                    $.closeModal();
+                } else {
+                    $.alert("保存失败", "danger");
+                }
+            },"json")
+            return false;
+        });
+    })();
+</script>

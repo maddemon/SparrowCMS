@@ -7,12 +7,20 @@ using System.Text;
 
 namespace SparrowCMS.Core.Apis
 {
-    public class Page : IApi
+    public class Page : APIBase
     {
-        public ApiResult Save(Models.Page model)
+        public ApiResult Save(Models.Page page, string filePath, string layout)
         {
-            PageManager.Save(model);
-            return new ApiResult();
+            if (page == null)
+            {
+                throw new ArgumentNullException("page");
+            }
+
+            page.Template = new Template(filePath, layout);
+
+            PageManager.Save(page);
+
+            return Success();
         }
 
         public string Delete(string urlPattern)

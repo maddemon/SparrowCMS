@@ -52,6 +52,20 @@ namespace SparrowCMS.Core
             return Context.Current.CurrentPage.RouteData.AllKeys;
         }
 
+        private static object GetBasicParameterValue(ParameterInfo p)
+        {
+            object pValue = null;
+            if (Context.Current.CurrentPage.RouteData.AllKeys.Contains(p.Name.ToLower()))
+            {
+                pValue = Context.Current.Request(p.Name).ToValue(p.ParameterType);
+            }
+            else
+            {
+                pValue = p.ParameterType.GetDefaultValue();
+            }
+            return pValue;
+        }
+
         private static object InvokeApi(IApi api, MethodInfo apiMethod, string dataType)
         {
             var parameters = new List<object>();
@@ -64,9 +78,9 @@ namespace SparrowCMS.Core
                     foreach (var p in apiMethod.GetParameters())
                     {
                         object pValue = null;
-                        if (allKeys.Contains(p.Name.ToLower()) && p.ParameterType.IsBasicType())
+                        if (p.ParameterType.IsBasicType())
                         {
-                            pValue = Context.Current.Request(p.Name).ToValue(p.ParameterType);
+                            pValue = GetBasicParameterValue(p);
                         }
                         else
                         {
@@ -96,23 +110,31 @@ namespace SparrowCMS.Core
                 default:
                     foreach (var p in apiMethod.GetParameters())
                     {
-                        object pValue = null;
-                        if (allKeys.Contains(p.Name.ToLower()) && p.ParameterType.IsBasicType())
+                        object pValue = p.ParameterType.GetDefaultValue();
+                        if (p.ParameterType.IsBasicType())
                         {
-                            pValue = Context.Current.Request(p.Name).ToValue(p.ParameterType);
+                            pValue = GetBasicParameterValue(p);
                         }
                         else
                         {
+                            pValue = Activator.CreateInstance(p.ParameterType);
+                            var shouldUseNewObject = false;
                             foreach (var prop in p.ParameterType.GetProperties())
                             {
                                 //TODO:只支持基本类型
                                 if (prop.PropertyType.IsBasicType())
                                 {
-                                    prop.SetValue(pValue, Context.Current.Request(p.Name).ToValue(prop.PropertyType), null);
+                                    var val = Context.Current.Request(prop.Name).ToValue(prop.PropertyType);
+                                    prop.SetValue(pValue, val, null);
+                                    shouldUseNewObject = true;
                                 }
                             }
-                            parameters.Add(pValue);
+                            if (!shouldUseNewObject)
+                            {
+                                pValue = null;
+                            }
                         }
+                        parameters.Add(pValue);
                     }
                     break;
             }

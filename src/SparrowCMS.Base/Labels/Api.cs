@@ -49,6 +49,7 @@ namespace SparrowCMS.Core.Labels
         {
             try
             {
+                SetApiNames(); 
                 var result = ApiFactory.Invoke(Plugin, _apiName, _methodName, DataType);
 
                 return Newtonsoft.Json.JsonConvert.SerializeObject(result);

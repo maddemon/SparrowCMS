@@ -1,47 +1,19 @@
-﻿body, ul, p, h1, h2, h3, h4, h5 {
-    padding: 0px;
-    margin: 0px;
-}
+﻿body, ul, p, h1, h2, h3, h4, h5 { padding: 0px; margin: 0px; }
 
 @side_width: 180px;
 @header_height: 51px;
 @footer_height: 0px;
 
-.sidebar {
-    width: @side_width;
-    position: fixed;
-    top: 51px;
-    bottom: 0px;
-    background: #c3d8e5;
-    overflow-x: hidden;
-    padding: 20px;
-    overflow-y: auto;
-    background-color: #f5f5f5;
-}
+.sidebar { width: @side_width; position: fixed; top: 51px; bottom: 0px; background: #c3d8e5; overflow-x: hidden; padding: 20px; overflow-y: auto; background-color: #f5f5f5; }
 
-    .sidebar .title {
-        line-height: 30px;
-        list-style: none;
-        font-weight: bold;
-    }
+    .sidebar .title { line-height: 30px; list-style: none; font-weight: bold; }
 
-    .sidebar .nav li {
-        margin: 0px -20px;
-        text-indent: 20px;
-    }
+    .sidebar .nav li { margin: 0px -20px; text-indent: 20px; }
 
-        .sidebar .nav li a.active {
-            background-color: #fff;
-        }
+        .sidebar .nav li a.active { background-color: #fff; }
 
-.cms-container {
-    padding: 5px;
-    position: absolute;
-    top: @header_height;
-    left: @side_width;
-    bottom: @footer_height;
-    right: 0px;
-    overflow: auto;
-}
+.cms-container { padding: 5px; position: absolute; top: @header_height; left: @side_width; bottom: @footer_height; right: 0px; overflow: auto; }
 
-.modal-dialog { margin:60px auto;}
+.modal-dialog { margin: 60px auto; }
+
+.myalert { display:none; margin: 0px auto; z-index: 999999999; max-width: 300px; position: absolute; right: 300px; left: 300px; text-align: center; font-weight: bold; }
