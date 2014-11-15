@@ -1,9 +1,21 @@
-SparrowCMS
-==========
-
-SparrowCMS将是一个自由度非常高的CMS系统，尽量避免开发人员开发后台代码，就能做出想要的网站。
-当然，主要是以CMS内容发布为主，一般用户可以不用编写代码就能制作功能齐全的网站。
-该系统没有所谓的前台和后台，所有的页面都是根据模板生成。
-可以面向小型企业，也支持巨型网站，支持多种数据库，分布式缓存等。
-
-如果有兴趣参与，可以与我联系，QQ 3667144。
+#执行流程
+    WebBrowser Visited Url -> //用户访问了一个URL
+    CMSHttpModule -> CMSPageHandler -> //自定义HttpHandler
+    Context.Init() //初始化上下文，其中包括获取站点信息、页面信息
+      site = GetSite(Url.Host)  -> 
+      page =  site.GetPages.Where(p=> p.IsMatch(Url.Path)  -> 
+      page.Init() //初始化Page实例，
+        template.Init()//Page的模板实例初始化
+          templateContent = Template.getContent();
+          labels = Label.FindLabels(templateContent);//获取所有的标签(以后改成control控件）
+            labelDescription.Init();
+              label.Parameters = labelDescription.getParamters() //获取所有的参数实例
+              label.FieldDecriptions =  labelDescription.getFields()//获取所有的Field描述
+                fieldDescription.Attributes //获取字段的属性
+              label.InnerLabels // 获取所有的内嵌Label
+        RouteData
+        ViewData
+        
+        template.GetRepalcedContent()//获取替换后的html，并展现
+          labelDescriptions.ForEach(label.GetReplacedContent())//遍历LabelDescriptions，实例化具体的Label并替换html
+            FieldDescription.GetReplacedContent()
