@@ -29,7 +29,7 @@ namespace SparrowCMS
 
             //}
             //处理内嵌标签
-            var innerLabelDescriptions = LabelDescriptorParser.Parse(innerHtml);
+            var innerLabelDescriptions = LabelDescriptorParser.FindAll(innerHtml);
             if (innerLabelDescriptions != null && innerLabelDescriptions.Count() > 0)
             {
                 foreach (var desc in innerLabelDescriptions)

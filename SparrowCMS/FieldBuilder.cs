@@ -22,14 +22,14 @@ namespace SparrowCMS
         {
             foreach (var p in field.GetType().GetProperties())
             {
-                var attr = description.Attributes.FirstOrDefault(e => e.Name.ToLower() == p.Name.ToLower());
+                var attr = description.Functions.FirstOrDefault(e => e.Name.ToLower() == p.Name.ToLower());
                 p.SetValue(field, attr, null);
             }
 
             var property = field.GetType().GetProperty("Attributes");
             if (property != null)
             {
-                property.SetValue(field, description.Attributes, null);
+                property.SetValue(field, description.Functions, null);
             }
         }
 

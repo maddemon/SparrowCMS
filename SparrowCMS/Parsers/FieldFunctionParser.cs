@@ -14,7 +14,7 @@ namespace SparrowCMS.Parsers
         /// <param name="labelName"></param>
         /// <param name="attributesTemplateContent">format="some text $this" dateformat="yyyy/MM/dd"</param>
         /// <returns></returns>
-        public static IEnumerable<FieldFunction> Parse(string labelName, string fieldName, string attributesTemplateContent)
+        public static IEnumerable<FieldFunction> FindAll(string labelName, string fieldName, string attributesTemplateContent)
         {
             if (!string.IsNullOrEmpty(attributesTemplateContent))
             {

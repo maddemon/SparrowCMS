@@ -26,6 +26,7 @@ namespace SparrowCMS
             var context = application.Context;
             var url = context.Request.Url.AbsoluteUri;
             Trace.WriteLine(url);
+            //创建自定义的HttpHandler处理请求
             context.Handler = new PageHandler();
         }
 

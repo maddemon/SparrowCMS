@@ -33,24 +33,25 @@ namespace SparrowCMS
 
         public void Init(HttpContext context)
         {
-
-            //set httpcontext
+            //HttpContext
             Current.HttpContext = context;
+            //匹配当前求情的站点
             Current.Site = Core.SiteManager.GetSite(context.Request.Url.Host);
             if (Current.Site == null)
             {
                 throw new SiteNotFoundException();
             }
-            //set current page
+            //匹配当前请求的页面
             var page = Core.PageManager.GetPage(Current.Site, context.Request.Url.AbsolutePath);
             if (page == null)
             {
                 throw new PageNotFoundException();
             }
-
+            //页面初始化工作
             page.Init(Current);
-
+            //赋值给Context
             Current.Page = page;
+            //获取RouteData
             RouteData = page.UrlRoute.GetRouteData(context);
         }
 

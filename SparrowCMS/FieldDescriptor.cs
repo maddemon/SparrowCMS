@@ -13,6 +13,6 @@ namespace SparrowCMS
 
         public string FieldName { get; set; }
 
-        public IEnumerable<FieldFunction> Attributes { get; set; }
+        public IEnumerable<FieldFunction> Functions { get; set; }
     }
 }

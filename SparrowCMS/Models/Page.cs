@@ -27,6 +27,10 @@ namespace SparrowCMS.Models
 
         public UrlRoute UrlRoute { get; set; }
 
+        /// <summary>
+        /// 默认输出Template对象替换后的内容
+        /// </summary>
+        /// <returns></returns>
         public virtual string GetReplacedContext()
         {
             return Template.GetReplacedContent();

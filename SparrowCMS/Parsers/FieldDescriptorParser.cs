@@ -22,14 +22,14 @@ namespace SparrowCMS.Parsers
                 LabelName = labelName,
                 FieldName = fieldName,
                 TemplateContent = match.Groups[0].Value,
-                Attributes = FieldFunctionParser.Parse(labelName, fieldName, match.Groups["parameters"].Value),
+                Functions = FieldFunctionParser.FindAll(labelName, fieldName, match.Groups["parameters"].Value),
 
             };
 
             return desc;
         }
 
-        public static IEnumerable<FieldDescriptor> Parse(string labelName, string templateContent)
+        public static IEnumerable<FieldDescriptor> FindAll(string labelName, string templateContent)
         {
             foreach (Match m in Regex.Matches(templateContent))
             {

@@ -16,14 +16,15 @@ namespace SparrowCMS.Parsers
             }
 
             var labelName = match.Groups["name"].Value;
+            //label类的名称默认是Default,比如有些labelName并不包含.符号 ,例如{Test /},则实际类名为Test.Default
             var className = "Default";
             var parameters = match.Groups["parameters"].Value;
-            if (labelName.Contains("."))
+            var dotIndex = labelName.LastIndexOf('.');
+            if (dotIndex > -1)
             {
-                className = labelName.Split('.')[1];
-                labelName = labelName.Split('.')[0];
+                className = labelName.Substring(dotIndex + 1);
+                //labelName = labelName.Substring(0, dotIndex);
             }
-
 
             var desc = new LabelDescriptor
             {
@@ -31,7 +32,7 @@ namespace SparrowCMS.Parsers
                 LabelName = labelName,
                 ClassName = className,
                 TemplateContent = match.Groups[0].Value,
-                Parameters = LabelParameterParser.Parse(labelName, parameters),
+                Parameters = LabelParameterParser.FindAll(labelName, parameters),
                 InnerHtml = match.Groups["inner"].Value
             };
 
@@ -40,19 +41,27 @@ namespace SparrowCMS.Parsers
                 return desc;
             }
 
-            desc.FieldDescriptors = FieldDescriptorParser.Parse(labelName + (className == "Default" ? null : "." + className), desc.InnerHtml);
+            desc.FieldDescriptors = FieldDescriptorParser.FindAll(labelName, desc.InnerHtml);
 
             //desc.InnerLabelDescriptions = Parse(desc.InnerHtml);
 
             return desc;
         }
 
-        public static IEnumerable<LabelDescriptor> Parse(string templateContent)
+        /// <summary>
+        /// 获取所有的LabelDescriptor
+        /// </summary>
+        /// <param name="templateContent"></param>
+        /// <returns></returns>
+        public static List<LabelDescriptor> FindAll(string templateContent)
         {
+            var list = new List<LabelDescriptor>();
             foreach (Match m in Regex.Matches(templateContent))
             {
-                yield return Parse(m);
+                list.Add(Parse(m));
             }
+
+            return list;
         }
 
     }

@@ -12,7 +12,7 @@ namespace SparrowCMS
 
         public string Name { get; set; }
 
-        public IEnumerable<FieldFunction> Attributes { get; set; }
+        public IEnumerable<FieldFunction> Functions { get; set; }
 
         public string TemplateContent { get; set; }
 
@@ -52,9 +52,9 @@ namespace SparrowCMS
 
             var result = string.Empty;
 
-            if (Attributes != null)
+            if (Functions != null)
             {
-                foreach (var p in Attributes)
+                foreach (var p in Functions)
                 {
                     result = p.ConvertFieldValue(fieldValue);
                 }

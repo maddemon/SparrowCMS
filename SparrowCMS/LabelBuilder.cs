@@ -11,6 +11,7 @@ namespace SparrowCMS
     {
         public static ILabel Build(LabelDescriptor labelDescription)
         {
+            //通过LabelFactory获取对应的Label类实例对象.
             var label = Factory.Instance.GetInstance<ILabel>(labelDescription.LabelName, labelDescription.ClassName);
             if (label != null)
             {
@@ -35,13 +36,20 @@ namespace SparrowCMS
             }
         }
 
+        /// <summary>
+        /// 对Label实例的Parameter赋值
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="labelDescription"></param>
         private static void SetParameters(ILabel label, LabelDescriptor labelDescription)
         {
             foreach (var p in label.GetType().GetProperties())
             {
+                //如果Label类的属性标记了FieldFlag属性,则说明此属性是字段,不是参数,直接continue
                 var attribute = p.GetCustomAttributes(typeof(FieldFlagAttribute), false).FirstOrDefault();
                 if (attribute != null) continue;
 
+                //如果descriptor的参数里包含了该属性名称,则为label实例的参数
                 if (labelDescription.Parameters.ContainsKey(p.Name.ToLower()))
                 {
                     var parameter = labelDescription.Parameters[p.Name.ToLower()];
@@ -51,13 +59,20 @@ namespace SparrowCMS
 
         }
 
+        /// <summary>
+        /// 对Label对象的 Fields赋值
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="labelDescription"></param>
         private static void SetFields(ILabel label, LabelDescriptor labelDescription)
         {
             foreach (var p in label.GetType().GetProperties())
             {
+                //获取该属性是否标记了FieldFlag属性
                 var attribute = p.GetCustomAttributes(typeof(FieldFlagAttribute), false).FirstOrDefault();
                 if (attribute == null)
                 {
+                    //如果没有标记,则判断是不是Field属性
                     if (p.Name == "Fields")
                     {
                         var list = new List<Field>();
@@ -70,6 +85,7 @@ namespace SparrowCMS
                 }
                 else
                 {
+                    //如果标记,则获取该field的descriptor,并创建对应的field类实例
                     var fieldDesc = labelDescription.FieldDescriptors.FirstOrDefault(e => e.FieldName.ToLower() == p.Name.ToLower());
                     if (fieldDesc != null)
                     {
