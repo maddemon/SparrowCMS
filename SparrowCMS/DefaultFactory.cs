@@ -13,6 +13,11 @@ namespace SparrowCMS
 
     public class DefaultFactory : IFactory
     {
+        public enum SearchType
+        {
+            Unknown, Api, Label, Field, Parameter, Function
+        }
+
         protected AssemblyManager AssemblyManager;
 
         public DefaultFactory()
@@ -20,39 +25,53 @@ namespace SparrowCMS
             AssemblyManager = CMSContext.Current.Core.AssemblyManager;
         }
 
-        protected virtual string[] GetFullNames(string fullName)
+        protected virtual string[] GetFullNames(string fullName, SearchType searchType)
         {
             var dotIndex = fullName.LastIndexOf('.');
             var parentName = fullName.Substring(0, dotIndex == -1 ? fullName.Length : dotIndex);
             var className = fullName.Substring(dotIndex + 1);
-
+            var searchName = string.Empty;
+            switch (searchType)
+            {
+                case SearchType.Api:
+                case SearchType.Label:
+                    searchName = searchType.ToString();
+                    break;
+                case SearchType.Field:
+                case SearchType.Function:
+                case SearchType.Parameter:
+                    searchName = "Labels." + searchType.ToString();
+                    break;
+                default:
+                    return null;
+            }
             return new string[]
             {
-                string.Format("{0}.{2}s.{1}",parentName , className),
-                string.Format("{0}.Shared.{2}s.{1}",parentName , className),
-                string.Format("SparrowCMS.{2}s.{0}",parentName),
-                string.Format("SparrowCMS.{2}s.{0}.{1}",parentName,className),
-                string.Format("SparrowCMS.Shared.{2}s.{0}",parentName),
-                string.Format("SparrowCMS.Shared.{2}s.{0}.{1}",parentName,className)
+                string.Format("{0}.{2}s.{1}",parentName , className , searchName),
+                string.Format("{0}.Shared.{2}s.{1}",parentName , className, searchName),
+                string.Format("SparrowCMS.{1}s.{0}",parentName, searchName),
+                string.Format("SparrowCMS.{2}s.{0}.{1}",parentName,className, searchName),
+                string.Format("SparrowCMS.Shared.{1}s.{0}",parentName, searchName),
+                string.Format("SparrowCMS.Shared.{2}s.{0}.{1}",parentName,className, searchName)
             };
         }
 
-        public T CreateInstance<T>(string[] namespaces)
+        private static SearchType GetSearchType(Type type)
         {
-            foreach (var ns in namespaces)
+            foreach (var name in Enum.GetNames(typeof(SearchType)))
             {
-                var type = AssemblyManager.Search(ns);
-                if (type != null)
+                if (type.Name.Contains(name))
                 {
-                    return Activator.CreateInstance<T>();
+                    return (SearchType)Enum.Parse(typeof(SearchType), name);
                 }
             }
-            return default(T);
+            return SearchType.Unknown;
         }
 
         public T CreateInstance<T>(string classFullName)
         {
-            var fullNames = GetFullNames(classFullName);
+            var searchType = GetSearchType(typeof(T));
+            var fullNames = GetFullNames(classFullName, searchType);
             foreach (var fullName in fullNames)
             {
                 var type = AssemblyManager.Search(fullName);

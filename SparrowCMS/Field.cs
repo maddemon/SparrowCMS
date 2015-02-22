@@ -6,7 +6,12 @@ using SparrowCMS.Common;
 
 namespace SparrowCMS
 {
-    public class Field
+    public interface IField
+    {
+        string GetReplacedContent(Document doc);
+    }
+
+    public class Field : IField
     {
         public string LabelName { get; set; }
 
