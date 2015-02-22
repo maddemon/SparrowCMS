@@ -2,16 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SparrowCMS.Managers;
 
 namespace SparrowCMS
 {
     public class FieldBuilder
     {
+        private static FactoryManager FactoryManager = new FactoryManager();
+
         public static Field Build(FieldDescriptor descriptor)
         {
-            var factory = CMSContext.Current.GetFactory(descriptor.LabelDescriptor.PluginName);
-            var field = factory.CreateInstance<Field>(descriptor.GetFieldClassFullName())
-                ?? new Field() { TemplateContent = descriptor.TemplateContent };
+            Field field = null;
+            var factories = FactoryManager.GetFieldFactories();
+            foreach (var factory in factories)
+            {
+                field = factory.CreateField(descriptor);
+                if (field != null) break;
+            }
+            if (field == null)
+            {
+                field = new Field() { TemplateContent = descriptor.TemplateContent };
+            }
             SetFunctions(field, descriptor);
             field.Name = descriptor.FieldName;
             field.TemplateContent = descriptor.TemplateContent;

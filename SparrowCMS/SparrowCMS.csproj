@@ -70,10 +70,14 @@
     <Compile Include="Exceptions\ExceptionBase.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
     <Compile Include="Exceptions\SiteNotFoundException.cs" />
-    <Compile Include="DefaultFactory.cs" />
+    <Compile Include="Factories\DefaultApiFactory.cs" />
+    <Compile Include="Factories\DefaultLabelFactory.cs" />
+    <Compile Include="Factories\DefaultFieldFactory.cs" />
+    <Compile Include="Factories\DefaultFunctionFactory.cs" />
+    <Compile Include="Factories\LabelFactoryHelper.cs" />
     <Compile Include="LabelUtils.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
-    <Compile Include="Managers\CoreManager.cs" />
+    <Compile Include="Managers\ManagerCore.cs" />
     <Compile Include="Managers\FactoryManager.cs" />
     <Compile Include="Managers\ManagerBase.cs" />
     <Compile Include="Managers\PageManager.cs" />
@@ -133,10 +137,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Descriptors\" />
-    <Folder Include="Factories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

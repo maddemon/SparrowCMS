@@ -4,21 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using SparrowCMS.Managers;
 
 namespace SparrowCMS
 {
     public class LabelBuilder
     {
+        private static FactoryManager FactoryManager = new FactoryManager();
+
         public static ILabel Build(LabelDescriptor descriptor)
         {
-            var label = CMSContext.Current.GetFactory(descriptor.PluginName).CreateInstance<ILabel>(descriptor.GetLabelClassFullName());
-            if (label != null)
+            var factories = FactoryManager.GetLabelFactories();
+            foreach (var factory in factories)
             {
-                //SetInnerLabel(label, labelDescription);
-                SetParameters(label, descriptor);
-                SetFields(label, descriptor);
+                var label = factory.CreateLabel(descriptor);
+                if (label != null)
+                {
+                    //SetInnerLabel(label, labelDescription);
+                    SetParameters(label, descriptor);
+                    SetFields(label, descriptor);
+                }
+                return label;
             }
-            return label;
+            return null;
         }
 
         private static void SetInnerLabel(ILabel label, LabelDescriptor labelDescription)
@@ -52,7 +60,7 @@ namespace SparrowCMS
                 if (labelDescription.Parameters.ContainsKey(p.Name.ToLower()))
                 {
                     var parameter = labelDescription.Parameters[p.Name.ToLower()];
-                    p.SetValue(label, parameter.ConvertParameterValue(p.PropertyType), null);
+                    p.SetValue(label, parameter.GetFinalValue(p.PropertyType), null);
                 }
             }
 

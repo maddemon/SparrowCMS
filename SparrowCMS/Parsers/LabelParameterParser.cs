@@ -13,22 +13,20 @@ namespace SparrowCMS.Parsers
             var name = match.Groups["name"].Value;
             var value = match.Groups["value"].Value.Trim('"').Trim('\'');
 
-            var labelParameter = new LabelParameter { Name = name, Value = value };
+            var labelParameter = new LabelParameter { Name = name, RawValue = value };
 
-            labelParameter.Function = LabelParameterFunctionParser.Parse(descriptor, labelParameter.Value);
+            labelParameter.Function = LabelParameterFunctionParser.Parse(descriptor, labelParameter.RawValue);
 
             return labelParameter;
         }
 
-        public static Dictionary<string, LabelParameter> FindAll(LabelDescriptor descriptor, string templateContent)
+        public static void FindAll(LabelDescriptor descriptor, string templateContent)
         {
-            var result = new Dictionary<string, LabelParameter>();
             foreach (Match match in ParameterRegex.Matches(templateContent))
             {
                 var parameter = Parse(descriptor, match);
-                result.Add(parameter.Name.ToLower(), parameter);
+                descriptor.Parameters.Add(parameter.Name.ToLower(), parameter);
             }
-            return result;
         }
     }
 

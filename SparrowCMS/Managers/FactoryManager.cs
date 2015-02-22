@@ -2,35 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SparrowCMS.Factories;
 
 namespace SparrowCMS.Managers
 {
-    public class FactoryManager : ManagerBase
+    public class FactoryManager
     {
-        private const string DEFAULT_KEY = "Default";
-
-        private static readonly Dictionary<string, IFactory> Data = new Dictionary<string, IFactory>();
-
-        public FactoryManager()
+        private static FactoryManager _instance = new FactoryManager();
+        public static FactoryManager GetInstance()
         {
-            AddFactory(DEFAULT_KEY, new DefaultFactory());
+            return _instance;
+        }
+        public List<ILabelFactory> GetLabelFactories()
+        {
+            //TODO
+            return new List<ILabelFactory>() { new DefaultLabelFactory() };
         }
 
-        public void AddFactory(string pluginName, IFactory factory)
+        public List<IFieldFactory> GetFieldFactories()
         {
-            if (Data.ContainsKey(pluginName))
-            {
-                Data[pluginName] = factory;
-            }
-            else
-            {
-                Data.Add(pluginName, factory);
-            }
+            //TODO
+            return new List<IFieldFactory>() { new DefaultFieldFactory() };
         }
 
-        public IFactory GetFactory(string pluginName = DEFAULT_KEY)
+        public List<IFunctionFactory> GetFunctionFactories()
         {
-            return Data.ContainsKey(pluginName) ? Data[pluginName] : Data[DEFAULT_KEY];
+            //TODO
+            return new List<IFunctionFactory>() { new DefaultFunctionFactory() };
+        }
+
+        public List<IApiFactory> GetApiFactories()
+        {
+            //TODO
+            return new List<IApiFactory>() { new DefaultApiFactory() };
         }
     }
 }

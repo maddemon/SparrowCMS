@@ -36,7 +36,7 @@ namespace SparrowCMS
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public NameValueCollection GetRouteData(HttpContext context)
+        public NameValueCollection GetRouteData(HttpContextBase context)
         {
             var data = new NameValueCollection();
             foreach (Match m in _urlRegex.Matches(context.Request.Path))

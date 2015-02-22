@@ -7,6 +7,6 @@ namespace SparrowCMS
 {
     public interface IParameterFunction
     {
-        string GetParameterValue(string literalValue);
+        string GetValue(string parameterRawValue);
     }
 }

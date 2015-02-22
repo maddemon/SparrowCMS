@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using SparrowCMS.Managers;
 
 namespace SparrowCMS.Parsers
 {
@@ -33,16 +34,22 @@ namespace SparrowCMS.Parsers
 
         private static FieldFunction Parse(FieldDescriptor descriptor, Match m)
         {
-            var factory = CMSContext.Current.GetFactory(descriptor.LabelDescriptor.PluginName);
             var name = m.Groups["name"].Value;
             var value = m.Groups["value"].Value;
-            var attribute = factory.CreateInstance<FieldFunction>(descriptor.GetFunctionClassFullName(name));
-            if (attribute != null)
+
+            var factories = FactoryManager.GetInstance().GetFunctionFactories();
+            foreach (var factory in factories)
             {
-                attribute.Name = name;
-                attribute.Value = value;
+                var attribute = factory.CreateFunction<FieldFunction>(descriptor.LabelDescriptor.PluginName, descriptor.LabelDescriptor.LabelName, name);
+                if (attribute != null)
+                {
+                    attribute.Name = name;
+                    attribute.Value = value;
+                }
+                return attribute;
             }
-            return attribute;
+            return null;
+
         }
     }
 }

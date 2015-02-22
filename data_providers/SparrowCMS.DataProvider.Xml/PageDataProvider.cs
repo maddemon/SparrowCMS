@@ -62,12 +62,16 @@ namespace SparrowCMS.DataProviders.Xml
         private Template GetTemplate(string templatePath, string layoutPath)
         {
             var filePath = Path.Combine(Environment.CurrentDirectory, templatePath);
-            var templateContent = File.ReadAllText(templatePath);
-
-            if (!string.IsNullOrEmpty(layoutPath))
+            var templateContent = string.Empty;
+            if (File.Exists(filePath))
             {
-                var layoutContent = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, layoutPath));
-                templateContent = layoutContent.Replace("%body%", templateContent);
+                templateContent = File.ReadAllText(templatePath);
+
+                if (!string.IsNullOrEmpty(layoutPath))
+                {
+                    var layoutContent = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, layoutPath));
+                    templateContent = layoutContent.Replace("%body%", templateContent);
+                }
             }
 
             return new Template

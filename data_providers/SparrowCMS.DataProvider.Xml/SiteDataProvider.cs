@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using SparrowCMS.DataProviders;
 
-namespace SparrowCMS.DataProvider.File
+namespace SparrowCMS.DataProvider.Xml
 {
-    internal class SiteDataProvider : ISiteDataProvider
+    public class SiteDataProvider : ISiteDataProvider
     {
         public List<Models.Site> GetSites()
         {

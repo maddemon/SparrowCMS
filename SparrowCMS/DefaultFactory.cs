@@ -11,25 +11,22 @@ namespace SparrowCMS
         T CreateInstance<T>(string fullName);
     }
 
+    /// <summary>
+    /// 搜索类型,顺序不能更改
+    /// </summary>
+    public enum SearchType
+    {
+        Function, Parameter, Field, Label, Api, Unknown
+    }
+
     public class DefaultFactory : IFactory
     {
-        public enum SearchType
-        {
-            Unknown, Api, Label, Field, Parameter, Function
-        }
-
-        protected AssemblyManager AssemblyManager;
-
-        public DefaultFactory()
-        {
-            AssemblyManager = CMSContext.Current.Core.AssemblyManager;
-        }
+        private ManagerCore Core = ManagerCore.Instance;
 
         protected virtual string[] GetFullNames(string fullName, SearchType searchType)
         {
-            var dotIndex = fullName.LastIndexOf('.');
-            var parentName = fullName.Substring(0, dotIndex == -1 ? fullName.Length : dotIndex);
-            var className = fullName.Substring(dotIndex + 1);
+            var parentName = fullName.Split('.')[0];
+            var className = fullName.Split('.')[1];
             var searchName = string.Empty;
             switch (searchType)
             {
@@ -74,7 +71,7 @@ namespace SparrowCMS
             var fullNames = GetFullNames(classFullName, searchType);
             foreach (var fullName in fullNames)
             {
-                var type = AssemblyManager.Search(fullName);
+                var type = Search(fullName);
                 if (type != null)
                 {
                     return Activator.CreateInstance<T>();

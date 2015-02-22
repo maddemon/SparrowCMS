@@ -8,9 +8,8 @@ using SparrowCMS.Models;
 
 namespace SparrowCMS.Managers
 {
-    public class AssemblyManager : ManagerBase
+    public class AssemblyManager
     {
-
         private List<ClassDescriptor> _descriptors = new List<ClassDescriptor>();
 
         public class ClassDescriptor
@@ -89,11 +88,11 @@ namespace SparrowCMS.Managers
             }
         }
 
-        public Type Search(string fullName)
+        private Type Search(string fullName)
         {
             foreach (var desc in _descriptors)
             {
-                if (desc.AliasName.ToLower() == fullName.ToLower())
+                if (!string.IsNullOrEmpty(desc.AliasName) && desc.AliasName.ToLower() == fullName.ToLower())
                 {
                     return desc.ClassType;
                 }
@@ -104,5 +103,19 @@ namespace SparrowCMS.Managers
             }
             return null;
         }
+
+        public T CreateInstance<T>(string[] fullNames)
+        {
+            foreach (var fullName in fullNames)
+            {
+                var type = Search(fullName);
+                if (type != null)
+                {
+                    return Activator.CreateInstance<T>();
+                }
+            }
+            return default(T);
+        }
+
     }
 }

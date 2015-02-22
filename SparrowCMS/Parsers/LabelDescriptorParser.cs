@@ -35,14 +35,14 @@ namespace SparrowCMS.Parsers
                 InnerHtml = match.Groups["inner"].Value,
             };
 
-            desc.Parameters = LabelParameterParser.FindAll(desc, parameters);
+            LabelParameterParser.FindAll(desc, parameters);
 
             if (string.IsNullOrEmpty(desc.InnerHtml))
             {
                 return desc;
             }
 
-            desc.FieldDescriptors = FieldDescriptorParser.FindAll(desc, desc.InnerHtml);
+            FieldDescriptorParser.FindAll(desc, desc.InnerHtml);
 
             //desc.InnerLabelDescriptions = Parse(desc.InnerHtml);
 

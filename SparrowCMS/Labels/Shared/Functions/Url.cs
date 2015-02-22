@@ -12,7 +12,7 @@ namespace SparrowCMS.Labels.Shared.Functions
         /// </summary>
         /// <param name="literalValue">Url(Id)</param>
         /// <returns></returns>
-        public string GetParameterValue(string literalValue)
+        public string GetValue(string literalValue)
         {
             var name = literalValue.Substring(literalValue.IndexOf('(') + 1).TrimEnd(')');
 

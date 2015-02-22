@@ -7,6 +7,6 @@ namespace SparrowCMS.Managers
 {
     public class ManagerBase
     {
-        protected readonly CoreManager Core = CoreManager.GetInstance();
+        protected readonly ManagerCore Core = ManagerCore.Instance;
     }
 }

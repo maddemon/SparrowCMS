@@ -13,13 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data_providers", "data_prov
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{94C2A17B-7D8E-4FED-A613-C9AB4B5D9D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Test", "tests\SparrowCMS.Test\SparrowCMS.Test.csproj", "{43ACA76D-5DFC-4EF7-99F9-A2614B7AB654}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Plugin.Article", "plugins\SparrowCMS.Plugin.Article\SparrowCMS.Plugin.Article.csproj", "{709357D0-A45E-4126-AB2D-2E96F640EE12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.DataProvider.SqlServer", "data_providers\SparrowCMS.DataProvider.SqlServer\SparrowCMS.DataProvider.SqlServer.csproj", "{100D8A6A-1B56-40FB-B16A-B782C0AE4E88}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.DataProvider.Xml", "data_providers\SparrowCMS.DataProvider.Xml\SparrowCMS.DataProvider.Xml.csproj", "{2F724797-7A50-4C4A-931E-D2DF604EA91B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SparrowCMS.Test", "SparrowCMS.Test\SparrowCMS.Test.csproj", "{C8279C32-423F-4DD0-BAF1-A385010D1366}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,6 @@ Global
 		{84E73B8F-3D7A-4EC8-91F2-492C7BE0DFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84E73B8F-3D7A-4EC8-91F2-492C7BE0DFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84E73B8F-3D7A-4EC8-91F2-492C7BE0DFCE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43ACA76D-5DFC-4EF7-99F9-A2614B7AB654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43ACA76D-5DFC-4EF7-99F9-A2614B7AB654}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43ACA76D-5DFC-4EF7-99F9-A2614B7AB654}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43ACA76D-5DFC-4EF7-99F9-A2614B7AB654}.Release|Any CPU.Build.0 = Release|Any CPU
 		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{709357D0-A45E-4126-AB2D-2E96F640EE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,12 +47,15 @@ Global
 		{2F724797-7A50-4C4A-931E-D2DF604EA91B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F724797-7A50-4C4A-931E-D2DF604EA91B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F724797-7A50-4C4A-931E-D2DF604EA91B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8279C32-423F-4DD0-BAF1-A385010D1366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8279C32-423F-4DD0-BAF1-A385010D1366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8279C32-423F-4DD0-BAF1-A385010D1366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8279C32-423F-4DD0-BAF1-A385010D1366}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{43ACA76D-5DFC-4EF7-99F9-A2614B7AB654} = {94C2A17B-7D8E-4FED-A613-C9AB4B5D9D45}
 		{709357D0-A45E-4126-AB2D-2E96F640EE12} = {E0533D38-5E2B-4314-8DE0-A28D9BF56674}
 		{100D8A6A-1B56-40FB-B16A-B782C0AE4E88} = {F2F46165-AED5-4DC6-9039-5351C100B547}
 		{2F724797-7A50-4C4A-931E-D2DF604EA91B} = {F2F46165-AED5-4DC6-9039-5351C100B547}

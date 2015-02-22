@@ -22,12 +22,16 @@ namespace SparrowCMS
 
         private IApi GetApiInstance(string pluginName, string className)
         {
-            var apiInstance = CMSContext.Current.GetFactory(pluginName).CreateInstance<IApi>(className);
-            if (apiInstance == null)
+            var factories = FactoryManager.GetInstance().GetApiFactories();
+            foreach (var factory in factories)
             {
-                throw new HttpException(404, "Not found " + className + " API.");
+                var apiInstance = factory.CreateInstance(pluginName, className);
+                if (apiInstance != null)
+                {
+                    return apiInstance;
+                }
             }
-            return apiInstance;
+            return null;
         }
 
         private MethodInfo GetApiMethod(IApi api, string methodName)

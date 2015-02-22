@@ -5,19 +5,13 @@ using System.Text;
 
 namespace SparrowCMS.Managers
 {
-    public class CoreManager
+    public class ManagerCore
     {
-        private CoreManager()
+        private ManagerCore()
         {
 
         }
-
-        private static readonly CoreManager Instance = new CoreManager();
-
-        public static CoreManager GetInstance()
-        {
-            return Instance;
-        }
+        public static readonly ManagerCore Instance = new ManagerCore();
 
         private AssemblyManager _assemblyManager = new AssemblyManager();
         public AssemblyManager AssemblyManager
@@ -41,12 +35,6 @@ namespace SparrowCMS.Managers
         public PageManager PageManager
         {
             get { return _pageManager; }
-        }
-
-        private FactoryManager _factoryManager = new FactoryManager();
-        public FactoryManager FactoryManager
-        {
-            get { return _factoryManager; }
         }
 
     }

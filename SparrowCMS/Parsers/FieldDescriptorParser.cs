@@ -26,11 +26,11 @@ namespace SparrowCMS.Parsers
             return desc;
         }
 
-        public static IEnumerable<FieldDescriptor> FindAll(LabelDescriptor descriptor, string templateContent)
+        public static void FindAll(LabelDescriptor descriptor, string templateContent)
         {
             foreach (Match m in Regex.Matches(templateContent))
             {
-                yield return Parse(descriptor, m);
+                descriptor.FieldDescriptors.Add(Parse(descriptor, m));
             }
         }
     }

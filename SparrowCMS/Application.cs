@@ -12,8 +12,6 @@ namespace SparrowCMS
 {
     public class Application
     {
-        protected readonly CoreManager Core = CoreManager.GetInstance();
-
         public virtual void Init()
         {
             //加载对应的DataProvider，可以顺利读取数据
@@ -26,6 +24,7 @@ namespace SparrowCMS
             LoadFactories();
         }
 
+        private ManagerCore Core = ManagerCore.Instance;
 
         protected virtual void LoadDataProviders()
         {
@@ -34,14 +33,14 @@ namespace SparrowCMS
         }
 
         protected virtual void LoadPlugins()
-        { 
+        {
             //从plugins目录载入所有插件dll
             Core.PluginManager.LoadPulgins();
         }
 
         protected virtual void LoadFactories()
-        { 
-            
+        {
+
         }
 
     }

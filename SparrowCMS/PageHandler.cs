@@ -11,7 +11,7 @@ namespace SparrowCMS
         private void ProcessContext(HttpContext context)
         {
             //初始化该次请求的Context
-            CMSContext.Current.Init(context);
+            CMSContext.Current.Init(new  HttpContextWrapper(context));
             //输出当前请求页面替换后的内容
             //TODO:如果生成静态文件以后需要考虑输出静态文件的相关处理(1判断有效期  2生成和读取文件)
             context.Response.Write(CMSContext.Current.Page.GetReplacedContext());

@@ -21,18 +21,24 @@ namespace SparrowCMS
 
         public Document ViewData { get; set; }
 
-        public HttpContext HttpContext { get; set; }
+        public HttpContextBase HttpContext { get; set; }
 
-        public static CMSContext Current = new CMSContext();
-
-        public CoreManager Core { get; private set; }
-
-        private CMSContext()
+        private static CMSContext _current;
+        public static CMSContext Current
         {
-            Core = CoreManager.GetInstance();
+            get
+            {
+                if (_current == null)
+                {
+                    _current = new CMSContext();
+                }
+                return _current;
+            }
         }
 
-        public void Init(HttpContext context)
+        private ManagerCore Core = ManagerCore.Instance;
+
+        public void Init(HttpContextBase context)
         {
             //HttpContext
             Current.HttpContext = context;
@@ -73,10 +79,5 @@ namespace SparrowCMS
         //{
         //    return Current.RouteData[key];
         //}
-
-        internal IFactory GetFactory(string pluginName = null)
-        {
-            return Core.FactoryManager.GetFactory(pluginName);
-        }
     }
 }

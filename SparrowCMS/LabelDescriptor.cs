@@ -28,9 +28,9 @@ namespace SparrowCMS
 
         public Dictionary<string, LabelParameter> Parameters { get; set; }
 
-        public IEnumerable<FieldDescriptor> FieldDescriptors { get; set; }
+        public List<FieldDescriptor> FieldDescriptors { get; set; }
 
-        public IEnumerable<LabelDescriptor> InnerLabelDescriptors { get; set; }
+        public List<LabelDescriptor> InnerLabelDescriptors { get; set; }
 
         public string GetLabelClassFullName()
         {

@@ -10,24 +10,24 @@ namespace SparrowCMS
     {
         public virtual string Name { get; set; }
 
-        public virtual string Value { get; set; }
+        public virtual string RawValue { get; set; }
 
         public virtual IParameterFunction Function { get; set; }
 
-        public virtual object ConvertParameterValue(Type type)
+        public virtual object GetFinalValue(Type type)
         {
-            var value = Value;
+            var result = RawValue;
             if (Function != null)
             {
-                value = Function.GetParameterValue(Value);
+                result = Function.GetValue(RawValue);
             }
 
-            if (string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(result))
             {
                 return type.GetDefaultValue();
             }
 
-            return Convert.ChangeType(value, type);
+            return Convert.ChangeType(result, type);
         }
     }
 }
