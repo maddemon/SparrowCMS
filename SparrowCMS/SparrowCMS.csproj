@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiFactory.cs" />
+    <Compile Include="ApiBuilder.cs" />
     <Compile Include="Apis\Page.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Attributes\FieldFlagAttribute.cs" />
@@ -70,17 +70,16 @@
     <Compile Include="Exceptions\ExceptionBase.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
     <Compile Include="Exceptions\SiteNotFoundException.cs" />
-    <Compile Include="Factories\APIFactory.cs" />
-    <Compile Include="Factories\LabelFactory.cs" />
+    <Compile Include="DefaultFactory.cs" />
     <Compile Include="LabelUtils.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
     <Compile Include="Managers\CoreManager.cs" />
+    <Compile Include="Managers\FactoryManager.cs" />
     <Compile Include="Managers\ManagerBase.cs" />
     <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Managers\PluginManager.cs" />
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Models\Document.cs" />
-    <Compile Include="Factory.cs" />
     <Compile Include="CMSContext.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FieldBuilder.cs" />
@@ -122,6 +121,7 @@
     <Compile Include="LabelParameter.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="PageHandler.cs" />
+    <Compile Include="Parsers\LabelParameterFunctionParser.cs" />
     <Compile Include="Parsers\LabelParameterParser.cs" />
     <Compile Include="Parsers\LabelDescriptorParser.cs" />
     <Compile Include="Models\PluginCollection.cs" />
@@ -133,7 +133,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Descriptors\" />
+    <Folder Include="Factories\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

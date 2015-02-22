@@ -65,7 +65,7 @@ namespace SparrowCMS.Labels.Shared
             var rowTemplate = GetRepeatTemplate(innerHtml);
             foreach (var row in _rows)
             {
-                repeatResult += this.GetRelacedModelContent(rowTemplate, row, Fields);
+                repeatResult += this.GetReplacedModelContent(rowTemplate, row, Fields);
 
             }
 

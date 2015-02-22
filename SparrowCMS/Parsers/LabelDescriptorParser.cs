@@ -32,16 +32,17 @@ namespace SparrowCMS.Parsers
                 LabelName = labelName,
                 ClassName = className,
                 TemplateContent = match.Groups[0].Value,
-                Parameters = LabelParameterParser.FindAll(labelName, parameters),
-                InnerHtml = match.Groups["inner"].Value
+                InnerHtml = match.Groups["inner"].Value,
             };
+
+            desc.Parameters = LabelParameterParser.FindAll(desc, parameters);
 
             if (string.IsNullOrEmpty(desc.InnerHtml))
             {
                 return desc;
             }
 
-            desc.FieldDescriptors = FieldDescriptorParser.FindAll(labelName, desc.InnerHtml);
+            desc.FieldDescriptors = FieldDescriptorParser.FindAll(desc, desc.InnerHtml);
 
             //desc.InnerLabelDescriptions = Parse(desc.InnerHtml);
 

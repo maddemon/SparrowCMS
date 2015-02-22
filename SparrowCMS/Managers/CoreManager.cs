@@ -43,5 +43,11 @@ namespace SparrowCMS.Managers
             get { return _pageManager; }
         }
 
+        private FactoryManager _factoryManager = new FactoryManager();
+        public FactoryManager FactoryManager
+        {
+            get { return _factoryManager; }
+        }
+
     }
 }

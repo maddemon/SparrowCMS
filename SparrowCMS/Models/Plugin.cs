@@ -26,23 +26,23 @@ namespace SparrowCMS.Models
 
         public PluginStatus Status { get; set; }
 
-        public void LoadDll()
-        {
-            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, EnName);
-            var dirs = Directory.GetDirectories(pluginPath);
-            if (dirs.Contains("bin"))
-            {
-                pluginPath = Path.Combine(pluginPath, "bin");
-            }
-            foreach (var fileName in Directory.GetFiles(pluginPath))
-            {
-                if (fileName.EndsWith("dll"))
-                {
-                    var filePath = Path.Combine(pluginPath, fileName);
-                    Assembly.LoadFile(filePath);
-                }
-            }
-        }
+        //public void LoadDll()
+        //{
+        //    var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, EnName);
+        //    var dirs = Directory.GetDirectories(pluginPath);
+        //    if (dirs.Contains("bin"))
+        //    {
+        //        pluginPath = Path.Combine(pluginPath, "bin");
+        //    }
+        //    foreach (var fileName in Directory.GetFiles(pluginPath))
+        //    {
+        //        if (fileName.EndsWith("dll"))
+        //        {
+        //            var filePath = Path.Combine(pluginPath, fileName);
+        //            Assembly.LoadFile(filePath);
+        //        }
+        //    }
+        //}
 
     }
 

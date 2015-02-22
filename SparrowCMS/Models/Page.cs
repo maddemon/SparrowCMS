@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace SparrowCMS.Models
 {
@@ -36,17 +38,22 @@ namespace SparrowCMS.Models
             return Template.GetReplacedContent();
         }
 
-        private bool _initialized;
-        internal void Init(CMSContext context)
-        {
-            if (_initialized)
-            {
-                return;
-            }
+        //public NameValueCollection GetRouteData(HttpContext context)
+        //{
+        //    return UrlRoute.GetRouteData(context);
+        //}
 
-            context.RouteData = UrlRoute.GetRouteData(context.HttpContext);
+        //private bool _initialized;
+        //internal void Init(CMSContext context)
+        //{
+        //    if (_initialized)
+        //    {
+        //        return;
+        //    }
 
-            _initialized = true;
-        }
+        //    context.RouteData = UrlRoute.GetRouteData(context.HttpContext);
+
+        //    _initialized = true;
+        //}
     }
 }

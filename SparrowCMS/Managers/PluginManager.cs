@@ -19,7 +19,7 @@ namespace SparrowCMS.Managers
         {
             foreach (var plugin in GetPlugins())
             {
-                plugin.LoadDll();
+                Core.AssemblyManager.LoadDll(plugin);
             }
         }
     }

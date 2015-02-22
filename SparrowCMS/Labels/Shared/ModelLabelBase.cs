@@ -15,7 +15,7 @@ namespace SparrowCMS.Labels.Shared
         {
             var data = GetData();
 
-            return this.GetRelacedModelContent(innerHtml, data, Fields);
+            return this.GetReplacedModelContent(innerHtml, data, Fields);
         }
     }
 }

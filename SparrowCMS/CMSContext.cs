@@ -25,10 +25,11 @@ namespace SparrowCMS
 
         public static CMSContext Current = new CMSContext();
 
-        private readonly CoreManager Core = CoreManager.GetInstance();
+        public CoreManager Core { get; private set; }
 
         private CMSContext()
         {
+            Core = CoreManager.GetInstance();
         }
 
         public void Init(HttpContext context)
@@ -48,7 +49,7 @@ namespace SparrowCMS
                 throw new PageNotFoundException();
             }
             //页面初始化工作
-            page.Init(Current);
+            //page.Init(Current);
             //赋值给Context
             Current.Page = page;
             //获取RouteData
@@ -72,5 +73,10 @@ namespace SparrowCMS
         //{
         //    return Current.RouteData[key];
         //}
+
+        internal IFactory GetFactory(string pluginName = null)
+        {
+            return Core.FactoryManager.GetFactory(pluginName);
+        }
     }
 }

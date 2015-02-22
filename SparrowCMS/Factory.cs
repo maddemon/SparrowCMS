@@ -13,11 +13,10 @@ namespace SparrowCMS
 
         internal enum ClassType
         {
-            Parameter,
-            Function,
-            Attribute,
             Unknown,
             Label,
+            Parameter,
+            Function,
             Field,
             Api
         }
@@ -36,8 +35,33 @@ namespace SparrowCMS
                 return ClassType.Unknown;
             }
 
-            public static IEnumerable<string> GetNamespaces(ClassType classType, string parentName, string className)
+            public static string[] GetNamespaces(ClassType classType, string labelName, string className)
             {
+                var pluginName = labelName;
+                var dotIndex = labelName.IndexOf('.');
+                if (dotIndex > -1)
+                {
+                    pluginName = labelName.Substring(0, dotIndex);
+                }
+                dotIndex = labelName.LastIndexOf('.');
+                var parentName = labelName;
+                if (labelName.Contains(className))
+                {
+                    parentName = labelName.Substring(0, dotIndex);
+                }
+                switch (classType)
+                {
+                    case ClassType.Unknown:
+                        return null;
+                    case ClassType.Api:
+                        return new string[]
+                        {
+                            string.Format("{0}.Apis.{1}",pluginName , className),
+                            string.Format("{0}.Shared.Apis.{1}",parentName , className),
+                            string.Format("SparrowCMS.Apis.{0}",parentName),
+                            string.Format("SparrowCMS.Apis.{0}.{1}",parentName,className),
+                        };
+                }
                 if (classType == ClassType.Unknown) return null;
                 if (classType == ClassType.Api)
                 {
@@ -48,28 +72,15 @@ namespace SparrowCMS
                 };
                 }
 
-                if (classType == ClassType.Label)
+                return new string[]
                 {
-                    return new List<string>
-                {
-                   //string.Format("{0}",parentName),
-                   string.Format("{0}.{1}",parentName , className),
-                   string.Format("{0}.Labels.{1}",parentName , className),
-                   string.Format("{0}.Shared.Labels.{1}",parentName , className),
-                   string.Format("SparrowCMS.Labels.{0}",parentName),
-                   string.Format("SparrowCMS.Labels.{0}.{1}",parentName,className),
-                   string.Format("SparrowCMS.Shared.Labels.{0}",parentName),
-                   string.Format("SparrowCMS.Shared.Labels.{0}.{1}",parentName,className)
+                    string.Format("{0}.{2}s.{1}",parentName , className),
+                    string.Format("{0}.Shared.{2}s.{1}",parentName , className),
+                    string.Format("SparrowCMS.{2}s.{0}",parentName),
+                    string.Format("SparrowCMS.{2}s.{0}.{1}",parentName,className),
+                    string.Format("SparrowCMS.Shared.{2}s.{0}",parentName),
+                    string.Format("SparrowCMS.Shared.{2}s.{0}.{1}",parentName,className)
                 };
-                }
-
-                return new List<string>
-            {
-                string.Format("{0}.{1}s.{2}",parentName ,classType , className),
-                string.Format("{0}.Shared.{1}s.{2}",parentName , classType , className),
-                string.Format("SparrowCMS.Labels.{0}.{1}s.{2}" , parentName , classType , className),
-                string.Format("SparrowCMS.Labels.Shared.{0}s.{1}",classType , className),
-            };
 
             }
         }

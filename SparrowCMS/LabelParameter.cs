@@ -12,7 +12,7 @@ namespace SparrowCMS
 
         public virtual string Value { get; set; }
 
-        public virtual ILabelParameterFunction Function { get; set; }
+        public virtual IParameterFunction Function { get; set; }
 
         public virtual object ConvertParameterValue(Type type)
         {

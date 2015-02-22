@@ -9,15 +9,14 @@ namespace SparrowCMS
 {
     public class LabelBuilder
     {
-        public static ILabel Build(LabelDescriptor labelDescription)
+        public static ILabel Build(LabelDescriptor descriptor)
         {
-            //通过LabelFactory获取对应的Label类实例对象.
-            var label = Factory.Instance.GetInstance<ILabel>(labelDescription.LabelName, labelDescription.ClassName);
+            var label = CMSContext.Current.GetFactory(descriptor.PluginName).CreateInstance<ILabel>(descriptor.GetLabelClassFullName());
             if (label != null)
             {
                 //SetInnerLabel(label, labelDescription);
-                SetParameters(label, labelDescription);
-                SetFields(label, labelDescription);
+                SetParameters(label, descriptor);
+                SetFields(label, descriptor);
             }
             return label;
         }

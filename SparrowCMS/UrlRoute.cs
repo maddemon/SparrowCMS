@@ -31,6 +31,11 @@ namespace SparrowCMS
             return _urlRegex.IsMatch(requestPath);
         }
 
+        /// <summary>
+        /// 需要从Path\QueryString\Form里获取数据
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public NameValueCollection GetRouteData(HttpContext context)
         {
             var data = new NameValueCollection();

@@ -7,21 +7,22 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using SparrowCMS.Common;
+using SparrowCMS.Managers;
 
 namespace SparrowCMS
 {
-    public class ApiFactory
+    public class ApiBuilder
     {
-        public static object Invoke(string pluginName, string className, string methodName, string dataType)
+        public object Invoke(string pluginName, string className, string methodName, string dataType)
         {
             var api = GetApiInstance(pluginName, className);
             var method = GetApiMethod(api, methodName);
             return InvokeApi(api, method, dataType);
         }
 
-        private static IApi GetApiInstance(string pluginName, string className)
+        private IApi GetApiInstance(string pluginName, string className)
         {
-            var apiInstance = Factory.Instance.GetInstance<IApi>(pluginName, className);
+            var apiInstance = CMSContext.Current.GetFactory(pluginName).CreateInstance<IApi>(className);
             if (apiInstance == null)
             {
                 throw new HttpException(404, "Not found " + className + " API.");
@@ -29,7 +30,7 @@ namespace SparrowCMS
             return apiInstance;
         }
 
-        private static MethodInfo GetApiMethod(IApi api, string methodName)
+        private MethodInfo GetApiMethod(IApi api, string methodName)
         {
             var method = api.GetType().GetMethods().FirstOrDefault(e => e.Name.ToLower() == methodName.ToLower());
             if (method == null)
@@ -39,7 +40,7 @@ namespace SparrowCMS
             return method;
         }
 
-        private static string GetPostData()
+        private string GetPostData()
         {
             using (var sr = new StreamReader(CMSContext.Current.HttpContext.Request.InputStream))
             {
@@ -47,12 +48,12 @@ namespace SparrowCMS
             }
         }
 
-        private static IEnumerable<string> GetRequestAllKeys()
+        private IEnumerable<string> GetRequestAllKeys()
         {
             return CMSContext.Current.RouteData.AllKeys;
         }
 
-        private static object GetBasicParameterValue(ParameterInfo p)
+        private object GetBasicParameterValue(ParameterInfo p)
         {
             object pValue = null;
             if (CMSContext.Current.RouteData.AllKeys.Contains(p.Name.ToLower()))
@@ -66,7 +67,7 @@ namespace SparrowCMS
             return pValue;
         }
 
-        private static object InvokeApi(IApi api, MethodInfo apiMethod, string dataType)
+        private object InvokeApi(IApi api, MethodInfo apiMethod, string dataType)
         {
             var parameters = new List<object>();
             var allKeys = GetRequestAllKeys();

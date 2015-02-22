@@ -20,6 +20,8 @@ namespace SparrowCMS
 
         public string ClassName { get; set; }
 
+        public string PluginName { get; set; }
+
         public string TemplateContent { get; set; }
 
         public string InnerHtml { get; set; }
@@ -29,5 +31,14 @@ namespace SparrowCMS
         public IEnumerable<FieldDescriptor> FieldDescriptors { get; set; }
 
         public IEnumerable<LabelDescriptor> InnerLabelDescriptors { get; set; }
+
+        public string GetLabelClassFullName()
+        {
+            if (LabelName.EndsWith(ClassName))
+            {
+                return LabelName;
+            }
+            return LabelName + "." + ClassName;
+        }
     }
 }

@@ -45,12 +45,14 @@ namespace SparrowCMS.Labels
             }
         }
 
+        private static readonly ApiBuilder ApiBuilder = new ApiBuilder();
+
         public string GetReplacedContent(string innerHtml)
         {
             try
             {
                 SetApiNames(); 
-                var result = ApiFactory.Invoke(Plugin, _apiName, _methodName, DataType);
+                var result = ApiBuilder.Invoke(Plugin, _apiName, _methodName, DataType);
 
                 return Newtonsoft.Json.JsonConvert.SerializeObject(result);
             }
