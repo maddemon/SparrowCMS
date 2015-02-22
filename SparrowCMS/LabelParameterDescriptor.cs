@@ -6,7 +6,7 @@ using SparrowCMS.Common;
 
 namespace SparrowCMS
 {
-    public class LabelParameter
+    public class LabelParameterDescriptor
     {
         public virtual string Name { get; set; }
 

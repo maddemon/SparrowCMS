@@ -14,19 +14,14 @@ namespace SparrowCMS
 
         public static ILabel Build(LabelDescriptor descriptor)
         {
-            var factories = FactoryManager.GetLabelFactories();
-            foreach (var factory in factories)
+            var label = FactoryUtils.CreateInstance<ILabel>(descriptor.LabelName, null);
+            if (label != null)
             {
-                var label = factory.CreateLabel(descriptor);
-                if (label != null)
-                {
-                    //SetInnerLabel(label, labelDescription);
-                    SetParameters(label, descriptor);
-                    SetFields(label, descriptor);
-                }
-                return label;
+                //SetInnerLabel(label, labelDescription);
+                SetParameters(label, descriptor);
+                SetFields(label, descriptor);
             }
-            return null;
+            return label;
         }
 
         private static void SetInnerLabel(ILabel label, LabelDescriptor labelDescription)
@@ -57,9 +52,9 @@ namespace SparrowCMS
                 if (attribute != null) continue;
 
                 //如果descriptor的参数里包含了该属性名称,则为label实例的参数
-                if (labelDescription.Parameters.ContainsKey(p.Name.ToLower()))
+                if (labelDescription.ParameterDescriptors.ContainsKey(p.Name.ToLower()))
                 {
-                    var parameter = labelDescription.Parameters[p.Name.ToLower()];
+                    var parameter = labelDescription.ParameterDescriptors[p.Name.ToLower()];
                     p.SetValue(label, parameter.GetFinalValue(p.PropertyType), null);
                 }
             }

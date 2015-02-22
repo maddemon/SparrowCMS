@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -17,36 +18,19 @@ namespace SparrowCMS.Parsers
 
             var labelName = match.Groups["name"].Value;
             //label类的名称默认是Default,比如有些labelName并不包含.符号 ,例如{Test /},则实际类名为Test.Default
-            var className = "Default";
             var parameters = match.Groups["parameters"].Value;
-            var dotIndex = labelName.LastIndexOf('.');
-            if (dotIndex > -1)
-            {
-                className = labelName.Substring(dotIndex + 1);
-                //labelName = labelName.Substring(0, dotIndex);
-            }
 
-            var desc = new LabelDescriptor
+            var innerHtml =  match.Groups["inner"].Value;
+
+            return new LabelDescriptor
             {
                 ID = Guid.NewGuid().ToString(),
                 LabelName = labelName,
-                ClassName = className,
                 TemplateContent = match.Groups[0].Value,
-                InnerHtml = match.Groups["inner"].Value,
+                InnerHtml = innerHtml,
+                ParameterDescriptors = LabelParameterDescriptorParser.FindAll(labelName,parameters),
+                FieldDescriptors = FieldDescriptorParser.FindAll(labelName, innerHtml).ToList(),
             };
-
-            LabelParameterParser.FindAll(desc, parameters);
-
-            if (string.IsNullOrEmpty(desc.InnerHtml))
-            {
-                return desc;
-            }
-
-            FieldDescriptorParser.FindAll(desc, desc.InnerHtml);
-
-            //desc.InnerLabelDescriptions = Parse(desc.InnerHtml);
-
-            return desc;
         }
 
         /// <summary>

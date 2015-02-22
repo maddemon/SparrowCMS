@@ -13,21 +13,12 @@ namespace SparrowCMS.Parsers
 
         private FactoryManager FactoryManager = FactoryManager.GetInstance();
 
-        public static IParameterFunction Parse(LabelDescriptor descriptor, string parameterRawValue)
+        public static IParameterFunction Parse(string labelName, string parameterRawValue)
         {
             var match = ParameterFunctionRegex.Match(parameterRawValue);
             if (match == null || match.Groups.Count <= 1) return null;
-            var factories = FactoryManager.GetInstance().GetFunctionFactories();
             var name = match.Groups["name"].Value;
-            foreach (var factory in factories)
-            {
-                var func = factory.CreateFunction<IParameterFunction>(descriptor.PluginName, descriptor.LabelName, name);
-                if (func != null)
-                {
-                    return func;
-                }
-            }
-            return null;
+            return FactoryUtils.CreateInstance<IParameterFunction>(labelName, name);
         }
 
     }

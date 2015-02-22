@@ -25,7 +25,7 @@ namespace SparrowCMS.Test
             var systemLabel = labels[0];
 
             Assert.AreEqual("System", systemLabel.LabelName);
-            var p1 = systemLabel.Parameters["name"];
+            var p1 = systemLabel.ParameterDescriptors["name"];
             Assert.AreEqual("test", p1.RawValue);
         }
 

@@ -19,17 +19,17 @@ namespace SparrowCMS.Managers
             return new List<ILabelFactory>() { new DefaultLabelFactory() };
         }
 
-        public List<IFieldFactory> GetFieldFactories()
-        {
-            //TODO
-            return new List<IFieldFactory>() { new DefaultFieldFactory() };
-        }
+        //public List<IFieldFactory> GetFieldFactories()
+        //{
+        //    //TODO
+        //    return new List<IFieldFactory>() { new DefaultFieldFactory() };
+        //}
 
-        public List<IFunctionFactory> GetFunctionFactories()
-        {
-            //TODO
-            return new List<IFunctionFactory>() { new DefaultFunctionFactory() };
-        }
+        //public List<IFunctionFactory> GetFunctionFactories()
+        //{
+        //    //TODO
+        //    return new List<IFunctionFactory>() { new DefaultFunctionFactory() };
+        //}
 
         public List<IApiFactory> GetApiFactories()
         {

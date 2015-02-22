@@ -37,18 +37,13 @@ namespace SparrowCMS.Parsers
             var name = m.Groups["name"].Value;
             var value = m.Groups["value"].Value;
 
-            var factories = FactoryManager.GetInstance().GetFunctionFactories();
-            foreach (var factory in factories)
+            var func = FactoryUtils.CreateInstance<FieldFunction>(descriptor.LabelName, name);
+            if (func != null)
             {
-                var attribute = factory.CreateFunction<FieldFunction>(descriptor.LabelDescriptor.PluginName, descriptor.LabelDescriptor.LabelName, name);
-                if (attribute != null)
-                {
-                    attribute.Name = name;
-                    attribute.Value = value;
-                }
-                return attribute;
+                func.Name = name;
+                func.Value = value;
             }
-            return null;
+            return func;
 
         }
     }

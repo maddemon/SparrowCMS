@@ -7,7 +7,7 @@ namespace SparrowCMS.Parsers
     {
         //(?<!@)@((?<name>(\w+))|(\((?<name>\w+)(?<parameters>(\s\w+\s?=\s?("[^"]+"|[^\s]+))*)\)))
         private static readonly Regex Regex = new Regex(@"(?<!@)@((?<name>([\w\.\-]+))|(\((?<name>[\w\.\-]+)(?<function>(\s\w+\s?=\s?(""[^""]+""|[^\s]+))*)\)))", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        private static FieldDescriptor Parse(LabelDescriptor descriptor, Match match)
+        private static FieldDescriptor Parse(string labelName, Match match)
         {
             if (match == null)
             {
@@ -18,7 +18,7 @@ namespace SparrowCMS.Parsers
 
             var desc = new FieldDescriptor
             {
-                LabelDescriptor = descriptor,
+                LabelName = labelName,
                 FieldName = fieldName,
                 TemplateContent = match.Groups[0].Value,
             };
@@ -26,11 +26,11 @@ namespace SparrowCMS.Parsers
             return desc;
         }
 
-        public static void FindAll(LabelDescriptor descriptor, string templateContent)
+        public static IEnumerable<FieldDescriptor> FindAll(string labelName, string templateContent)
         {
             foreach (Match m in Regex.Matches(templateContent))
             {
-                descriptor.FieldDescriptors.Add(Parse(descriptor, m));
+                yield return Parse(labelName, m);
             }
         }
     }

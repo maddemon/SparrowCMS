@@ -9,7 +9,7 @@ namespace SparrowCMS
     {
         public LabelDescriptor()
         {
-            Parameters = new Dictionary<string, LabelParameter>();
+            ParameterDescriptors = new Dictionary<string, LabelParameterDescriptor>();
             FieldDescriptors = new List<FieldDescriptor>();
             InnerLabelDescriptors = new List<LabelDescriptor>();
         }
@@ -26,7 +26,7 @@ namespace SparrowCMS
 
         public string InnerHtml { get; set; }
 
-        public Dictionary<string, LabelParameter> Parameters { get; set; }
+        public Dictionary<string, LabelParameterDescriptor> ParameterDescriptors { get; set; }
 
         public List<FieldDescriptor> FieldDescriptors { get; set; }
 

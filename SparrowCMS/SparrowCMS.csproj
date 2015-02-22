@@ -72,9 +72,9 @@
     <Compile Include="Exceptions\SiteNotFoundException.cs" />
     <Compile Include="Factories\DefaultApiFactory.cs" />
     <Compile Include="Factories\DefaultLabelFactory.cs" />
-    <Compile Include="Factories\DefaultFieldFactory.cs" />
-    <Compile Include="Factories\DefaultFunctionFactory.cs" />
-    <Compile Include="Factories\LabelFactoryHelper.cs" />
+    <Compile Include="Factories\LabelFactoryHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LabelUtils.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
     <Compile Include="Managers\ManagerCore.cs" />
@@ -106,9 +106,9 @@
     <Compile Include="Labels\Shared\ModelLabelBase.cs" />
     <Compile Include="Labels\Shared\Functions\Url.cs" />
     <Compile Include="Labels\Shared\ListLabelBase.cs" />
-    <Compile Include="Labels\Shared\Attributes\DateFormat.cs" />
-    <Compile Include="Labels\Shared\Attributes\Format.cs" />
-    <Compile Include="Labels\Shared\Attributes\MaxLength.cs" />
+    <Compile Include="Labels\Shared\Functions\DateFormat.cs" />
+    <Compile Include="Labels\Shared\Functions\Format.cs" />
+    <Compile Include="Labels\Shared\Functions\MaxLength.cs" />
     <Compile Include="Labels\System.cs" />
     <Compile Include="Common\RemoteCache.cs" />
     <Compile Include="Models\ApiResult.cs" />
@@ -122,11 +122,11 @@
     <Compile Include="Parsers\FieldFunctionParser.cs" />
     <Compile Include="Parsers\FieldDescriptorParser.cs" />
     <Compile Include="ILabel.cs" />
-    <Compile Include="LabelParameter.cs" />
+    <Compile Include="LabelParameterDescriptor.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="PageHandler.cs" />
     <Compile Include="Parsers\LabelParameterFunctionParser.cs" />
-    <Compile Include="Parsers\LabelParameterParser.cs" />
+    <Compile Include="Parsers\LabelParameterDescriptorParser.cs" />
     <Compile Include="Parsers\LabelDescriptorParser.cs" />
     <Compile Include="Models\PluginCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

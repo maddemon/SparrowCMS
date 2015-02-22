@@ -7,7 +7,7 @@ namespace SparrowCMS
 {
     public class FieldDescriptor
     {
-        public LabelDescriptor LabelDescriptor { get; set; }
+        public string LabelName { get; set; }
 
         public string TemplateContent { get; set; }
 
@@ -17,12 +17,12 @@ namespace SparrowCMS
 
         public string GetFieldClassFullName()
         {
-            return LabelDescriptor.LabelName + ".Fields." + FieldName;
+            return LabelName + ".Fields." + FieldName;
         }
 
         public string GetFunctionClassFullName(string functionName)
         {
-            return LabelDescriptor.LabelName + ".Functions." + functionName;
+            return LabelName + ".Functions." + functionName;
         }
     }
 }

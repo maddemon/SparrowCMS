@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SparrowCMS.Managers;
 
-namespace SparrowCMS.Factories
+namespace SparrowCMS
 {
-    public class LabelFactoryHelper
+    public class FactoryUtils
     {
-        public static string[] GetFullNames(string pluginName, string labelName, string className, string MemberType)
+        private static FactoryManager FactoryManager = new FactoryManager();
+
+        public static T CreateInstance<T>(string labelName, string className)
         {
-            return new string[]
-            { 
-                string.Format("{0}.Labels.{1}.{3}s.{2}",pluginName,labelName,className,MemberType ),
-                string.Format("{0}.Shared.Labels.{1}.{3}s.{2}",pluginName,labelName,className,MemberType ),
-                string.Format("SparrowCMS.Labels.{0}.{2}s.{1}",labelName,className,MemberType),
-                string.Format("SparrowCMS.Shared.Labels.{0}.{2}s.{1}",labelName,className,MemberType),
-            };
+            var factories = FactoryManager.GetLabelFactories();
+            foreach (var factory in factories)
+            {
+                var result = factory.CreateInstance<T>(labelName, className);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            return default(T);
         }
     }
 }
