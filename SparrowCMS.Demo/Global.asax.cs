@@ -9,10 +9,10 @@ namespace SparrowCMS.Demo.Web
 {
     public class Global : System.Web.HttpApplication
     {
-
         protected void Application_Start(object sender, EventArgs e)
         {
             Environment.CurrentDirectory = Server.MapPath("~/");
+            SparrowCMS.Application.Instance.Init();
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace SparrowCMS.Demo.Web
 
         protected void Application_End(object sender, EventArgs e)
         {
-
+            SparrowCMS.Application.Instance.Unload();
         }
     }
 }

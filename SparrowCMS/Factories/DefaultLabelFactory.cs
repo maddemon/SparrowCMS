@@ -62,13 +62,25 @@ namespace SparrowCMS.Factories
 
         protected virtual string[] GetLabelFullNames(string pluginName, string labelName)
         {
-            return new string[]
-            { 
-                string.Format("{0}.Labels.{1}",pluginName , labelName ),
-                string.Format("{0}.Shared.Labels.{1}",pluginName , labelName),
-                string.Format("SparrowCMS.Labels.{0}",pluginName+"."+labelName),
-                string.Format("SparrowCMS.Labels.{0}.{1}",labelName,labelName)
-            };
+            if (labelName == "Default")
+            {
+                return new string[]
+                { 
+                    string.Format("SparrowCMS.Labels.{0}" , pluginName),
+                    string.Format("SparrowCMS.Labels.{0}.{1}" , pluginName, labelName)
+                };
+            }
+            else
+            {
+                return new string[]
+                { 
+                    string.Format("{0}.Labels.{1}",pluginName , labelName),
+                    string.Format("{0}.Labels.{1}.Default",pluginName , labelName),
+                    string.Format("{0}.Shared.Labels.{1}",pluginName,labelName),
+                    string.Format("{0}.Shared.Labels.{1}.Default",pluginName,labelName),
+                    string.Format("SparrowCMS.Labels.{0}.{1}",pluginName,labelName)
+                };
+            }
         }
 
         protected virtual string[] GetFieldFullNames(string pluginName, string labelName, string fieldName)
@@ -76,20 +88,20 @@ namespace SparrowCMS.Factories
             return new string[]
             { 
                 string.Format("{0}.Labels.{1}.Fields.{2}",pluginName,labelName,fieldName ),
-                string.Format("{0}.Shared.Fields.{2}",pluginName,fieldName ),
-                string.Format("SparrowCMS.Labels.{0}.Fields.{1}",pluginName+"."+labelName,fieldName),
-                string.Format("SparrowCMS.Labels.Shared.Fields.{1}",fieldName),
+                string.Format("{0}.Shared.Fields.{1}",pluginName,fieldName ),
+                string.Format("SparrowCMS.Labels.{0}.{1}.Fields.{2}",pluginName,labelName,fieldName),
+                string.Format("SparrowCMS.Labels.Shared.Fields.{0}",fieldName),
             };
         }
 
-        protected virtual string[] GetFunctionFullNames(string pluginName, string labelName, string fieldName)
+        protected virtual string[] GetFunctionFullNames(string pluginName, string labelName, string functionName)
         {
             return new string[]
             { 
-                string.Format("{0}.Labels.{1}.Functions.{2}",pluginName,labelName,fieldName ),
-                string.Format("{0}.Shared.Functions.{2}",pluginName,labelName,fieldName ),
-                string.Format("SparrowCMS.Labels.{0}.Functions.{1}",pluginName+"."+labelName,fieldName),
-                string.Format("SparrowCMS.Labels.Shared.Functions.{1}",labelName,fieldName),
+                string.Format("{0}.Labels.{1}.Functions.{2}",pluginName,labelName,functionName ),
+                string.Format("{0}.Shared.Functions.{1}",pluginName,functionName ),
+                string.Format("SparrowCMS.Labels.{0}.{1}.Functions.{2}",pluginName,labelName,functionName),
+                string.Format("SparrowCMS.Labels.Shared.Functions.{0}",functionName),
             };
         }
 

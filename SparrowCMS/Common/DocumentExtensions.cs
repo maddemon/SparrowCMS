@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SparrowCMS.Attributes;
 
 namespace SparrowCMS.Common
 {
@@ -14,6 +15,11 @@ namespace SparrowCMS.Common
 
             foreach (var p in data.GetType().GetProperties())
             {
+                var attr = p.GetCustomAttributes(true).FirstOrDefault(e => e.GetType() == typeof(DocumentIgnoreAttribute));
+                if (attr != null)
+                {
+                    continue;
+                }
                 var value = p.GetValue(data, null);
                 if (value != null && !value.GetType().IsBasicType())
                 {
@@ -67,7 +73,7 @@ namespace SparrowCMS.Common
 
         public static bool IsBasicType(this Type type)
         {
-            return type.IsPrimitive  || type == typeof(string) || type.IsEnum || type == typeof(Guid);
+            return type.IsPrimitive || type == typeof(string) || type.IsEnum || type == typeof(Guid);
         }
     }
 

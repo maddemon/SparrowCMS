@@ -12,6 +12,8 @@ namespace SparrowCMS
 {
     public class Application
     {
+        public static readonly Application Instance = new Application();
+
         public virtual void Init()
         {
             //加载对应的DataProvider，可以顺利读取数据
@@ -24,18 +26,16 @@ namespace SparrowCMS
             LoadFactories();
         }
 
-        private ManagerCore Core = ManagerCore.Instance;
-
         protected virtual void LoadDataProviders()
         {
-            var dbType = AppSettings.Current["DbType"];
-            AppDomain.CurrentDomain.Load("SparrowCMS.DataProvider." + dbType + ".dll");
+            //var dbType = AppSettings.Current["DbType"];
+            //AppDomain.CurrentDomain.Load("SparrowCMS.DataProvider." + dbType + ".dll");
         }
 
         protected virtual void LoadPlugins()
         {
             //从plugins目录载入所有插件dll
-            Core.PluginManager.LoadPulgins();
+            new PluginManager().LoadPulgins();
         }
 
         protected virtual void LoadFactories()
@@ -43,5 +43,10 @@ namespace SparrowCMS
 
         }
 
+
+        public void Unload()
+        {
+            
+        }
     }
 }

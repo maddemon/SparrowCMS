@@ -107,6 +107,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\data_providers\SparrowCMS.DataProvider.Xml\SparrowCMS.DataProvider.Xml.csproj">
+      <Project>{2f724797-7a50-4c4a-931e-d2df604ea91b}</Project>
+      <Name>SparrowCMS.DataProvider.Xml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SparrowCMS\SparrowCMS.csproj">
       <Project>{59a060de-fa5b-4d64-8121-a93fb25b31e7}</Project>
       <Name>SparrowCMS</Name>
@@ -129,6 +133,10 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

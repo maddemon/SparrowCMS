@@ -49,20 +49,22 @@ namespace SparrowCMS.DataProviders.Xml
                 }
 
                 var templateElement = pageElement.Element("template");
-                var layout = templateElement.Attribute("layout") == null ? null : templateElement.Attribute("layout").Value;
-                page.Template = GetTemplate(templateElement.Value, layout);
+                page.Template = GetTemplate(templateElement);
                 result.Add(page);
             }
 
-            SaveConfigFile(result);
+            //SaveConfigFile(result);
 
             return result.OrderByDescending(e => e.UrlPattern).ToList();
         }
 
-        private Template GetTemplate(string templatePath, string layoutPath)
+        private Template GetTemplate(XElement templateElement)
         {
-            var filePath = Path.Combine(Environment.CurrentDirectory, templatePath);
+            var layoutPath = templateElement.Attribute("layout") == null ? null : templateElement.Attribute("layout").Value;
+            var templatePath = templateElement.Value;
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, templatePath);
             var templateContent = string.Empty;
+            System.Diagnostics.Trace.WriteLine("FilePath:" + filePath);
             if (File.Exists(filePath))
             {
                 templateContent = File.ReadAllText(templatePath);
@@ -76,7 +78,9 @@ namespace SparrowCMS.DataProviders.Xml
 
             return new Template
             {
+                FilePath = templatePath,
                 Content = templateContent,
+                Layout =  layoutPath
             };
         }
 
@@ -92,7 +96,7 @@ namespace SparrowCMS.DataProviders.Xml
                 node.Add(new XElement("role", page.Role));
                 node.Add(new XElement("url", page.UrlPattern));
 
-                var templateNode = new XElement("template", page.Template);
+                var templateNode = new XElement("template", page.Template.FilePath);
 
                 node.Add(templateNode);
                 root.Add(node);

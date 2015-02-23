@@ -36,20 +36,21 @@ namespace SparrowCMS
             }
         }
 
-        private ManagerCore Core = ManagerCore.Instance;
+        private SiteManager SiteManager = new SiteManager();
+        private PageManager PageManager = new PageManager();
 
         public void Init(HttpContextBase context)
         {
             //HttpContext
             Current.HttpContext = context;
             //匹配当前求情的站点
-            Current.Site = Core.SiteManager.GetSite(context.Request.Url.Host);
+            Current.Site = SiteManager.GetSite(context.Request.Url.Host);
             if (Current.Site == null)
             {
                 throw new SiteNotFoundException();
             }
             //匹配当前请求的页面
-            var page = Core.PageManager.GetPage(Current.Site, context.Request.Url.AbsolutePath);
+            var page = PageManager.GetPage(Current.Site, context.Request.Url.AbsolutePath);
             if (page == null)
             {
                 throw new PageNotFoundException();
@@ -59,6 +60,8 @@ namespace SparrowCMS
             //赋值给Context
             Current.Page = page;
             //获取RouteData
+
+            ViewData = new Document();
             RouteData = page.UrlRoute.GetRouteData(context);
         }
 

@@ -17,7 +17,13 @@ namespace SparrowCMS.DataProviders
             {
                 throw new Exception("web.config miss dbType section");
             }
-            var filePath = Path.Combine(Environment.CurrentDirectory, "SparrowCMS.DataProvider." + dbType + ".dll");
+
+            var fullName = "SparrowCMS.DataProvider." + dbType + ".dll";
+            var filePath = Path.Combine(Environment.CurrentDirectory, fullName);
+            if (!File.Exists(filePath))
+            {
+                filePath = Path.Combine(Environment.CurrentDirectory, "bin", fullName);
+            }
             return Assembly.LoadFile(filePath);
         }
 

@@ -71,7 +71,7 @@ namespace SparrowCMS.Managers
 
         public void LoadDll(Plugin plugin)
         {
-            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, plugin.EnName);
+            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Plugins", plugin.EnName);
             var dirs = Directory.GetDirectories(pluginPath);
             if (dirs.Contains("bin"))
             {

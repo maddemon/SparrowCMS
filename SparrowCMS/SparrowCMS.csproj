@@ -57,6 +57,7 @@
     <Compile Include="ApiBuilder.cs" />
     <Compile Include="Apis\Page.cs" />
     <Compile Include="Application.cs" />
+    <Compile Include="Attributes\DocumentIgnoreAttribute.cs" />
     <Compile Include="Attributes\FieldFlagAttribute.cs" />
     <Compile Include="Attributes\LabelNameAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
@@ -72,14 +73,12 @@
     <Compile Include="Exceptions\SiteNotFoundException.cs" />
     <Compile Include="Factories\DefaultApiFactory.cs" />
     <Compile Include="Factories\DefaultLabelFactory.cs" />
-    <Compile Include="Factories\LabelFactoryHelper.cs">
+    <Compile Include="Factories\FactoryUtils.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LabelUtils.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
-    <Compile Include="Managers\ManagerCore.cs" />
     <Compile Include="Managers\FactoryManager.cs" />
-    <Compile Include="Managers\ManagerBase.cs" />
     <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Managers\PluginManager.cs" />
     <Compile Include="Managers\SiteManager.cs" />

@@ -23,24 +23,22 @@ namespace SparrowCMS.Managers
 
         public List<Page> GetPages(Site site)
         {
-            var pages = Cache.GetOrSet<List<Page>>(_cacheKey, () => _dataProvider.GetPages());
-            return pages.Where(e => e.SiteId == site.Id).ToList();
+            var pages = _dataProvider.GetPages();
+            return site == null ? pages : pages.Where(e => e.SiteId == site.Id).ToList();
         }
 
         private string GetConfigPath()
         {
-            return Path.Combine(Environment.CurrentDirectory, "configs/pages.config");
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "configs/pages.config");
         }
 
         public Page GetPage(Site site, string url)
         {
-            var pages = GetPages(site);
-            
             var currentPage = GetPages(site).FirstOrDefault(page => page.UrlRoute.IsMatch(url));
 
             if (currentPage == null)
             {
-                throw new HttpException(404, "PAGE NOT FOUND!");
+                throw new Exceptions.PageNotFoundException();
             }
 
             return currentPage;

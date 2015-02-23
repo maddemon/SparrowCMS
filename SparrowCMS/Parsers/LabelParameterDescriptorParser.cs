@@ -26,7 +26,7 @@ namespace SparrowCMS.Parsers
             foreach (Match match in ParameterRegex.Matches(templateContent))
             {
                 var parameter = Parse(labelName, match);
-                result.Add(parameter.Name, parameter);
+                result.Add(parameter.Name.ToLower(), parameter);
             }
             return result;
         }

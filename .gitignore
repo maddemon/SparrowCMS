@@ -219,3 +219,4 @@ pip-log.txt
 /src/SparrowCMS.Web/static/main.css
 /src/SparrowCMS.Web/static/main.min.css
 /packages
+/SparrowCMS.Demo/plugins/Article

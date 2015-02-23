@@ -34,11 +34,14 @@ namespace SparrowCMS.Test
         public void test_has_innerhtml_template()
         {
             var template = @"
-{Article.List CategoryId='123'}
+{Article.List CategoryId='Url(cid)'}
     <a href='list?cid=@CategoryId'>@(Title maxlength=20)</a>
 {/Article.List}";
             var labels = LabelDescriptorParser.FindAll(template);
             var label = labels[0];
+
+            var parameter = label.ParameterDescriptors.First().Value ;
+            Assert.AreEqual(typeof(Url), parameter.Function.GetType());
 
             Assert.AreEqual("Article.List", label.LabelName);
             var field1 = label.FieldDescriptors[0];

@@ -4,17 +4,23 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using SparrowCMS.Attributes;
 
 namespace SparrowCMS.Models
 {
     public class Template
     {
-        public string Id { get; set; }
+        public string FilePath { get; set; }
+
+        public string Layout { get; set; }
+
+        public string Name { get; set; }
 
         public string Content { get; set; }
 
         private Lazy<List<LabelDescriptor>> _initLabelDescriptions;
 
+        [DocumentIgnore]
         public List<LabelDescriptor> LabelDescriptions { get { return _initLabelDescriptions.Value; } }
 
         /// <summary>

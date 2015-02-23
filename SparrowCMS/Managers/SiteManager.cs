@@ -24,11 +24,11 @@ namespace SparrowCMS.Managers
             return Cache.GetOrSet<List<Site>>(_cacheKey, () => _dataProvider.GetSites());
         }
 
-        public Site GetSite(string host)
+        public Site GetSite(string idOrHost)
         {
             //TODO
             return new Site();
-            return GetSites().FirstOrDefault(e => e.Domains.Contains(host));
+            return GetSites().FirstOrDefault(e => e.Domains.Contains(idOrHost) || e.Id == idOrHost);
         }
 
         public void AddSite(Site site)
