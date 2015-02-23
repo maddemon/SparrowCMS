@@ -1,4 +1,4 @@
-﻿namespace SparrowCMS.Labels.Shared.Attributes
+﻿namespace SparrowCMS.Labels.Shared.Functions
 {
     public class Format : FieldFunction
     {

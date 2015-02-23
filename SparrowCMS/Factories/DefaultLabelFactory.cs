@@ -66,10 +66,8 @@ namespace SparrowCMS.Factories
             { 
                 string.Format("{0}.Labels.{1}",pluginName , labelName ),
                 string.Format("{0}.Shared.Labels.{1}",pluginName , labelName),
-                string.Format("SparrowCMS.Labels.{0}",labelName),
-                string.Format("SparrowCMS.Labels.{0}.{1}",labelName,labelName),
-                string.Format("SparrowCMS.Shared.Labels.{0}",labelName),
-                string.Format("SparrowCMS.Shared.Labels.{0}.{1}",labelName,labelName)
+                string.Format("SparrowCMS.Labels.{0}",pluginName+"."+labelName),
+                string.Format("SparrowCMS.Labels.{0}.{1}",labelName,labelName)
             };
         }
 
@@ -78,9 +76,9 @@ namespace SparrowCMS.Factories
             return new string[]
             { 
                 string.Format("{0}.Labels.{1}.Fields.{2}",pluginName,labelName,fieldName ),
-                string.Format("{0}.Shared.Labels.{1}.Fields.{2}",pluginName,labelName,fieldName ),
-                string.Format("SparrowCMS.Labels.{0}.Fields.{1}",labelName,fieldName),
-                string.Format("SparrowCMS.Shared.Labels.{0}.Fields.{1}",labelName,fieldName),
+                string.Format("{0}.Shared.Fields.{2}",pluginName,fieldName ),
+                string.Format("SparrowCMS.Labels.{0}.Fields.{1}",pluginName+"."+labelName,fieldName),
+                string.Format("SparrowCMS.Labels.Shared.Fields.{1}",fieldName),
             };
         }
 
@@ -89,9 +87,9 @@ namespace SparrowCMS.Factories
             return new string[]
             { 
                 string.Format("{0}.Labels.{1}.Functions.{2}",pluginName,labelName,fieldName ),
-                string.Format("{0}.Shared.Labels.{1}.Functions.{2}",pluginName,labelName,fieldName ),
-                string.Format("SparrowCMS.Labels.{0}.Functions.{1}",labelName,fieldName),
-                string.Format("SparrowCMS.Shared.Labels.{0}.Functions.{1}",labelName,fieldName),
+                string.Format("{0}.Shared.Functions.{2}",pluginName,labelName,fieldName ),
+                string.Format("SparrowCMS.Labels.{0}.Functions.{1}",pluginName+"."+labelName,fieldName),
+                string.Format("SparrowCMS.Labels.Shared.Functions.{1}",labelName,fieldName),
             };
         }
 

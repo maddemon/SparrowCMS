@@ -111,7 +111,7 @@ namespace SparrowCMS.Managers
                 var type = Search(fullName);
                 if (type != null)
                 {
-                    return Activator.CreateInstance<T>();
+                    return (T)Activator.CreateInstance(type);
                 }
             }
             return default(T);

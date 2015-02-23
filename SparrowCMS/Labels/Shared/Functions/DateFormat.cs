@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SparrowCMS.Labels.Shared.Attributes
+namespace SparrowCMS.Labels.Shared.Functions
 {
     public class DateFormat : FieldFunction
     {

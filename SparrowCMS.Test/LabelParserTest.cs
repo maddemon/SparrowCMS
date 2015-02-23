@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SparrowCMS.Labels.Shared.Functions;
 using SparrowCMS.Parsers;
 
 namespace SparrowCMS.Test
@@ -38,10 +39,13 @@ namespace SparrowCMS.Test
 {/Article.List}";
             var labels = LabelDescriptorParser.FindAll(template);
             var label = labels[0];
+
             Assert.AreEqual("Article.List", label.LabelName);
             var field1 = label.FieldDescriptors[0];
-
             Assert.AreEqual("CategoryId", field1.FieldName);
+
+            var field2 = label.FieldDescriptors[1];
+            Assert.AreEqual(typeof(MaxLength), field2.Functions.First().GetType());
             
         }
     }
