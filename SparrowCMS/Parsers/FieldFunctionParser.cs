@@ -15,14 +15,14 @@ namespace SparrowCMS.Parsers
         /// <param name="labelName"></param>
         /// <param name="attributesTemplateContent">format="some text $this" dateformat="yyyy/MM/dd"</param>
         /// <returns></returns>
-        public static List<FieldFunction> FindAll(FieldDescriptor descriptor, string attributesTemplateContent)
+        public static List<FieldFunction> FindAll(string labelName, string attributesTemplateContent)
         {
             var result = new List<FieldFunction>();
             if (!string.IsNullOrEmpty(attributesTemplateContent))
             {
                 foreach (Match m in Regex.Matches(attributesTemplateContent))
                 {
-                    var func = Parse(descriptor, m);
+                    var func = Parse(labelName, m);
                     if (func != null)
                     {
                         result.Add(func);
@@ -32,16 +32,16 @@ namespace SparrowCMS.Parsers
             return result;
         }
 
-        private static FieldFunction Parse(FieldDescriptor descriptor, Match m)
+        private static FieldFunction Parse(string labelName, Match m)
         {
             var name = m.Groups["name"].Value;
             var value = m.Groups["value"].Value;
 
-            var func = FactoryUtils.CreateInstance<FieldFunction>(descriptor.LabelName, name);
+            var func = LabelFactory.CreateFieldFunction(labelName, name);
             if (func != null)
             {
                 func.Name = name;
-                func.Value = value;
+                func.RawValue = value;
             }
             return func;
 

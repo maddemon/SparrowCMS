@@ -15,14 +15,14 @@ namespace SparrowCMS
     {
         public virtual void OnError() { }
 
-        protected virtual APIResult Success(object data = null, string message = null)
+        protected virtual ApiResult Success(object data = null, string message = null)
         {
-            return new APIResult { Data = data, Message = message, Result = true };
+            return new ApiResult { Data = data, Message = message, Result = true };
         }
 
-        protected virtual APIResult Error(string message = null)
+        protected virtual ApiResult Error(string message = null)
         {
-            return new APIResult { Result = false, Data = null, Message = message };
+            return new ApiResult { Result = false, Data = null, Message = message };
         }
     }
 }

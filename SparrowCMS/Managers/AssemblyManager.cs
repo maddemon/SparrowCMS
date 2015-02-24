@@ -8,11 +8,11 @@ using SparrowCMS.Models;
 
 namespace SparrowCMS.Managers
 {
-    public class AssemblyManager
+    internal class AssemblyManager
     {
-        private List<ClassDescriptor> _descriptors = new List<ClassDescriptor>();
+        private static List<TypeDescriptor> _descriptors = new List<TypeDescriptor>();
 
-        public class ClassDescriptor
+        public class TypeDescriptor
         {
             public Type ClassType { get; set; }
 
@@ -20,10 +20,18 @@ namespace SparrowCMS.Managers
 
             public string Plugin { get; set; }
 
-            //private static string[] LimitNames = new[] { "Apis", "Labels", "Fields", "Functions", "Parameters" };
-            public static ClassDescriptor Create(Type type)
+            private static Type[] _cmsBaseTypes = new[] 
             {
-                var result = new ClassDescriptor { ClassType = type };
+                typeof(ILabel),
+                typeof(IField),
+                typeof(IApi),
+                typeof(ILabelParameterFunction),
+                typeof(FieldFunction)
+            };
+
+            public static TypeDescriptor Create(Type type)
+            {
+                var result = new TypeDescriptor { ClassType = type };
 
                 var attr = type.GetCustomAttributes(true).FirstOrDefault(a => a is NameAttribute);
                 if (attr != null)
@@ -32,23 +40,26 @@ namespace SparrowCMS.Managers
                     return result;
                 }
 
-                //foreach (var name in LimitNames)
-                //{
-                //    if (type.FullName.Contains(name))
-                //    {
-                //        return result;
-                //    }
-                //}
-                return result;
+                foreach (var baseType in _cmsBaseTypes)
+                {
+                    if (baseType.IsAssignableFrom(type))
+                    {
+                        return result;
+                    }
+                }
+                return null;
             }
         }
 
         public AssemblyManager()
         {
-            //默认把Sparrow前缀的dll添加
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(assembly => assembly.FullName.StartsWith("Sparrow")))
+            if (_descriptors.Count == 0)
             {
-                AddAssembly(assembly);
+                //默认把Sparrow前缀的dll添加
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(assembly => assembly.FullName.StartsWith("Sparrow")))
+                {
+                    AddAssembly(assembly);
+                }
             }
         }
 
@@ -61,7 +72,7 @@ namespace SparrowCMS.Managers
 
             foreach (var type in assembly.GetTypes())
             {
-                var desc = ClassDescriptor.Create(type);
+                var desc = TypeDescriptor.Create(type);
                 if (desc != null)
                 {
                     _descriptors.Add(desc);
@@ -71,7 +82,7 @@ namespace SparrowCMS.Managers
 
         public void LoadDll(Plugin plugin)
         {
-            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Plugins", plugin.EnName);
+            var pluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins", plugin.EnName);
             var dirs = Directory.GetDirectories(pluginPath);
             if (dirs.Contains("bin"))
             {
@@ -104,12 +115,31 @@ namespace SparrowCMS.Managers
             return null;
         }
 
-        public T CreateInstance<T>(string[] fullNames)
+        //public T CreateInstance<T>(string partialName)
+        //{
+
+        //    var descs = _descriptors.Where(d => typeof(T).IsAssignableFrom(d.ClassType) && (
+        //        d.AliasName == partialName
+        //    ||
+        //        d.ClassType.FullName.EndsWith(partialName)
+        //        ||
+        //        d.ClassType.FullName.EndsWith(partialName + ".Default")
+        //        ));
+        //    var desc = descs.FirstOrDefault(d => d.AliasName == partialName) ?? descs.FirstOrDefault();
+        //    if (desc == null)
+        //    {
+        //        return default(T);
+        //    }
+
+        //    return (T)Activator.CreateInstance(desc.ClassType);
+        //}
+
+        internal T CreateInstance<T>(string[] fullNames)
         {
             foreach (var fullName in fullNames)
             {
                 var type = Search(fullName);
-                if (type != null)
+                if (type != null && typeof(T).IsAssignableFrom(type))
                 {
                     return (T)Activator.CreateInstance(type);
                 }

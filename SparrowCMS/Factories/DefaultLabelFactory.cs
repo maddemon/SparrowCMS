@@ -13,8 +13,6 @@ namespace SparrowCMS.Factories
 
     public class DefaultLabelFactory : ILabelFactory
     {
-        protected static AssemblyManager AssemblyManager = new AssemblyManager();
-
         private enum SearchType
         {
             Function, Parameter, Field, Label, Api, Unknown
@@ -105,6 +103,7 @@ namespace SparrowCMS.Factories
             };
         }
 
+        private static readonly AssemblyManager AssemblyManager = new AssemblyManager();
         public virtual T CreateInstance<T>(string labelName, string className)
         {
             var searchType = GetSearchType(typeof(T));

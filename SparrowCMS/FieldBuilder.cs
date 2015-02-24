@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SparrowCMS.Managers;
 
 namespace SparrowCMS
 {
@@ -9,7 +10,7 @@ namespace SparrowCMS
     {
         public static IField Build(FieldDescriptor descriptor)
         {
-            var field = FactoryUtils.CreateInstance<IField>(descriptor.LabelName, descriptor.FieldName) ?? new DefaultField()
+            var field = LabelFactory.CreateField(descriptor.LabelName, descriptor.FieldName) ?? new DefaultField()
             {
                 TemplateContent = descriptor.TemplateContent,
                 Name = descriptor.FieldName,
@@ -22,12 +23,18 @@ namespace SparrowCMS
 
         private static void SetFunctions(IField field, FieldDescriptor description)
         {
-            foreach (var p in field.GetType().GetProperties())
+            if (description.Functions.Count() > 0)
             {
-                var func = description.Functions.FirstOrDefault(e => e.Name.ToLower() == p.Name.ToLower());
-                p.SetValue(field, func, null);
-            }
+                foreach (var p in field.GetType().GetProperties())
+                {
+                    var func = description.Functions.FirstOrDefault(e => e.Name.ToLower() == p.Name.ToLower());
+                    if (func != null)
+                    {
+                        p.SetValue(field, func, null);
+                    }
+                }
 
+            }
             var property = field.GetType().GetProperty("Functions");
             if (property != null)
             {

@@ -54,18 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiBuilder.cs" />
+    <Compile Include="ApiActionDescriptor.cs" />
+    <Compile Include="ApiActionParameterDescriptor.cs" />
+    <Compile Include="ApiDescriptor.cs" />
+    <Compile Include="ApiInvoker.cs" />
     <Compile Include="Apis\Page.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Attributes\DocumentIgnoreAttribute.cs" />
     <Compile Include="Attributes\FieldFlagAttribute.cs" />
     <Compile Include="Attributes\LabelNameAttribute.cs" />
+    <Compile Include="Attributes\ModelBinderAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\ParameterFlagAttribute.cs" />
     <Compile Include="CMSHttpModule.cs" />
     <Compile Include="Common\AppSettings.cs" />
     <Compile Include="Common\LocalCache.cs" />
     <Compile Include="Common\DocumentExtensions.cs" />
+    <Compile Include="Common\TypeExtensions.cs" />
     <Compile Include="DataProviders\DataProviderFactory.cs" />
     <Compile Include="DataProviders\IPluginDataProvider.cs" />
     <Compile Include="Exceptions\ExceptionBase.cs" />
@@ -73,16 +78,20 @@
     <Compile Include="Exceptions\SiteNotFoundException.cs" />
     <Compile Include="Factories\DefaultApiFactory.cs" />
     <Compile Include="Factories\DefaultLabelFactory.cs" />
-    <Compile Include="Factories\FactoryUtils.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="IField.cs" />
     <Compile Include="LabelUtils.cs" />
+    <Compile Include="Managers\ApiManager.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
-    <Compile Include="Managers\FactoryManager.cs" />
+    <Compile Include="LabelFactory.cs" />
     <Compile Include="Managers\PageManager.cs" />
     <Compile Include="Managers\PluginManager.cs" />
     <Compile Include="Managers\SiteManager.cs" />
+    <Compile Include="Attributes\CustomModelBinderAttribute.cs" />
+    <Compile Include="ModelBinders\DefaultModelBinder.cs" />
+    <Compile Include="ModelBinders\FileBinder.cs" />
+    <Compile Include="ModelBinders\FormBinder.cs" />
+    <Compile Include="ModelBinders\IModelBinder.cs" />
+    <Compile Include="ModelBinders\JsonBinder.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="CMSContext.cs" />
     <Compile Include="DefaultField.cs" />
@@ -92,7 +101,7 @@
     <Compile Include="IApi.cs" />
     <Compile Include="DataProviders\ISiteDataProvider.cs" />
     <Compile Include="DataProviders\IPageDataProvider.cs" />
-    <Compile Include="ILabelParameterDescriptorFunction.cs" />
+    <Compile Include="ILabelParameterFunction.cs" />
     <Compile Include="LabelBuilder.cs" />
     <Compile Include="LabelDescriptor.cs" />
     <Compile Include="Labels\Api.cs" />
@@ -125,7 +134,7 @@
     <Compile Include="LabelParameterDescriptor.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="PageHandler.cs" />
-    <Compile Include="Parsers\LabelParameterDescriptorFunctionParser.cs" />
+    <Compile Include="Parsers\LabelParameterFunctionParser.cs" />
     <Compile Include="Parsers\LabelParameterDescriptorParser.cs" />
     <Compile Include="Parsers\LabelDescriptorParser.cs" />
     <Compile Include="Models\PluginCollection.cs" />
@@ -137,9 +146,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Labels\Shared\Fields\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

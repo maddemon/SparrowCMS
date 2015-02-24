@@ -54,7 +54,7 @@ namespace SparrowCMS
 
             foreach (var key in context.Request.Form.AllKeys)
             {
-                data.Add(key, context.Request.QueryString[key]);
+                data.Add(key, context.Request.Form[key]);
             }
 
             return data;

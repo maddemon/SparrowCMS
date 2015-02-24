@@ -38,7 +38,7 @@ namespace SparrowCMS.DataProviders
             return Cache.GetOrSet<T>(typeName, () =>
             {
                 var ass = GetAssembly();
-                var type = ass.GetTypes().FirstOrDefault(e => e.GetInterface(typeof(T).Name, true) != null);
+                var type = ass.GetTypes().FirstOrDefault(t => typeof(T).IsAssignableFrom(t));
                 return (T)Activator.CreateInstance(type);
             });
         }

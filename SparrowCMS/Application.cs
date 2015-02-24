@@ -38,7 +38,6 @@ namespace SparrowCMS
 
         }
 
-
         public void Unload()
         {
         }

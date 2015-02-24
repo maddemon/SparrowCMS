@@ -7,18 +7,16 @@ using SparrowCMS.Managers;
 
 namespace SparrowCMS.Parsers
 {
-    public class LabelParameterDescriptorFunctionParser
+    public class LabelParameterFunctionParser
     {
         private static readonly Regex ParameterFunctionRegex = new Regex(@"(?<name>[^)(]+)\([^)(]+\)", RegexOptions.Compiled);
 
-        private FactoryManager FactoryManager = FactoryManager.GetInstance();
-
-        public static ILabelParameterDescriptorFunction Parse(string labelName, string parameterRawValue)
+        public static ILabelParameterFunction Parse(string labelName, string parameterRawValue)
         {
             var match = ParameterFunctionRegex.Match(parameterRawValue);
             if (match == null || match.Groups.Count <= 1) return null;
             var name = match.Groups["name"].Value;
-            return FactoryUtils.CreateInstance<ILabelParameterDescriptorFunction>(labelName, name);
+            return LabelFactory.CreateParameterFunction(labelName, name);
         }
 
     }

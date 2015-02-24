@@ -5,13 +5,13 @@ using System.Text;
 
 namespace SparrowCMS.Managers
 {
-    public class ManagerCore
+    public class ManagerCenter
     {
-        private ManagerCore()
+        private ManagerCenter()
         {
 
         }
-        public static readonly ManagerCore Instance = new ManagerCore();
+        public static readonly ManagerCenter Instance = new ManagerCenter();
 
         private AssemblyManager _assemblyManager = new AssemblyManager();
         public AssemblyManager AssemblyManager

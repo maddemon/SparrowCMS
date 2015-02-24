@@ -22,7 +22,7 @@ namespace SparrowCMS.Labels.Pagination.Fields
             }
             else
             {
-                return Format.ConvertFieldValue(next);
+                return Format.GetValue(next);
             }
         }
 

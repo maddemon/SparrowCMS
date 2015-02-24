@@ -12,7 +12,7 @@ namespace SparrowCMS
 
         public virtual string RawValue { get; set; }
 
-        public virtual ILabelParameterDescriptorFunction Function { get; set; }
+        public virtual ILabelParameterFunction Function { get; set; }
 
         public virtual object GetFinalValue(Type type)
         {

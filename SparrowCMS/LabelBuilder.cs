@@ -10,11 +10,9 @@ namespace SparrowCMS
 {
     internal class LabelBuilder
     {
-        private static FactoryManager FactoryManager = new FactoryManager();
-
         public static ILabel Build(LabelDescriptor descriptor)
         {
-            var label = FactoryUtils.CreateInstance<ILabel>(descriptor.LabelName, null);
+            var label = LabelFactory.CreateLabel(descriptor.LabelName);
             if (label != null)
             {
                 //SetInnerLabel(label, labelDescription);

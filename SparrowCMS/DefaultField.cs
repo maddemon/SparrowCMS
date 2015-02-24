@@ -56,7 +56,7 @@ namespace SparrowCMS
             {
                 foreach (var p in Functions)
                 {
-                    result = p.ConvertFieldValue(fieldValue);
+                    result = p.GetValue(fieldValue);
                 }
             }
             return string.IsNullOrEmpty(result) ? fieldValue.ToString() : result;

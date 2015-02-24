@@ -10,31 +10,29 @@ namespace SparrowCMS
     {
         private static FactoryManager FactoryManager = new FactoryManager();
 
-        public static T CreateInstance<T>(string labelName, string className)
+        public static IApi CreateApi(string pluginName, string apiName)
         {
-            if (typeof(T) is IApi)
+            var factories = FactoryManager.GetApiFactories();
+            foreach (var factory in factories)
             {
-                var factories = FactoryManager.GetApiFactories();
-                foreach (var factory in factories)
+                var result = factory.CreateInstance(pluginName, apiName);
+                if (result != null)
                 {
-                    var result = factory.CreateInstance(labelName, className);
-                    if (result != null)
-                    {
-                        return (T)result;
-                    }
+                    return result;
                 }
             }
-            else
-            {
+            return null;
+        }
 
-                var factories = FactoryManager.GetLabelFactories();
-                foreach (var factory in factories)
+        public static T CreateInstance<T>(string labelName, string className)
+        {
+            var factories = FactoryManager.GetLabelFactories();
+            foreach (var factory in factories)
+            {
+                var result = factory.CreateInstance<T>(labelName, className);
+                if (result != null)
                 {
-                    var result = factory.CreateInstance<T>(labelName, className);
-                    if (result != null)
-                    {
-                        return result;
-                    }
+                    return result;
                 }
             }
             return default(T);

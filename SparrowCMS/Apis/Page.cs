@@ -8,7 +8,7 @@ namespace SparrowCMS.Apis
 {
     public class Page : ApiBase
     {
-        public APIResult Save(Models.Page page, Template template)
+        public ApiResult Save(Models.Page page, Template template)
         {
             if (page == null)
             {

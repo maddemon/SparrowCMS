@@ -13,17 +13,18 @@ namespace SparrowCMS.Factories
 
     public class DefaultApiFactory : IApiFactory
     {
-        protected static AssemblyManager AssemblyManager = new AssemblyManager();
-        
         protected virtual string[] GetFullNames(string pluginName, string apiName)
         {
             return new string[]
             { 
                 string.Format("{0}.Apis.{1}",pluginName , apiName),
                 string.Format("{0}.Shared.Apis.{1}",pluginName , apiName),
-                string.Format("SparrowCMS.Apis.{0}",apiName)
+                string.Format("SparrowCMS.Apis.{0}",apiName),
+                string.Format("SparrowCMS.Apis.{0}.{1}",pluginName,apiName)
             };
         }
+
+        private static readonly AssemblyManager AssemblyManager = new AssemblyManager();
 
         public IApi CreateInstance(string pluginName, string apiName)
         {

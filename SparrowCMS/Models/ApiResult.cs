@@ -6,8 +6,11 @@ using System.Text;
 
 namespace SparrowCMS.Models
 {
-    public class APIResult
+    public class ApiResult
     {
+        [JsonProperty("status_code")]
+        public int StatusCode { get; set; }
+
         [JsonProperty("result")]
         public bool Result { get; set; }
 

@@ -4,14 +4,14 @@ namespace SparrowCMS.Labels.Shared.Functions
 {
     public class DateFormat : FieldFunction
     {
-        public override string ConvertFieldValue(object fieldValue)
+        public override string GetValue(object fieldValue)
         {
             if (fieldValue is DateTime)
             {
-                var dateFormat = Value;
+                var dateFormat = RawValue;
                 return ((DateTime)fieldValue).ToString(dateFormat);
             }
-            return base.ConvertFieldValue(fieldValue);
+            return base.GetValue(fieldValue);
         }
 
     }

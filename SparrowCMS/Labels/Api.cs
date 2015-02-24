@@ -16,8 +16,6 @@ namespace SparrowCMS.Labels
 
         public string Action { get; set; }
 
-        public string Version { get; set; }
-
         public string DataType { get; set; }
 
         public string Plugin { get; set; }
@@ -50,12 +48,18 @@ namespace SparrowCMS.Labels
             }
         }
 
-        private static ApiBuilder _builder = new ApiBuilder();
+        private static readonly ApiInvoker _invoker = new ApiInvoker();
 
         public string GetReplacedContent(string innerHtml)
         {
             SetApiNames();
-            var result = _builder.Invoke(Plugin, _apiName, _methodName, DataType);
+
+            var result = _invoker.Invoke(Plugin, _apiName, _methodName);
+            
+            if (DataType!=null && DataType.ToLower() == "json")
+            {
+                return Newtonsoft.Json.JsonConvert.SerializeObject(result);
+            }
 
             return result.ToString();
         }

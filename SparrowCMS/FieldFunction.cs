@@ -9,9 +9,9 @@ namespace SparrowCMS
     {
         public string Name { get; set; }
 
-        public string Value { get; set; }
+        public string RawValue { get; set; }
 
-        public virtual string ConvertFieldValue(object fieldValue)
+        public virtual string GetValue(object fieldValue)
         {
             return fieldValue == null ? null : fieldValue.ToString();
         }

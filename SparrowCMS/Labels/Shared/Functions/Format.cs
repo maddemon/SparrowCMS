@@ -2,12 +2,12 @@
 {
     public class Format : FieldFunction
     {
-        public override string ConvertFieldValue(object fieldValue)
+        public override string GetValue(object fieldValue)
         {
             if (fieldValue == null)
                 return null;
 
-            return Value.Replace("$this", fieldValue.ToString());
+            return RawValue.Replace("$this", fieldValue.ToString());
         }
     }
 }

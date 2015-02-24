@@ -2,14 +2,14 @@
 {
     public class MaxLength : FieldFunction
     {
-        private int Length { get { return int.Parse(Value); } }
+        private int Length { get { return int.Parse(RawValue); } }
 
-        public override string ConvertFieldValue(object fieldValue)
+        public override string GetValue(object fieldValue)
         {
-            var result = base.ConvertFieldValue(fieldValue);
+            var result = base.GetValue(fieldValue);
 
             var maxLength = 0;
-            if (int.TryParse(Value, out maxLength) && result.Length > maxLength)
+            if (int.TryParse(RawValue, out maxLength) && result.Length > maxLength)
             {
                 return result.Substring(0, Length) + "...";
             }

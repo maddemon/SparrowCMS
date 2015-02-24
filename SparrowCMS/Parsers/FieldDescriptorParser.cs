@@ -16,14 +16,13 @@ namespace SparrowCMS.Parsers
 
             var fieldName = match.Groups["name"].Value;
 
-            var desc = new FieldDescriptor
+            return new FieldDescriptor
             {
                 LabelName = labelName,
                 FieldName = fieldName,
                 TemplateContent = match.Groups[0].Value,
+                Functions = FieldFunctionParser.FindAll(labelName, match.Groups["function"].Value)
             };
-            desc.Functions = FieldFunctionParser.FindAll(desc, match.Groups["function"].Value);
-            return desc;
         }
 
         public static IEnumerable<FieldDescriptor> FindAll(string labelName, string templateContent)
