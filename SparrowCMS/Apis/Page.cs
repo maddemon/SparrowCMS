@@ -6,19 +6,16 @@ using System.Text;
 
 namespace SparrowCMS.Apis
 {
-    public class Page : APIBase
+    public class Page : ApiBase
     {
-        public ApiResult Save(Models.Page page, string template, string layout)
+        public APIResult Save(Models.Page page, Template template)
         {
             if (page == null)
             {
                 throw new ArgumentNullException("page");
             }
 
-            page.Template = new Template
-            {
-                Content = template,
-            };
+            page.Template =template;
 
 
             return Success();

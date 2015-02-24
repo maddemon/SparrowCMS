@@ -40,5 +40,10 @@ namespace SparrowCMS
             }
             return LabelName + "." + ClassName;
         }
+
+        public ILabel GetLabel()
+        {
+            return LabelBuilder.Build(this);
+        }
     }
 }

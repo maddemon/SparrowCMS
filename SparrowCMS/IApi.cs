@@ -11,18 +11,18 @@ namespace SparrowCMS
         
     }
 
-    public class APIBase : IApi
+    public class ApiBase : IApi
     {
         public virtual void OnError() { }
 
-        protected virtual ApiResult Success(object data = null, string message = null)
+        protected virtual APIResult Success(object data = null, string message = null)
         {
-            return new ApiResult { Data = data, Message = message, Result = true };
+            return new APIResult { Data = data, Message = message, Result = true };
         }
 
-        protected virtual ApiResult Error(string message = null)
+        protected virtual APIResult Error(string message = null)
         {
-            return new ApiResult { Result = false, Data = null, Message = message };
+            return new APIResult { Result = false, Data = null, Message = message };
         }
     }
 }

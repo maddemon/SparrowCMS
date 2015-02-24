@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SparrowCMS
 {
-    public interface IParameterFunction
+    public interface ILabelParameterDescriptorFunction
     {
         string GetValue(string parameterRawValue);
     }

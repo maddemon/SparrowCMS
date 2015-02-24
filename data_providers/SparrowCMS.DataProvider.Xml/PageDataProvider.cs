@@ -27,7 +27,7 @@ namespace SparrowCMS.DataProviders.Xml
             {
                 var page = new Page
                 {
-                    Title = pageElement.Element("name").Value,
+                    Name = pageElement.Element("name").Value,
                     UrlPattern = pageElement.Element("url").Value,
                 };
 
@@ -80,7 +80,7 @@ namespace SparrowCMS.DataProviders.Xml
             {
                 FilePath = templatePath,
                 Content = templateContent,
-                Layout =  layoutPath
+                Layout =  layoutPath,
             };
         }
 
@@ -92,7 +92,7 @@ namespace SparrowCMS.DataProviders.Xml
             {
                 var node = new XElement("page");
                 node.SetAttributeValue("id", page.Id.ToString());
-                node.Add(new XElement("name", page.Title));
+                node.Add(new XElement("name", page.Name));
                 node.Add(new XElement("role", page.Role));
                 node.Add(new XElement("url", page.UrlPattern));
 

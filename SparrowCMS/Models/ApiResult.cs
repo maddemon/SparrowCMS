@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SparrowCMS.Models
 {
-    public class ApiResult
+    public class APIResult
     {
         [JsonProperty("result")]
         public bool Result { get; set; }

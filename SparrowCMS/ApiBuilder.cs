@@ -25,7 +25,7 @@ namespace SparrowCMS
             var factories = FactoryManager.GetInstance().GetApiFactories();
             foreach (var factory in factories)
             {
-                var apiInstance = factory.CreateApi(pluginName, className);
+                var apiInstance = factory.CreateInstance(pluginName, className);
                 if (apiInstance != null)
                 {
                     return apiInstance;

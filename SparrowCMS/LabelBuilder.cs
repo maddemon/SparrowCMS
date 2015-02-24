@@ -8,7 +8,7 @@ using SparrowCMS.Managers;
 
 namespace SparrowCMS
 {
-    public class LabelBuilder
+    internal class LabelBuilder
     {
         private static FactoryManager FactoryManager = new FactoryManager();
 
@@ -33,7 +33,7 @@ namespace SparrowCMS
                 {
                     var innerLabelDesc = labelDescription.InnerLabelDescriptors.FirstOrDefault(e => e.LabelName.ToLower() == p.Name.ToLower());
 
-                    p.SetValue(label, Build(innerLabelDesc), null);
+                    p.SetValue(label, innerLabelDesc.GetLabel(), null);
                 }
             }
         }
@@ -77,10 +77,10 @@ namespace SparrowCMS
                     //如果没有标记,则判断是不是Field属性
                     if (p.Name == "Fields")
                     {
-                        var list = new List<Field>();
+                        var list = new List<IField>();
                         foreach (var fieldDescription in labelDescription.FieldDescriptors)
                         {
-                            list.Add(FieldBuilder.Build(fieldDescription));
+                            list.Add(fieldDescription.GetField());
                         }
                         p.SetValue(label, list, null);
                     }
@@ -91,7 +91,7 @@ namespace SparrowCMS
                     var fieldDesc = labelDescription.FieldDescriptors.FirstOrDefault(e => e.FieldName.ToLower() == p.Name.ToLower());
                     if (fieldDesc != null)
                     {
-                        var field = FieldBuilder.Build(fieldDesc);
+                        var field = fieldDesc.GetField();
                         if (field.GetType() != p.PropertyType) continue;
                         p.SetValue(label, field, null);
                     }

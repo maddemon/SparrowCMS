@@ -24,7 +24,7 @@ namespace SparrowCMS.DataProviders
             {
                 filePath = Path.Combine(Environment.CurrentDirectory, "bin", fullName);
             }
-            return Assembly.LoadFile(filePath);
+            return Assembly.LoadFrom(filePath);
         }
 
         public static T GetProvider<T>()

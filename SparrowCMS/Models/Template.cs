@@ -44,7 +44,7 @@ namespace SparrowCMS.Models
             foreach (var desc in LabelDescriptions)
             {
                 //根据所有的label的Descriptor对象,实例化Label对象,并执行Label的GetReplacedContent
-                var label = LabelBuilder.Build(desc);
+                var label = desc.GetLabel();
                 if (label == null)
                 {
                     continue;

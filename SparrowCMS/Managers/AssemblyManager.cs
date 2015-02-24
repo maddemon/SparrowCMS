@@ -82,7 +82,7 @@ namespace SparrowCMS.Managers
                 if (fileName.EndsWith("dll"))
                 {
                     var filePath = Path.Combine(pluginPath, fileName);
-                    var assembly = Assembly.LoadFile(filePath);
+                    var assembly = Assembly.LoadFrom(filePath);
                     AddAssembly(assembly);
                 }
             }

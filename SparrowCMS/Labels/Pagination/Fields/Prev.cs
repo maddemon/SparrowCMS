@@ -6,11 +6,13 @@ using SparrowCMS.Labels.Shared.Functions;
 
 namespace SparrowCMS.Labels.Pagination.Fields
 {
-    public class Prev : Field
+    public class Prev : IField
     {
         public Format Format { get; set; }
 
-        public override string GetReplacedContent(Document doc)
+        public string TemplateContent { get; set; }
+
+        public string GetReplacedContent(Document doc)
         {
             var prev = (int)doc["prev"];
             if (prev < 3)

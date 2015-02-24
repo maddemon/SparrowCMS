@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SparrowCMS.Managers;
 
 namespace SparrowCMS.Labels.Page
 {
@@ -11,9 +12,11 @@ namespace SparrowCMS.Labels.Page
     {
         public string Id { get; set; }
 
+        private PageManager PageManager = new PageManager();
+
         protected override Document GetData()
         {
-            throw new NotImplementedException();
+            return PageManager.GetPage(Id).ToDocument();
         }
     }
 }

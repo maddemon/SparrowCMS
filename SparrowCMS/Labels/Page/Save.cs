@@ -7,7 +7,6 @@ namespace SparrowCMS.Labels.Page
 {
     public class Save : ILabel
     {
-
         public Models.Page Data { get; set; }
 
         public string GetReplacedContent(string innerHtml)

@@ -10,6 +10,10 @@ namespace SparrowCMS.Labels
 {
     public class Api : ILabel
     {
+        public Api()
+        {
+        }
+
         public string Action { get; set; }
 
         public string Version { get; set; }
@@ -41,31 +45,19 @@ namespace SparrowCMS.Labels
             }
             else
             {
-                
+                _apiName = Action.Substring(0, Action.LastIndexOf('.'));
+                _methodName = names.Last();
             }
         }
 
-        private static readonly ApiBuilder ApiBuilder = new ApiBuilder();
+        private static ApiBuilder _builder = new ApiBuilder();
 
         public string GetReplacedContent(string innerHtml)
         {
-            try
-            {
-                SetApiNames(); 
-                var result = ApiBuilder.Invoke(Plugin, _apiName, _methodName, DataType);
+            SetApiNames();
+            var result = _builder.Invoke(Plugin, _apiName, _methodName, DataType);
 
-                return Newtonsoft.Json.JsonConvert.SerializeObject(result);
-            }
-            catch (Exception ex)
-            {
-                //Context.Current.HttpContext.Response.StatusCode = ex.GetStatusCode();
-                return Newtonsoft.Json.JsonConvert.SerializeObject(new ApiResult
-                {
-                    Result = false,
-                    Data = ex,
-                    Message = ex.Message
-                });
-            }
+            return result.ToString();
         }
     }
 }

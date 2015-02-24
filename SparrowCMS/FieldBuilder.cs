@@ -5,20 +5,22 @@ using System.Text;
 
 namespace SparrowCMS
 {
-    public class FieldBuilder
+    internal class FieldBuilder
     {
-        public static Field Build(FieldDescriptor descriptor)
+        public static IField Build(FieldDescriptor descriptor)
         {
-            var field = FactoryUtils.CreateInstance<Field>(descriptor.LabelName, descriptor.FieldName) ?? new Field() { TemplateContent = descriptor.TemplateContent };
+            var field = FactoryUtils.CreateInstance<IField>(descriptor.LabelName, descriptor.FieldName) ?? new DefaultField()
+            {
+                TemplateContent = descriptor.TemplateContent,
+                Name = descriptor.FieldName,
+                LabelName = descriptor.LabelName
+            };
 
             SetFunctions(field, descriptor);
-            field.Name = descriptor.FieldName;
-            field.TemplateContent = descriptor.TemplateContent;
-            field.LabelName = descriptor.LabelName;
             return field;
         }
 
-        private static void SetFunctions(Field field, FieldDescriptor description)
+        private static void SetFunctions(IField field, FieldDescriptor description)
         {
             foreach (var p in field.GetType().GetProperties())
             {

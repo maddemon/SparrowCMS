@@ -32,6 +32,11 @@ namespace SparrowCMS.Managers
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "configs/pages.config");
         }
 
+        public Page GetPage(string pageId)
+        {
+            return GetPages(null).FirstOrDefault(p => p.Id == pageId);
+        }
+
         public Page GetPage(Site site, string url)
         {
             var currentPage = GetPages(site).FirstOrDefault(page => page.UrlRoute.IsMatch(url));

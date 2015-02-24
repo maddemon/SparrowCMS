@@ -12,13 +12,29 @@ namespace SparrowCMS
 
         public static T CreateInstance<T>(string labelName, string className)
         {
-            var factories = FactoryManager.GetLabelFactories();
-            foreach (var factory in factories)
+            if (typeof(T) is IApi)
             {
-                var result = factory.CreateInstance<T>(labelName, className);
-                if (result != null)
+                var factories = FactoryManager.GetApiFactories();
+                foreach (var factory in factories)
                 {
-                    return result;
+                    var result = factory.CreateInstance(labelName, className);
+                    if (result != null)
+                    {
+                        return (T)result;
+                    }
+                }
+            }
+            else
+            {
+
+                var factories = FactoryManager.GetLabelFactories();
+                foreach (var factory in factories)
+                {
+                    var result = factory.CreateInstance<T>(labelName, className);
+                    if (result != null)
+                    {
+                        return result;
+                    }
                 }
             }
             return default(T);

@@ -9,7 +9,7 @@ namespace SparrowCMS.Labels.Shared
     {
         protected abstract Document GetData();
 
-        public IEnumerable<Field> Fields { get; set; }
+        public IEnumerable<IField> Fields { get; set; }
 
         public virtual string GetReplacedContent(string innerHtml)
         {

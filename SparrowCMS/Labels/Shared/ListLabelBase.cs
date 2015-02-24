@@ -7,9 +7,7 @@ namespace SparrowCMS.Labels.Shared
 {
     public abstract class ListLabelBase : ILabel
     {
-        public IEnumerable<LabelParameterDescriptor> Parameters { get; set; }
-
-        public IEnumerable<Field> Fields { get; set; }
+        public IEnumerable<IField> Fields { get; set; }
 
         private IEnumerable<Document> _rows = null;
 

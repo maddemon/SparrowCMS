@@ -15,7 +15,7 @@ namespace SparrowCMS.Parsers
 
             var labelParameter = new LabelParameterDescriptor { Name = name, RawValue = value };
 
-            labelParameter.Function = LabelParameterFunctionParser.Parse(labelName, labelParameter.RawValue);
+            labelParameter.Function = LabelParameterDescriptorFunctionParser.Parse(labelName, labelParameter.RawValue);
 
             return labelParameter;
         }

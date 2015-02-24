@@ -76,6 +76,7 @@
     <Compile Include="Factories\FactoryUtils.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IField.cs" />
     <Compile Include="LabelUtils.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
     <Compile Include="Managers\FactoryManager.cs" />
@@ -84,14 +85,14 @@
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="CMSContext.cs" />
-    <Compile Include="Field.cs" />
+    <Compile Include="DefaultField.cs" />
     <Compile Include="FieldBuilder.cs" />
     <Compile Include="FieldDescriptor.cs" />
     <Compile Include="FieldFunction.cs" />
     <Compile Include="IApi.cs" />
     <Compile Include="DataProviders\ISiteDataProvider.cs" />
     <Compile Include="DataProviders\IPageDataProvider.cs" />
-    <Compile Include="ILabelParameterFunction.cs" />
+    <Compile Include="ILabelParameterDescriptorFunction.cs" />
     <Compile Include="LabelBuilder.cs" />
     <Compile Include="LabelDescriptor.cs" />
     <Compile Include="Labels\Api.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="LabelParameterDescriptor.cs" />
     <Compile Include="OutputCache.cs" />
     <Compile Include="PageHandler.cs" />
-    <Compile Include="Parsers\LabelParameterFunctionParser.cs" />
+    <Compile Include="Parsers\LabelParameterDescriptorFunctionParser.cs" />
     <Compile Include="Parsers\LabelParameterDescriptorParser.cs" />
     <Compile Include="Parsers\LabelDescriptorParser.cs" />
     <Compile Include="Models\PluginCollection.cs" />
@@ -136,7 +137,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Labels\Shared\Fields\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,7 +8,7 @@ namespace SparrowCMS.Factories
 {
     public interface IApiFactory
     {
-        IApi CreateApi(string pluginName, string apiName);
+        IApi CreateInstance(string pluginName, string apiName);
     }
 
     public class DefaultApiFactory : IApiFactory
@@ -25,7 +25,7 @@ namespace SparrowCMS.Factories
             };
         }
 
-        public IApi CreateApi(string pluginName, string apiName)
+        public IApi CreateInstance(string pluginName, string apiName)
         {
             return AssemblyManager.CreateInstance<IApi>(GetFullNames(pluginName, apiName));
         }

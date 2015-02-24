@@ -24,5 +24,10 @@ namespace SparrowCMS
         {
             return LabelName + ".Functions." + functionName;
         }
+
+        public IField GetField()
+        {
+            return FieldBuilder.Build(this);
+        }
     }
 }

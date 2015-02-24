@@ -16,9 +16,6 @@ namespace SparrowCMS
 
         public virtual void Init()
         {
-            //加载对应的DataProvider，可以顺利读取数据
-            LoadDataProviders();
-
             //加载所有插件
             LoadPlugins();
 
@@ -28,8 +25,6 @@ namespace SparrowCMS
 
         protected virtual void LoadDataProviders()
         {
-            //var dbType = AppSettings.Current["DbType"];
-            //AppDomain.CurrentDomain.Load("SparrowCMS.DataProvider." + dbType + ".dll");
         }
 
         protected virtual void LoadPlugins()
@@ -46,7 +41,6 @@ namespace SparrowCMS
 
         public void Unload()
         {
-            
         }
     }
 }

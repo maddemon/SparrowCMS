@@ -8,8 +8,7 @@ namespace SparrowCMS
 {
     public static class LabelUtils
     {
-        private static readonly LabelBuilder LabelBuilder = new LabelBuilder();
-        public static string GetReplacedModelContent(this ILabel label, string innerHtml, Document model, IEnumerable<Field> fields = null)
+        public static string GetReplacedModelContent(this ILabel label, string innerHtml, Document model, IEnumerable<IField> fields = null)
         {
             if (fields != null)
             {
@@ -35,7 +34,7 @@ namespace SparrowCMS
             {
                 foreach (var desc in innerLabelDescriptions)
                 {
-                    var innerLabel = LabelBuilder.Build(desc);
+                    var innerLabel = desc.GetLabel();
                     innerHtml = innerHtml.Replace(desc.TemplateContent, innerLabel.GetReplacedContent(desc.InnerHtml));
                 }
             }
