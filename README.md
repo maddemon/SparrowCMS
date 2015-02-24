@@ -1,6 +1,6 @@
 SPARROW CMS
 ===================================
-该CMS系统是本人业余时间开发，进都无法保证。如果您对此系统感兴趣可以与我联系，一起开发。 ^_^
+该CMS系统是本人业余时间开发，进度无法保证。如果您对此系统感兴趣可以与我联系，一起开发。 ^_^
 ###处理流程
     
     URL -> Site -> Page -> Template -> Label -> Field -> return GetReplacedContent()
@@ -15,8 +15,7 @@ SPARROW CMS
 
 
 ####插件开发
->由于用户不需要编写程序，只需要写标签调用，那么对于开发者来说，工作内容即是插件开发。
-不同于普通的Web系统开发，本系统没有WebForm的Control也没有MVC的Controller，有的只是Label、Field、Function、API等类的开发。
+由于用户不需要编写程序，只需要写标签调用，那么对于开发者来说，工作内容即是插件开发。不同于普通的Web系统开发，本系统没有WebForm的Control也没有MVC的Controller，有的只是Label、Field、Function、API等类的开发。
 但最终也离不开数据获取，逻辑处理和最终数据返回输出。所以，插件亦可以分层、分块，只是换了一个样子。
 
 
