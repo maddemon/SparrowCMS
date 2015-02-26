@@ -17,10 +17,14 @@ namespace SparrowCMS.Labels.Page
 
         public int Page { get; set; }
 
+        private static readonly SiteManager SiteManager = new SiteManager();
+        private static readonly PageManager PageManager = new PageManager();
+
         public override IEnumerable<Document> GetDatas()
         {
-            var site = new SiteManager().GetSite(SiteId);
-            var query = new PageManager().GetPages(site).AsEnumerable();
+            var site = SiteManager.GetSite(SiteId);
+            var query = PageManager.GetPages(site).AsEnumerable();
+
             if (!string.IsNullOrEmpty(PaginationId))
             {
                 RecordCount = query.Count();

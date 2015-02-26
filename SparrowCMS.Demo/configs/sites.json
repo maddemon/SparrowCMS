@@ -1,0 +1,75 @@
+﻿[
+    {
+        "Id": "1",
+        "Name": "SparrowCMS.Demo",
+        "Domains": [ "localhost" ],
+        "Pages": [
+            {
+                "Name": "添加编辑页面",
+                "Role": "Admin",
+                "UrlPattern": "^/admin/system/pages/edit/?$",
+                "Template": {
+                    "FilePath": "templates/admin/system.pages.edit.html"
+                }
+            },
+            {
+                "Name": "页面管理",
+                "Role": "Admin",
+                "UrlPattern": "^/admin/system/pages/?$",
+                "Template": {
+                    "FilePath": "templates/admin/system.pages.html"
+                }
+            },
+            {
+                "Name": "日志管理",
+                "Role": "Admin",
+                "UrlPattern": "^/admin/system/logs/?$",
+                "Template": {
+                    "FilePath": "templates/admin/system.logs.html"
+                }
+            },
+            {
+                "Name": "系统配置",
+                "Role": "Admin",
+                "UrlPattern": "^/admin/system/configs/?$",
+                "Template": {
+                    "FilePath": "templates/admin/system.configs.html"
+                }
+            },
+            {
+                "Name": "插件管理",
+                "Role": "Admin",
+                "UrlPattern": "^/admin/system/plugins/?$",
+                "Template": {
+                    "FilePath": "templates/admin/system.plugins.html"
+                }
+            },
+            {
+                "Name": "插件管理",
+                "Role": "Admin",
+                "UrlPattern": "^/admin/api/?$",
+                "Template": {
+                    "FilePath": "templates/api.html"
+                }
+            },
+            {
+                "Name": "后台管理首页",
+                "Role": "Admin",
+                "UrlPattern": "^/admin/?$",
+                "Template": {
+                    "Layout": "templates/admin/_layout.html",
+                    "FilePath": "templates/admin/index.html"
+                }
+            },
+            {
+                "Name": "网站首页",
+                "Role": "Everyone",
+                "UrlPattern": "^/?$",
+                "Template": {
+                    "FilePath": "templates/index.html"
+                }
+            }
+
+        ]
+    }
+]

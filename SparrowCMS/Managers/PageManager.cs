@@ -23,7 +23,7 @@ namespace SparrowCMS.Managers
 
         public List<Page> GetPages(Site site)
         {
-            var pages = _dataProvider.GetPages();
+            var pages = _dataProvider.GetPages(site);
             return site == null ? pages : pages.Where(e => e.SiteId == site.Id).ToList();
         }
 
@@ -37,17 +37,17 @@ namespace SparrowCMS.Managers
             return GetPages(null).FirstOrDefault(p => p.Id == pageId);
         }
 
-        public Page GetPage(Site site, string url)
-        {
-            var currentPage = GetPages(site).FirstOrDefault(page => page.UrlRoute.IsMatch(url));
+        //public Page GetPage(Site site, string url)
+        //{
+        //    var currentPage = GetPages(site).FirstOrDefault(page => page.UrlRoute.IsMatch(url));
 
-            if (currentPage == null)
-            {
-                throw new Exceptions.PageNotFoundException();
-            }
+        //    if (currentPage == null)
+        //    {
+        //        throw new Exceptions.PageNotFoundException();
+        //    }
 
-            return currentPage;
-        }
+        //    return currentPage;
+        //}
 
         public void Save(Page model)
         {

@@ -92,13 +92,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="configs\pages.config" />
-    <Content Include="configs\sites.config" />
     <Content Include="static\main.less" />
     <Content Include="templates\admin\system.logs.html" />
     <Content Include="static\main.css.map">
       <DependentUpon>main.css</DependentUpon>
     </Content>
+    <Content Include="configs\sites.json" />
+    <Content Include="configs\global.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -107,9 +107,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\data_providers\SparrowCMS.DataProvider.Xml\SparrowCMS.DataProvider.Xml.csproj">
+    <ProjectReference Include="..\data_providers\SparrowCMS.DataProvider.LocalFile\SparrowCMS.DataProvider.LocalFile.csproj">
       <Project>{2f724797-7a50-4c4a-931e-d2df604ea91b}</Project>
-      <Name>SparrowCMS.DataProvider.Xml</Name>
+      <Name>SparrowCMS.DataProvider.LocalFile</Name>
     </ProjectReference>
     <ProjectReference Include="..\SparrowCMS\SparrowCMS.csproj">
       <Project>{59a060de-fa5b-4d64-8121-a93fb25b31e7}</Project>

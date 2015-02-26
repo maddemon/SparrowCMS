@@ -67,13 +67,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\data_providers\SparrowCMS.DataProvider.LocalFile\SparrowCMS.DataProvider.LocalFile.csproj">
+      <Project>{2f724797-7a50-4c4a-931e-d2df604ea91b}</Project>
+      <Name>SparrowCMS.DataProvider.LocalFile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\data_providers\SparrowCMS.DataProvider.SqlServer\SparrowCMS.DataProvider.SqlServer.csproj">
       <Project>{100d8a6a-1b56-40fb-b16a-b782c0ae4e88}</Project>
       <Name>SparrowCMS.DataProvider.SqlServer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\data_providers\SparrowCMS.DataProvider.Xml\SparrowCMS.DataProvider.Xml.csproj">
-      <Project>{2f724797-7a50-4c4a-931e-d2df604ea91b}</Project>
-      <Name>SparrowCMS.DataProvider.Xml</Name>
     </ProjectReference>
     <ProjectReference Include="..\plugins\SparrowCMS.Plugin.Article\SparrowCMS.Plugin.Article.csproj">
       <Project>{709357d0-a45e-4126-ab2d-2e96f640ee12}</Project>

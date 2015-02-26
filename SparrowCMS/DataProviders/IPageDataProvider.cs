@@ -8,9 +8,7 @@ namespace SparrowCMS.DataProviders
 {
     public interface IPageDataProvider
     {
-        List<Page> GetSitePages(Site site);
-
-        List<Page> GetPages();
+        List<Page> GetPages(Site site);
 
         Page GetPage(string id);
 

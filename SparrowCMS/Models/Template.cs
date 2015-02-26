@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using SparrowCMS.Attributes;
 
 namespace SparrowCMS.Models
@@ -16,6 +17,7 @@ namespace SparrowCMS.Models
 
         public string Name { get; set; }
 
+        [JsonIgnore]
         public string Content { get; set; }
 
         private Lazy<List<LabelDescriptor>> _initLabelDescriptions;

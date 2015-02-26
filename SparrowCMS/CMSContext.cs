@@ -37,7 +37,6 @@ namespace SparrowCMS
         }
 
         private SiteManager SiteManager = new SiteManager();
-        private PageManager PageManager = new PageManager();
 
         public void Init(HttpContextBase context)
         {
@@ -50,7 +49,7 @@ namespace SparrowCMS
                 throw new SiteNotFoundException();
             }
             //匹配当前请求的页面
-            var page = PageManager.GetPage(Current.Site, context.Request.Url.AbsolutePath);
+            var page = Current.Site.GetPage(context.Request.Url.AbsolutePath);
             if (page == null)
             {
                 throw new PageNotFoundException();
@@ -62,7 +61,7 @@ namespace SparrowCMS
             //获取RouteData
 
             ViewData = new Document();
-            RouteData = page.UrlRoute.GetRouteData(context);
+            RouteData = page.GetRouteData(context);
         }
 
         //public IEnumerable<string> GetRequestAllKeys()

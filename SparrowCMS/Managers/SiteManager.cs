@@ -26,8 +26,6 @@ namespace SparrowCMS.Managers
 
         public Site GetSite(string idOrHost)
         {
-            //TODO
-            return new Site();
             return GetSites().FirstOrDefault(e => e.Domains.Contains(idOrHost) || e.Id == idOrHost);
         }
 
